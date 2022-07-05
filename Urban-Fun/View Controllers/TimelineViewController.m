@@ -6,6 +6,8 @@
 //
 
 #import "TimelineViewController.h"
+#import "LoginViewController.h"
+#import "SceneDelegate.h"
 
 @interface TimelineViewController ()
 
@@ -16,6 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+- (IBAction)didTapLogout:(id)sender {
+    SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
+    sceneDelegate.window.rootViewController = loginViewController;
+    
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+
+    }];
+    NSLog(@"User logged out successfully");
+    
 }
 
 /*
