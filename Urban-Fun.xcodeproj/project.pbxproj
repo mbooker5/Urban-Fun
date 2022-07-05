@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		575BDA45D0012E05A2B6BA9E /* libPods-Urban-FunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */; };
 		6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF7D2874B510003E1723 /* AppDelegate.m */; };
 		6978DF812874B510003E1723 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF802874B510003E1723 /* SceneDelegate.m */; };
-		6978DF842874B510003E1723 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF832874B510003E1723 /* ViewController.m */; };
 		6978DF872874B510003E1723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF852874B510003E1723 /* Main.storyboard */; };
 		6978DF892874B518003E1723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF882874B518003E1723 /* Assets.xcassets */; };
 		6978DF8C2874B518003E1723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF8A2874B518003E1723 /* LaunchScreen.storyboard */; };
@@ -20,6 +19,12 @@
 		6978DF992874B518003E1723 /* Urban_FunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF982874B518003E1723 /* Urban_FunTests.m */; };
 		6978DFA32874B518003E1723 /* Urban_FunUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFA22874B518003E1723 /* Urban_FunUITests.m */; };
 		6978DFA52874B518003E1723 /* Urban_FunUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFA42874B518003E1723 /* Urban_FunUITestsLaunchTests.m */; };
+		6978DFB82874C1AF003E1723 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFB72874C1AF003E1723 /* LoginViewController.m */; };
+		6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFBA2874E07D003E1723 /* SignUpViewController.m */; };
+		6978DFBE2874E77A003E1723 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFBD2874E77A003E1723 /* ProfileViewController.m */; };
+		6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFC02874E791003E1723 /* TimelineViewController.m */; };
+		6978DFC42874E7AB003E1723 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFC32874E7AB003E1723 /* SearchViewController.m */; };
+		6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFC62874E7C7003E1723 /* FavoritesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +55,6 @@
 		6978DF7D2874B510003E1723 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6978DF7F2874B510003E1723 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		6978DF802874B510003E1723 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		6978DF822874B510003E1723 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6978DF832874B510003E1723 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6978DF862874B510003E1723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6978DF882874B518003E1723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6978DF8B2874B518003E1723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,6 +65,18 @@
 		6978DF9E2874B518003E1723 /* Urban-FunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Urban-FunUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6978DFA22874B518003E1723 /* Urban_FunUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Urban_FunUITests.m; sourceTree = "<group>"; };
 		6978DFA42874B518003E1723 /* Urban_FunUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Urban_FunUITestsLaunchTests.m; sourceTree = "<group>"; };
+		6978DFB62874C1AF003E1723 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6978DFB72874C1AF003E1723 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6978DFB92874E07D003E1723 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		6978DFBA2874E07D003E1723 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		6978DFBC2874E77A003E1723 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		6978DFBD2874E77A003E1723 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		6978DFBF2874E791003E1723 /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		6978DFC02874E791003E1723 /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		6978DFC22874E7AB003E1723 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		6978DFC32874E7AB003E1723 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		6978DFC52874E7C7003E1723 /* FavoritesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
+		6978DFC62874E7C7003E1723 /* FavoritesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AB8A609D869622A7E42E7E /* Pods-Urban-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,13 +159,15 @@
 		6978DF7B2874B510003E1723 /* Urban-Fun */ = {
 			isa = PBXGroup;
 			children = (
-				6978DF7C2874B510003E1723 /* AppDelegate.h */,
-				6978DF7D2874B510003E1723 /* AppDelegate.m */,
-				6978DF7F2874B510003E1723 /* SceneDelegate.h */,
-				6978DF802874B510003E1723 /* SceneDelegate.m */,
-				6978DF822874B510003E1723 /* ViewController.h */,
-				6978DF832874B510003E1723 /* ViewController.m */,
+				6978DFB12874BCAB003E1723 /* Delegates */,
+				6978DFB22874BD34003E1723 /* View Controllers */,
 				6978DF852874B510003E1723 /* Main.storyboard */,
+				6978DFC52874E7C7003E1723 /* FavoritesViewController.h */,
+				6978DFC62874E7C7003E1723 /* FavoritesViewController.m */,
+				6978DFC22874E7AB003E1723 /* SearchViewController.h */,
+				6978DFC32874E7AB003E1723 /* SearchViewController.m */,
+				6978DFBC2874E77A003E1723 /* ProfileViewController.h */,
+				6978DFBD2874E77A003E1723 /* ProfileViewController.m */,
 				6978DF882874B518003E1723 /* Assets.xcassets */,
 				6978DF8A2874B518003E1723 /* LaunchScreen.storyboard */,
 				6978DF8D2874B518003E1723 /* Info.plist */,
@@ -174,6 +191,31 @@
 				6978DFA42874B518003E1723 /* Urban_FunUITestsLaunchTests.m */,
 			);
 			path = "Urban-FunUITests";
+			sourceTree = "<group>";
+		};
+		6978DFB12874BCAB003E1723 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				6978DF7C2874B510003E1723 /* AppDelegate.h */,
+				6978DF7D2874B510003E1723 /* AppDelegate.m */,
+				6978DF7F2874B510003E1723 /* SceneDelegate.h */,
+				6978DF802874B510003E1723 /* SceneDelegate.m */,
+			);
+			name = Delegates;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		6978DFB22874BD34003E1723 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6978DFB62874C1AF003E1723 /* LoginViewController.h */,
+				6978DFB72874C1AF003E1723 /* LoginViewController.m */,
+				6978DFB92874E07D003E1723 /* SignUpViewController.h */,
+				6978DFBA2874E07D003E1723 /* SignUpViewController.m */,
+				6978DFBF2874E791003E1723 /* TimelineViewController.h */,
+				6978DFC02874E791003E1723 /* TimelineViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +284,6 @@
 		6978DF712874B510003E1723 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					6978DF782874B510003E1723 = {
@@ -389,9 +430,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6978DF842874B510003E1723 /* ViewController.m in Sources */,
+				6978DFB82874C1AF003E1723 /* LoginViewController.m in Sources */,
+				6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */,
+				6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */,
 				6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */,
 				6978DF8F2874B518003E1723 /* main.m in Sources */,
+				6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */,
+				6978DFBE2874E77A003E1723 /* ProfileViewController.m in Sources */,
+				6978DFC42874E7AB003E1723 /* SearchViewController.m in Sources */,
 				6978DF812874B510003E1723 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

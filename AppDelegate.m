@@ -6,6 +6,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +17,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+            configuration.applicationId = @"JWbAgNKPi9AplXJQW7EvrKLFcIsQUiLC2slW8KKq";
+            configuration.clientKey = @"S8da59MPDpH9IzoouaBvbyYzxtKGLY8WzJ3Esc20";
+            configuration.server = @"https://parseapi.back4app.com";
+        }];
+    [Parse initializeWithConfiguration:config];
+    [self saveInstallationObject];
     return YES;
+}
+
+-(void)saveInstallationObject{
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            NSLog(@"You have successfully connected your app to Back4App!");
+        }else{
+            NSLog(@"installation save failed %@",error.debugDescription);
+        }
+    }];
 }
 
 
