@@ -31,6 +31,8 @@
 		6978DFD228764A85003E1723 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFD128764A85003E1723 /* Activity.m */; };
 		6978DFD62877513C003E1723 /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFD52877513C003E1723 /* SetLocationViewController.m */; };
 		6978DFDC287763E0003E1723 /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDB287763E0003E1723 /* Categories.m */; };
+		6978DFDF287788DB003E1723 /* SetCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDE287788DB003E1723 /* SetCategoriesViewController.m */; };
+		6978DFE228778C9F003E1723 /* SetCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFE128778C9F003E1723 /* SetCategoryCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,10 @@
 		6978DFD52877513C003E1723 /* SetLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
 		6978DFDA287763E0003E1723 /* Categories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
 		6978DFDB287763E0003E1723 /* Categories.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
+		6978DFDD287788DB003E1723 /* SetCategoriesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCategoriesViewController.h; sourceTree = "<group>"; };
+		6978DFDE287788DB003E1723 /* SetCategoriesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetCategoriesViewController.m; sourceTree = "<group>"; };
+		6978DFE028778C9F003E1723 /* SetCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCategoryCell.h; sourceTree = "<group>"; };
+		6978DFE128778C9F003E1723 /* SetCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetCategoryCell.m; sourceTree = "<group>"; };
 		794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AB8A609D869622A7E42E7E /* Pods-Urban-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				6978DFB12874BCAB003E1723 /* Delegates */,
+				6978DFE328778CA4003E1723 /* Cells */,
 				6978DFB22874BD34003E1723 /* View Controllers */,
 				6978DFD328764A90003E1723 /* Models */,
 				6978DF852874B510003E1723 /* Main.storyboard */,
@@ -240,6 +247,8 @@
 				6978DFC02874E791003E1723 /* TimelineViewController.m */,
 				6978DFC82876013E003E1723 /* SettingsViewController.h */,
 				6978DFC92876013E003E1723 /* SettingsViewController.m */,
+				6978DFDD287788DB003E1723 /* SetCategoriesViewController.h */,
+				6978DFDE287788DB003E1723 /* SetCategoriesViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -253,6 +262,15 @@
 				6978DFDB287763E0003E1723 /* Categories.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6978DFE328778CA4003E1723 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6978DFE028778C9F003E1723 /* SetCategoryCell.h */,
+				6978DFE128778C9F003E1723 /* SetCategoryCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,7 +489,9 @@
 				6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */,
 				6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */,
 				6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */,
+				6978DFDF287788DB003E1723 /* SetCategoriesViewController.m in Sources */,
 				6978DF8F2874B518003E1723 /* main.m in Sources */,
+				6978DFE228778C9F003E1723 /* SetCategoryCell.m in Sources */,
 				6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */,
 				6978DFBE2874E77A003E1723 /* ProfileViewController.m in Sources */,
 				6978DFCF287646D4003E1723 /* HostViewController.m in Sources */,

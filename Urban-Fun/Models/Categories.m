@@ -9,7 +9,7 @@
 
 @implementation Categories
 @dynamic categories;
-@dynamic category;
+@dynamic title;
 
 + (nonnull NSString *)parseClassName {
     return @"Categories";
@@ -22,11 +22,11 @@ NSArray *categories = @[@"Party", @"Club", @"Concert", @"Indoor Sports", @"Outdo
 - (void) newCategories:(NSArray *_Nullable)categories withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     
     Categories *newCategory = [Categories new];
-    for(NSString *category in self.categories)
+    for(NSString *title in self.categories)
     {
-        BOOL isTheObjectThere = [self.categories containsObject:category];
+        BOOL isTheObjectThere = [self.categories containsObject:title];
         if (isTheObjectThere == NO){
-            newCategory.category = category;
+            newCategory.title = title;
         }
     }
     [newCategory saveInBackgroundWithBlock: completion];

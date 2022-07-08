@@ -16,11 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFUser *host;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSMutableArray *categories;
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) NSNumber *favoriteCount;
 @property (nonatomic, strong) NSNumber *commentCount;
 @property (nonatomic, strong) NSMutableArray *attendanceList;
 @property (nonatomic, strong) NSMutableArray *queueList;
+
+
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 @end
 
 NS_ASSUME_NONNULL_END

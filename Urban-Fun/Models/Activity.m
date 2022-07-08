@@ -13,6 +13,7 @@
 @dynamic host;
 @dynamic title;
 @dynamic description;
+@dynamic categories;
 @dynamic image;
 @dynamic favoriteCount;
 @dynamic commentCount;
@@ -23,13 +24,14 @@
     return @"Activity";
 }
 
-+ (void) postActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Activity *newActivity = [Activity new];
 //    newPost.image = [self getPFFileFromImage:image];
     newActivity.host = [PFUser currentUser];
     newActivity.title = title;
     newActivity.description = description;
+    newActivity.categories = [NSMutableArray new];
     newActivity.favoriteCount = @(0);
     newActivity.commentCount = @(0);
     newActivity.attendanceList = [NSMutableArray new];
