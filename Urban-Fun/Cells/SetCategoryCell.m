@@ -8,14 +8,23 @@
 #import "SetCategoryCell.h"
 
 @implementation SetCategoryCell
-- (IBAction)didTapCell:(id)sender {
-    [self.checkCategoryButton setSelected:YES];
-}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
 }
+
+//handles category cell being tapped
+- (IBAction)didTapCell:(id)sender {
+    
+//    [self.delegate didSelectCategory:self.category.title];
+    [self.delegate didSelectCategory:self.indexPath];
+
+}
+
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -24,8 +33,8 @@
 }
 
 -(void)setCell{
-
-    self.categoryLabel.text = self.category.title;
     
+    self.categoryLabel.text = self.category.title;
+//    self.checkCategoryButton.titleLabel = self.category.title;
 }
 @end

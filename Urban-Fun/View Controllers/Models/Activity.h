@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Activity : PFObject
+@interface Activity : PFObject<PFSubclassing>
 @property (nonatomic, strong) NSString *activityID;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) PFUser *host;
@@ -24,7 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *queueList;
 
 
-+ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable )description withCategories:( NSMutableArray * _Nullable)categories withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+
++ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
+
 @end
 
 NS_ASSUME_NONNULL_END
