@@ -9,11 +9,19 @@
 #import "Parse/Parse.h"
 #import "Categories.h"
 #import "SetCategoryCell.h"
+#import "HostViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SetCategoriesViewController : UIViewController
+@protocol CategoriesViewDelegate <NSObject>
 
+- (void)setCategoryArray:(NSMutableArray *)selectedCategories;
+
+@end
+
+@interface SetCategoriesViewController : UIViewController
+@property (nonatomic, weak) id <CategoriesViewDelegate> delegate1;
+@property (nonatomic, strong) NSMutableArray *selectedCategories;
 @end
 
 NS_ASSUME_NONNULL_END
