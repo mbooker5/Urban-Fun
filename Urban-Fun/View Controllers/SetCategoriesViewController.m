@@ -59,7 +59,7 @@
     Categories *category = self.arrayOfCategories[indexPath.row];
     cell.category = category;
     cell.indexPath = indexPath;
-    [cell setCell];
+    [cell setCategoryCell];
     
     if ([self.selectedCategories containsObject:category.title]){
         [cell.checkCategoryButton setSelected:YES];

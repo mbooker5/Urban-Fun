@@ -32,7 +32,7 @@
     // Configure the view for the selected state
 }
 
--(void)setCell{
+-(void)setCategoryCell{
     
     self.categoryLabel.text = self.category.title;
 //    self.checkCategoryButton.titleLabel = self.category.title;

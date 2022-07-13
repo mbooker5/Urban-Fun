@@ -12,8 +12,10 @@
 @dynamic userID;
 @dynamic host;
 @dynamic title;
-@dynamic description;
+@dynamic activityDescription;
 @dynamic categories;
+@dynamic minimumAge;
+@dynamic maximumAge;
 @dynamic image;
 @dynamic favoriteCount;
 @dynamic commentCount;
@@ -24,18 +26,21 @@
     return @"Activity";
 }
 
-+ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable )description withCategories:( NSMutableArray * _Nullable)categories withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Activity *newActivity = [Activity new];
     newActivity.image = [self getPFFileFromImage:image];
     newActivity.host = [PFUser currentUser];
     newActivity.title = title;
-    newActivity.description = description;
+    newActivity.activityDescription = activityDescription;
     newActivity.categories = categories;
+    newActivity.minimumAge = minimumAge;
+    newActivity.maximumAge = maximumAge;
     newActivity.favoriteCount = @(0);
     newActivity.commentCount = @(0);
     newActivity.attendanceList = [NSMutableArray new];
     newActivity.queueList = [NSMutableArray new];
+    
     
     [newActivity saveInBackgroundWithBlock: completion];
     

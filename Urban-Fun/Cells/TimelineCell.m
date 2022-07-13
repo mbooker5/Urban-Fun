@@ -19,5 +19,8 @@
 
     // Configure the view for the selected state
 }
-
+- (void) setTimelineCell{
+    self.activityTitleLabel.text = self.activity.title;
+    self.activityDescriptionLabel.text = self.activity.activityDescription;
+}
 @end

@@ -13,6 +13,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *activityTitle;
 @property (strong, nonatomic) IBOutlet UITextField *activityDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *activityImage;
+@property (strong, nonatomic) IBOutlet UITextField *minAge;
+@property (strong, nonatomic) IBOutlet UITextField *maxAge;
+@property (strong, nonatomic) IBOutlet UILabel *errorMessage;
+
 
 @end
 
@@ -31,11 +35,21 @@
 
 
 - (IBAction)uploadActivity:(id)sender {
-//    SetCategoryCell *setCategoryCell = [[SetCategoryCell alloc] init];
-    [Activity postUserActivity:(UIImage * _Nullable)_activityImage.image withTitle:(NSString * _Nullable)_activityTitle.text withDescription:(NSString * _Nullable)_activityDescription.text withCategories:(NSMutableArray * _Nullable)self.activityCategories withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+    // next four lines convert UITextField text into an NSNumber
+    int minAgeInt = [self.minAge.text intValue];
+    int maxAgeInt = [self.maxAge.text intValue];
+    NSNumber *minimumAge = [NSNumber numberWithInt:minAgeInt];
+    NSNumber *maximumAge = [NSNumber numberWithInt:maxAgeInt];
+    //
+    if (([self.activityTitle hasText]) && ([self.activityDescription hasText])){
+    [Activity postUserActivity:(UIImage * _Nullable)_activityImage.image withTitle:(NSString * _Nullable)_activityTitle.text withDescription:(NSString * _Nullable)_activityDescription.text withCategories:(NSMutableArray * _Nullable)self.activityCategories withMinAge:(NSNumber * _Nullable)minimumAge withMaxAge:(NSNumber * _Nullable)maximumAge withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [self.navigationController popViewControllerAnimated:YES];
         NSLog(@"Post shared successfully!");
     }];
+    }
+    else{
+        self.errorMessage.text = @"Invalid Title/Description";
+    }
 }
 
 - (void)setCategoryArray:(nonnull NSMutableArray *)selectedCategories {
@@ -58,6 +72,9 @@
         NSLog(@"HOST VC Categories: %@", self.activityCategories);
     }
 }
+
+
+
 
 
 @end

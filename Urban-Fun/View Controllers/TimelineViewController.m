@@ -20,9 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading thnre view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    [self getActivities];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+    [self.tableView reloadData];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getActivities];
+    [refreshControl endRefreshing];
+    [self.tableView reloadData];
     
 }
 
@@ -54,7 +65,7 @@
     
     Activity *activity = self.arrayOfActivities[indexPath.row];
     cell.activity = activity;
-//    [cell setActivity];
+    [cell setTimelineCell];
 
     
     return cell;
