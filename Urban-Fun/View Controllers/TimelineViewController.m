@@ -23,6 +23,8 @@
     // Do any additional setup after loading thnre view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorColor = [UIColor darkGrayColor];
     [self getActivities];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -81,7 +83,6 @@
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
 
     }];
-    NSLog(@"User logged out successfully");
     
 }
 

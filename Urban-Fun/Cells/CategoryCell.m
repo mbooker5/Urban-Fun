@@ -5,9 +5,9 @@
 //  Created by Maize Booker on 7/7/22.
 //
 
-#import "SetCategoryCell.h"
+#import "CategoryCell.h"
 
-@implementation SetCategoryCell
+@implementation CategoryCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -5,9 +5,9 @@
 //  Created by Maize Booker on 7/7/22.
 //
 
-#import "Categories.h"
+#import "Category.h"
 
-@implementation Categories
+@implementation Category
 @dynamic title;
 
 + (nonnull NSString *)parseClassName {

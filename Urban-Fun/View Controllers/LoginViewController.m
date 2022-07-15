@@ -49,8 +49,6 @@
         } else {
             // makes segue to ChatViewController
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-            NSLog(@"User logged in successfully");
-            
 
         }
     }];

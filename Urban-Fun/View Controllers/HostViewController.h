@@ -6,11 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SetCategoryCell.h"
+#import "CategoryCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HostViewController : UIViewController
-//@property (strong, nonatomic) SetCategoryCell *setCategoryCell;
 @property (nonatomic, strong) NSMutableArray *activityCategories;
 @end
 

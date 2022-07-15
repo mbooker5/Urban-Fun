@@ -6,7 +6,7 @@
 //
 
 #import "HostViewController.h"
-#import "SetCategoriesViewController.h"
+#import "SelectCategoriesViewController.h"
 #import "Activity.h"
 
 @interface HostViewController () <CategoriesViewDelegate>
@@ -54,7 +54,6 @@
 
 - (void)setCategoryArray:(nonnull NSMutableArray *)selectedCategories {
     self.activityCategories = selectedCategories;
-    NSLog(@"activityCategories: %@", self.activityCategories);
 }
 
 
@@ -65,11 +64,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"setCategories"]){
-        SetCategoriesViewController * scVC = [segue destinationViewController];
+        SelectCategoriesViewController * scVC = [segue destinationViewController];
         scVC.delegate1 = self;
         scVC.selectedCategories = [[NSMutableArray alloc] init];
         scVC.selectedCategories = self.activityCategories;
-        NSLog(@"HOST VC Categories: %@", self.activityCategories);
     }
 }
 
