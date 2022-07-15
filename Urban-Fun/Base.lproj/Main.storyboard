@@ -273,7 +273,7 @@
                                     <fontDescription key="titleFontDescription" name="Verdana" family="Verdana" pointSize="13"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="kMp-WE-UUe" kind="show" id="FPM-9s-k6A"/>
+                                    <segue destination="kMp-WE-UUe" kind="show" identifier="setLocation" id="FPM-9s-k6A"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDv-Vk-tNN">
@@ -517,7 +517,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5MU-21-SXo"/>
                     <connections>
-                        <outlet property="mapView" destination="Siu-TK-pYo" id="fcX-rK-nbY"/>
+                        <outlet property="mapView" destination="Siu-TK-pYo" id="jLn-Ff-f1M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5n-0v-zo9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

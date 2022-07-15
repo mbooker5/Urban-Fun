@@ -11,8 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SelectLocationViewController : UIViewController
+@protocol LocationViewDelegate <NSObject>
 
+- (void)setLocationPoint:(CLLocationCoordinate2D *)activityLocation;
+
+@end
+
+@interface SelectLocationViewController : UIViewController
+@property (nonatomic, weak) id <LocationViewDelegate> delegate2;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @end
 
 NS_ASSUME_NONNULL_END

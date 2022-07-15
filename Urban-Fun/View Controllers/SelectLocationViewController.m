@@ -8,8 +8,8 @@
 #import "SelectLocationViewController.h"
 
 @interface SelectLocationViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) const CLLocationManager *manager;
+@property (nonatomic, readwrite) CLLocationCoordinate2D *locationCoordinate;
 - (void) render: (CLLocation *)location;
 @end
 
@@ -35,13 +35,14 @@
 - (void) handleLongTapGesture: (UILongPressGestureRecognizer *) gestureRecognizer {
     if (gestureRecognizer.state != UIGestureRecognizerStateEnded){
         [self.mapView removeAnnotations:self.mapView.annotations];
+        //try passing in CGPoint to delegate instea
         CGPoint touchLocation = [gestureRecognizer locationInView:self.mapView];
         CLLocationCoordinate2D locationCoordinate = [self.mapView convertPoint:touchLocation toCoordinateFromView:self.mapView];
-        
+        [self.delegate2 setLocationPoint:&locationCoordinate];
         MKPointAnnotation *longTapPin = [[MKPointAnnotation alloc] initWithCoordinate:locationCoordinate];
         longTapPin.title = [[NSString alloc] initWithFormat:@"%@%.20lf%@%.20lf", @"Latitude: ", locationCoordinate.latitude, @"Longitude: ", locationCoordinate.longitude];
         [self.mapView addAnnotation:longTapPin];
-        
+
     }
     
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan){
