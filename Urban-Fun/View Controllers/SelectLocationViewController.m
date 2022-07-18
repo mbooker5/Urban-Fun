@@ -6,10 +6,13 @@
 //
 
 #import "SelectLocationViewController.h"
+#import "Contacts/Contacts.h"
+#import"ContactsUI/ContactsUI.h"
 
 @interface SelectLocationViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, readwrite) CLLocationCoordinate2D *locationCoordinate;
+@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
 - (void) render: (CLLocation *)location;
 @end
 
@@ -38,16 +41,54 @@
         //try passing in CGPoint to delegate instea
         CGPoint touchLocation = [gestureRecognizer locationInView:self.mapView];
         CLLocationCoordinate2D locationCoordinate = [self.mapView convertPoint:touchLocation toCoordinateFromView:self.mapView];
-        [self.delegate2 setLocationPoint:&locationCoordinate];
+        [self.delegate2 setLocationPoint:locationCoordinate withLatitude:locationCoordinate.latitude withLongitude:locationCoordinate.longitude];
         MKPointAnnotation *longTapPin = [[MKPointAnnotation alloc] initWithCoordinate:locationCoordinate];
         longTapPin.title = [[NSString alloc] initWithFormat:@"%@%.20lf%@%.20lf", @"Latitude: ", locationCoordinate.latitude, @"Longitude: ", locationCoordinate.longitude];
         [self.mapView addAnnotation:longTapPin];
-
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:locationCoordinate.latitude longitude:locationCoordinate.longitude];
+        [self getAddressFromLocation:location];
     }
     
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan){
         return;
     }
+}
+
+-(void)getAddressFromLocation:(CLLocation *)location {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!placemarks) {
+             // handle error
+         }
+
+         if(placemarks && placemarks.count > 0)
+         {
+             CLPlacemark *placemark= [placemarks objectAtIndex:0];
+             if ([placemark name]){
+                 if ([placemark locality]){
+                     NSString *address = [NSString stringWithFormat:@"%@, %@, %@", [placemark name], [placemark locality], [placemark administrativeArea]];
+                     self.addressLabel.text = address;
+                     [self.delegate2 setAddressLabel:address];
+                 }
+                 else{
+                     NSString *address = [placemark name];
+                     self.addressLabel.text = address;
+                     [self.delegate2 setAddressLabel:address];
+                 }
+                 
+             }
+             if([placemark subThoroughfare] && [placemark thoroughfare])
+             {
+             NSString *address = [NSString stringWithFormat:@"%@ %@, %@, %@ %@", [placemark subThoroughfare],[placemark thoroughfare],[placemark locality], [placemark administrativeArea], [placemark postalCode]];
+                 self.addressLabel.text = address;
+                 [self.delegate2 setAddressLabel:address];
+             }
+             // you have the address.
+             // do something with it.
+             
+         }
+     }];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{

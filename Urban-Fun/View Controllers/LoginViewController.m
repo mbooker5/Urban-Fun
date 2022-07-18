@@ -45,7 +45,6 @@
             [self presentViewController:alert animated:YES completion:^{
 
             }];
-            NSLog(@"User log in failed: %@", error.localizedDescription);
         } else {
             // makes segue to ChatViewController
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];

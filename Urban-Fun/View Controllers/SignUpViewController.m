@@ -71,11 +71,9 @@
             [alert addAction:okAction];
             [self presentViewController:alert animated:YES completion:^{
             }];
-            NSLog(@"Error: %@", error.localizedDescription);
         } else {
 
             [self performSegueWithIdentifier:@"registerUser" sender:nil];
-            NSLog(@"User registered successfully");
             
         }
     }];

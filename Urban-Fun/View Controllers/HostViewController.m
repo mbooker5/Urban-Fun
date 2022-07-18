@@ -21,49 +21,60 @@
 @property (strong, nonatomic) IBOutlet UITextField *maxAge;
 @property (strong, nonatomic) IBOutlet UILabel *errorMessage;
 @property (strong, nonatomic) PFGeoPoint *location;
-@property (nonatomic, readwrite) CLLocationCoordinate2D *locationLatLong;
+@property (nonatomic) CLLocationCoordinate2D locationLatLong;
+@property (strong, nonatomic) IBOutlet UIButton *selectLocation;
+@property (strong, nonatomic) NSString *locationAddress;
+@property (strong, nonatomic) IBOutlet UILabel *addressLabel2;
 
+    @end
 
-@end
+    @implementation HostViewController
 
-@implementation HostViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.activityCategories = [[NSMutableArray alloc] init];
-    // dismiss keyboard when tap outside a text field
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
-    [tapGestureRecognizer setCancelsTouchesInView:NO];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-}
-
-
-
-- (IBAction)uploadActivity:(id)sender {
-    // next four lines convert UITextField text into an NSNumber
-    int minAgeInt = [self.minAge.text intValue];
-    int maxAgeInt = [self.maxAge.text intValue];
-    NSNumber *minimumAge = [NSNumber numberWithInt:minAgeInt];
-    NSNumber *maximumAge = [NSNumber numberWithInt:maxAgeInt];
-    //
-    if (([self.activityTitle hasText]) && ([self.activityDescription hasText])){
-    [Activity postUserActivity:(UIImage * _Nullable)_activityImage.image withTitle:(NSString * _Nullable)_activityTitle.text withDescription:(NSString * _Nullable)_activityDescription.text withCategories:(NSMutableArray * _Nullable)self.activityCategories withMinAge:(NSNumber * _Nullable)minimumAge withMaxAge:(NSNumber * _Nullable)maximumAge withLocation:(PFGeoPoint *)self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        [self.navigationController popViewControllerAnimated:YES];
-        NSLog(@"Post shared successfully!");
-    }];
+    - (void)viewDidLoad {
+        [super viewDidLoad];
+        // Do any additional setup after loading the view.
+        self.activityCategories = [[NSMutableArray alloc] init];
+        // dismiss keyboard when tap outside a text field
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
+        [tapGestureRecognizer setCancelsTouchesInView:NO];
+        [self.view addGestureRecognizer:tapGestureRecognizer];
     }
-    else{
-        self.errorMessage.text = @"Invalid Title/Description";
+
+
+
+    - (IBAction)uploadActivity:(id)sender {
+        // next four lines convert UITextField text into an NSNumber
+        int minAgeInt = [self.minAge.text intValue];
+        int maxAgeInt = [self.maxAge.text intValue];
+        NSNumber *minimumAge = [NSNumber numberWithInt:minAgeInt];
+        NSNumber *maximumAge = [NSNumber numberWithInt:maxAgeInt];
+        //
+        if (([self.activityTitle hasText]) && ([self.activityDescription hasText])){
+            [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }];
+        }
+        else{
+            self.errorMessage.text = @"Invalid Title/Description";
+        }
     }
+
+- (IBAction)didTapCancel:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)setCategoryArray:(nonnull NSMutableArray *)selectedCategories {
     self.activityCategories = selectedCategories;
 }
-- (void)setLocationPoint:( CLLocationCoordinate2D *)locationCoordinate {
-    self.locationLatLong = [CLLocationCoordinate2DMake(locationCoordinate->latitude, locationCoordinate->longitude)];
-    self.location = [PFGeoPoint geoPointWithLatitude:locationCoordinate->latitude longitude:locationCoordinate->longitude];
+- (void)setLocationPoint:( CLLocationCoordinate2D)locationCoordinate withLatitude:(CLLocationDegrees)activityLatitude withLongitude:(CLLocationDegrees)activityLongitude {
+    self.location = [PFGeoPoint geoPointWithLatitude:locationCoordinate.latitude longitude:locationCoordinate.longitude];
+    self.locationLatLong = CLLocationCoordinate2DMake(locationCoordinate.latitude, locationCoordinate.longitude);
+}
+
+-(void)setAddressLabel:(NSString *)address{
+    [self.selectLocation setTitle:@"" forState:UIControlStateNormal];
+    [self.addressLabel2 setText:address];
+    self.locationAddress = address;
 }
 
 
@@ -82,9 +93,11 @@
     if ([[segue identifier] isEqualToString:@"setLocation"]){
         SelectLocationViewController *slVC = [segue destinationViewController];
         slVC.delegate2 = self;
-        if (self.locationLatLong != nil){
-            MKPointAnnotation *longTapPin = [[MKPointAnnotation alloc] initWithCoordinate:*(self.locationLatLong)];
-            [slVC.mapView addAnnotation:longTapPin];
+        if (self.location){
+            MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
+//            slVC.mapView.delegate = slVC.self;
+            slVC.mapView = [[MKMapView alloc] init];
+            [slVC.mapView addAnnotation:pin];
         }
         
     }

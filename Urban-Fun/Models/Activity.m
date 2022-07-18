@@ -22,12 +22,13 @@
 @dynamic attendanceList;
 @dynamic queueList;
 @dynamic location;
+@dynamic address;
 
 + (nonnull NSString *)parseClassName {
     return @"Activity";
 }
 
-+ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withAddress:(NSString *)address withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Activity *newActivity = [Activity new];
     newActivity.image = [self getPFFileFromImage:image];
@@ -42,6 +43,7 @@
     newActivity.attendanceList = [NSMutableArray new];
     newActivity.queueList = [NSMutableArray new];
     newActivity.location = location;
+    newActivity.address = address;
     
     
     [newActivity saveInBackgroundWithBlock: completion];

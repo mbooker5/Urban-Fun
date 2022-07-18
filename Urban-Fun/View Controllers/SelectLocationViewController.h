@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LocationViewDelegate <NSObject>
 
-- (void)setLocationPoint:(CLLocationCoordinate2D *)activityLocation;
-
+- (void)setLocationPoint:(CLLocationCoordinate2D)activityLocation withLatitude:(CLLocationDegrees)activityLatitude withLongitude:(CLLocationDegrees)activityLongitude;
+- (void)setAddressLabel:(NSString *)address;
 @end
 
 @interface SelectLocationViewController : UIViewController
