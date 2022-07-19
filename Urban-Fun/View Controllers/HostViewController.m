@@ -48,13 +48,14 @@
         NSNumber *maximumAge = [NSNumber numberWithInt:maxAgeInt];
         //
         if (([self.activityTitle hasText]) && ([self.activityDescription hasText])){
-            if ((minimumAge.intValue > 0 && maximumAge.intValue > 0) && (minimumAge.intValue > maximumAge.intValue)){
-                self.errorMessage.text = @"Invalid Age Range";
+            if ([self.addressLabel2.text isEqualToString:@""]){
+                self.errorMessage.text = @"Please Select A Location";
             }
             else{
-                if ([self.addressLabel2.text isEqualToString:@""])
+                
+                if ((minimumAge.intValue > 0 && maximumAge.intValue > 0) && (minimumAge.intValue > maximumAge.intValue))
                 {
-                    self.errorMessage.text = @"Invalid Location";
+                    self.errorMessage.text = @"Invalid Age Range";
                 }
                 else{
                     [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
