@@ -24,9 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *commentCount;
 @property (nonatomic, strong) NSMutableArray *attendanceList;
 @property (nonatomic, strong) NSMutableArray *queueList;
+@property (nonatomic, strong) PFGeoPoint *location;
+@property (nonatomic, strong) NSString *address;
 
 
-+ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withAddress:(NSString *)address withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 

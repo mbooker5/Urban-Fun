@@ -1,21 +1,23 @@
 //
-//  SetLocationViewController.m
+//  ActivityDetailsViewController.m
 //  Urban-Fun
 //
-//  Created by Maize Booker on 7/7/22.
+//  Created by Maize Booker on 7/18/22.
 //
 
-#import "SetLocationViewController.h"
+#import "ActivityDetailsViewController.h"
 
-@interface SetLocationViewController ()
+@interface ActivityDetailsViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
 
 @end
 
-@implementation SetLocationViewController
+@implementation ActivityDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.detailsTitle.text = self.activity.title;
 }
 
 /*

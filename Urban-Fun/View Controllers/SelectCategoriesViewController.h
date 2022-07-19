@@ -1,5 +1,5 @@
 //
-//  SetCategoriesViewController.h
+//  SelectCategoriesViewController.h
 //  Urban-Fun
 //
 //  Created by Maize Booker on 7/7/22.
@@ -7,8 +7,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/Parse.h"
-#import "Categories.h"
-#import "SetCategoryCell.h"
+#import "Category.h"
+#import "CategoryCell.h"
 #import "HostViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SetCategoriesViewController : UIViewController
-@property (nonatomic, weak) id <CategoriesViewDelegate> delegate1;
+@interface SelectCategoriesViewController : UIViewController
+@property (nonatomic, weak) id <CategoriesViewDelegate> categoriesVCDelegate;
 @property (nonatomic, strong) NSMutableArray *selectedCategories;
 @end
 

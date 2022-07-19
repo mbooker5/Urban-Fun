@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // dismiss keyboard when tap outside a text field
+    // dismisses keyboard when tap outside a text field
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
     [tapGestureRecognizer setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapGestureRecognizer];
@@ -45,26 +45,12 @@
             [self presentViewController:alert animated:YES completion:^{
 
             }];
-            NSLog(@"User log in failed: %@", error.localizedDescription);
         } else {
             // makes segue to ChatViewController
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-            NSLog(@"User logged in successfully");
-            
 
         }
     }];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

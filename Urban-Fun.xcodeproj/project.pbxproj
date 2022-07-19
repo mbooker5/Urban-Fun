@@ -10,6 +10,7 @@
 		2C9254DFCFB95DB74D67D408 /* libPods-Urban-FunUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */; };
 		40698F04EC293C0AFA27FE36 /* libPods-Urban-Fun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0847A0BCCF961BF9139F3C16 /* libPods-Urban-Fun.a */; };
 		575BDA45D0012E05A2B6BA9E /* libPods-Urban-FunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */; };
+		6957F7E828861C2700B26433 /* ActivityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */; };
 		6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF7D2874B510003E1723 /* AppDelegate.m */; };
 		6978DF812874B510003E1723 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF802874B510003E1723 /* SceneDelegate.m */; };
 		6978DF872874B510003E1723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF852874B510003E1723 /* Main.storyboard */; };
@@ -29,10 +30,10 @@
 		6978DFCC28761307003E1723 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6978DFCB28761307003E1723 /* MapKit.framework */; };
 		6978DFCF287646D4003E1723 /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFCE287646D4003E1723 /* HostViewController.m */; };
 		6978DFD228764A85003E1723 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFD128764A85003E1723 /* Activity.m */; };
-		6978DFD62877513C003E1723 /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFD52877513C003E1723 /* SetLocationViewController.m */; };
-		6978DFDC287763E0003E1723 /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDB287763E0003E1723 /* Categories.m */; };
-		6978DFDF287788DB003E1723 /* SetCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDE287788DB003E1723 /* SetCategoriesViewController.m */; };
-		6978DFE228778C9F003E1723 /* SetCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFE128778C9F003E1723 /* SetCategoryCell.m */; };
+		6978DFD62877513C003E1723 /* SelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFD52877513C003E1723 /* SelectLocationViewController.m */; };
+		6978DFDC287763E0003E1723 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDB287763E0003E1723 /* Category.m */; };
+		6978DFDF287788DB003E1723 /* SelectCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDE287788DB003E1723 /* SelectCategoriesViewController.m */; };
+		6978DFE228778C9F003E1723 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFE128778C9F003E1723 /* CategoryCell.m */; };
 		6978DFE6287C9B7E003E1723 /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFE5287C9B7E003E1723 /* TimelineCell.m */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		11D334437CF962F314C84AC0 /* Pods-Urban-FunUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1719A2DDDE9A0EBCD048129D /* Pods-Urban-FunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunTests/Pods-Urban-FunTests.release.xcconfig"; sourceTree = "<group>"; };
 		660BDA34CE6DB9E1DE98A38D /* Pods-Urban-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-Fun/Pods-Urban-Fun.debug.xcconfig"; sourceTree = "<group>"; };
+		6957F7E628861C2700B26433 /* ActivityDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityDetailsViewController.h; sourceTree = "<group>"; };
+		6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailsViewController.m; sourceTree = "<group>"; };
 		6978DF792874B510003E1723 /* Urban-Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Urban-Fun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6978DF7C2874B510003E1723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6978DF7D2874B510003E1723 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -93,14 +96,14 @@
 		6978DFCE287646D4003E1723 /* HostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostViewController.m; sourceTree = "<group>"; };
 		6978DFD028764A85003E1723 /* Activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		6978DFD128764A85003E1723 /* Activity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
-		6978DFD42877513C003E1723 /* SetLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetLocationViewController.h; sourceTree = "<group>"; };
-		6978DFD52877513C003E1723 /* SetLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
-		6978DFDA287763E0003E1723 /* Categories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
-		6978DFDB287763E0003E1723 /* Categories.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
-		6978DFDD287788DB003E1723 /* SetCategoriesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCategoriesViewController.h; sourceTree = "<group>"; };
-		6978DFDE287788DB003E1723 /* SetCategoriesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetCategoriesViewController.m; sourceTree = "<group>"; };
-		6978DFE028778C9F003E1723 /* SetCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCategoryCell.h; sourceTree = "<group>"; };
-		6978DFE128778C9F003E1723 /* SetCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetCategoryCell.m; sourceTree = "<group>"; };
+		6978DFD42877513C003E1723 /* SelectLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectLocationViewController.h; sourceTree = "<group>"; };
+		6978DFD52877513C003E1723 /* SelectLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectLocationViewController.m; sourceTree = "<group>"; };
+		6978DFDA287763E0003E1723 /* Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		6978DFDB287763E0003E1723 /* Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		6978DFDD287788DB003E1723 /* SelectCategoriesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCategoriesViewController.h; sourceTree = "<group>"; };
+		6978DFDE287788DB003E1723 /* SelectCategoriesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCategoriesViewController.m; sourceTree = "<group>"; };
+		6978DFE028778C9F003E1723 /* CategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCell.h; sourceTree = "<group>"; };
+		6978DFE128778C9F003E1723 /* CategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCell.m; sourceTree = "<group>"; };
 		6978DFE4287C9B7E003E1723 /* TimelineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
 		6978DFE5287C9B7E003E1723 /* TimelineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
 		794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +193,7 @@
 				6978DFB12874BCAB003E1723 /* Delegates */,
 				6978DFE328778CA4003E1723 /* Cells */,
 				6978DFB22874BD34003E1723 /* View Controllers */,
+				6978DFD328764A90003E1723 /* Models */,
 				6978DF852874B510003E1723 /* Main.storyboard */,
 				6978DF882874B518003E1723 /* Assets.xcassets */,
 				6978DF8A2874B518003E1723 /* LaunchScreen.storyboard */,
@@ -231,6 +235,8 @@
 		6978DFB22874BD34003E1723 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6957F7E628861C2700B26433 /* ActivityDetailsViewController.h */,
+				6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */,
 				6978DFC52874E7C7003E1723 /* FavoritesViewController.h */,
 				6978DFC62874E7C7003E1723 /* FavoritesViewController.m */,
 				6978DFC22874E7AB003E1723 /* SearchViewController.h */,
@@ -239,19 +245,18 @@
 				6978DFBD2874E77A003E1723 /* ProfileViewController.m */,
 				6978DFB62874C1AF003E1723 /* LoginViewController.h */,
 				6978DFB72874C1AF003E1723 /* LoginViewController.m */,
-				6978DFB92874E07D003E1723 /* SignUpViewController.h */,
 				6978DFBA2874E07D003E1723 /* SignUpViewController.m */,
 				6978DFBF2874E791003E1723 /* TimelineViewController.h */,
+				6978DFB92874E07D003E1723 /* SignUpViewController.h */,
 				6978DFC02874E791003E1723 /* TimelineViewController.m */,
 				6978DFCD287646D3003E1723 /* HostViewController.h */,
 				6978DFCE287646D4003E1723 /* HostViewController.m */,
-				6978DFDD287788DB003E1723 /* SetCategoriesViewController.h */,
-				6978DFDE287788DB003E1723 /* SetCategoriesViewController.m */,
-				6978DFD42877513C003E1723 /* SetLocationViewController.h */,
-				6978DFD52877513C003E1723 /* SetLocationViewController.m */,
+				6978DFDD287788DB003E1723 /* SelectCategoriesViewController.h */,
+				6978DFDE287788DB003E1723 /* SelectCategoriesViewController.m */,
+				6978DFD42877513C003E1723 /* SelectLocationViewController.h */,
+				6978DFD52877513C003E1723 /* SelectLocationViewController.m */,
 				6978DFC82876013E003E1723 /* SettingsViewController.h */,
 				6978DFC92876013E003E1723 /* SettingsViewController.m */,
-				6978DFD328764A90003E1723 /* Models */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -261,8 +266,8 @@
 			children = (
 				6978DFD028764A85003E1723 /* Activity.h */,
 				6978DFD128764A85003E1723 /* Activity.m */,
-				6978DFDA287763E0003E1723 /* Categories.h */,
-				6978DFDB287763E0003E1723 /* Categories.m */,
+				6978DFDA287763E0003E1723 /* Category.h */,
+				6978DFDB287763E0003E1723 /* Category.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -270,8 +275,8 @@
 		6978DFE328778CA4003E1723 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				6978DFE028778C9F003E1723 /* SetCategoryCell.h */,
-				6978DFE128778C9F003E1723 /* SetCategoryCell.m */,
+				6978DFE028778C9F003E1723 /* CategoryCell.h */,
+				6978DFE128778C9F003E1723 /* CategoryCell.m */,
 				6978DFE4287C9B7E003E1723 /* TimelineCell.h */,
 				6978DFE5287C9B7E003E1723 /* TimelineCell.m */,
 			);
@@ -494,17 +499,18 @@
 				6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */,
 				6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */,
 				6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */,
-				6978DFDF287788DB003E1723 /* SetCategoriesViewController.m in Sources */,
+				6978DFDF287788DB003E1723 /* SelectCategoriesViewController.m in Sources */,
 				6978DF8F2874B518003E1723 /* main.m in Sources */,
-				6978DFE228778C9F003E1723 /* SetCategoryCell.m in Sources */,
+				6978DFE228778C9F003E1723 /* CategoryCell.m in Sources */,
 				6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */,
 				6978DFBE2874E77A003E1723 /* ProfileViewController.m in Sources */,
 				6978DFCF287646D4003E1723 /* HostViewController.m in Sources */,
 				6978DFCA2876013E003E1723 /* SettingsViewController.m in Sources */,
 				6978DFC42874E7AB003E1723 /* SearchViewController.m in Sources */,
+				6957F7E828861C2700B26433 /* ActivityDetailsViewController.m in Sources */,
 				6978DFD228764A85003E1723 /* Activity.m in Sources */,
-				6978DFD62877513C003E1723 /* SetLocationViewController.m in Sources */,
-				6978DFDC287763E0003E1723 /* Categories.m in Sources */,
+				6978DFD62877513C003E1723 /* SelectLocationViewController.m in Sources */,
+				6978DFDC287763E0003E1723 /* Category.m in Sources */,
 				6978DF812874B510003E1723 /* SceneDelegate.m in Sources */,
 				6978DFE6287C9B7E003E1723 /* TimelineCell.m in Sources */,
 			);
