@@ -14,7 +14,7 @@
 @end
 
 @implementation SelectCategoriesViewController
-@synthesize delegate1;
+@synthesize categoriesVCDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,7 +52,7 @@
 //tableView method
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CategoryCell" forIndexPath:indexPath];
-    cell.delegate = self;
+    cell.categoryCellDelegate = self;
     Category *category = self.arrayOfCategories[indexPath.row];
     cell.category = category;
     cell.indexPath = indexPath;
@@ -77,7 +77,7 @@
         [self.selectedCategories addObject:category.title];
         }
         
-    [self.delegate1 setCategoryArray:self.selectedCategories];
+    [self.categoriesVCDelegate setCategoryArray:self.selectedCategories];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

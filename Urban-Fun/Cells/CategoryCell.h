@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (strong, nonatomic) Category *category;
 @property (strong, nonatomic) IBOutlet UIButton *checkCategoryButton;
-@property (nonatomic, weak) id <CategoryCellDelegate> delegate;
+@property (nonatomic, weak) id <CategoryCellDelegate> categoryCellDelegate;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 - (void) setCategoryCell;
 //@property (nonatomic, strong) NSMutableArray *activityCategories;

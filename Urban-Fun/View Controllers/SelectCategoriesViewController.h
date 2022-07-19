@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface SelectCategoriesViewController : UIViewController
-@property (nonatomic, weak) id <CategoriesViewDelegate> delegate1;
+@property (nonatomic, weak) id <CategoriesViewDelegate> categoriesVCDelegate;
 @property (nonatomic, strong) NSMutableArray *selectedCategories;
 @end
 

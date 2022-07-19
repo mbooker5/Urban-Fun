@@ -48,10 +48,21 @@
         NSNumber *maximumAge = [NSNumber numberWithInt:maxAgeInt];
         //
         if (([self.activityTitle hasText]) && ([self.activityDescription hasText])){
-            [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }];
+            if ((minimumAge.intValue > 0 && maximumAge.intValue > 0) && (minimumAge.intValue > maximumAge.intValue)){
+                self.errorMessage.text = @"Invalid Age Range";
+            }
+            else{
+                if ([self.addressLabel2.text isEqualToString:@""])
+                {
+                    self.errorMessage.text = @"Invalid Location";
+                }
+                else{
+                    [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                }
         }
+    }
         else{
             self.errorMessage.text = @"Invalid Title/Description";
         }
@@ -80,27 +91,21 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"setCategories"]){
-        SelectCategoriesViewController *scVC = [segue destinationViewController];
-        scVC.delegate1 = self;
-        scVC.selectedCategories = [[NSMutableArray alloc] init];
-        scVC.selectedCategories = self.activityCategories;
+        SelectCategoriesViewController *selectCategoriesVC = [segue destinationViewController];
+        selectCategoriesVC.categoriesVCDelegate = self;
+        selectCategoriesVC.selectedCategories = self.activityCategories;
     }
     if ([[segue identifier] isEqualToString:@"setLocation"]){
-        SelectLocationViewController *slVC = [segue destinationViewController];
-        slVC.delegate2 = self;
+        SelectLocationViewController *selectLocationVC = [segue destinationViewController];
+        selectLocationVC.locationVCDelegate = self;
         if (self.location){
             MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
-            slVC.mapView = [[MKMapView alloc] init];
-            [slVC.mapView addAnnotation:pin];
+            selectLocationVC.mapView = [[MKMapView alloc] init];
+            [selectLocationVC.mapView addAnnotation:pin];
         }
         
     }
 }
-
-
-
-
-
 
 @end
 
