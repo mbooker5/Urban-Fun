@@ -38,7 +38,6 @@
 - (void) handleLongTapGesture: (UILongPressGestureRecognizer *) gestureRecognizer {
     if (gestureRecognizer.state != UIGestureRecognizerStateEnded){
         [self.mapView removeAnnotations:self.mapView.annotations];
-        //try passing in CGPoint to delegate instea
         CGPoint touchLocation = [gestureRecognizer locationInView:self.mapView];
         CLLocationCoordinate2D locationCoordinate = [self.mapView convertPoint:touchLocation toCoordinateFromView:self.mapView];
         [self.delegate2 setLocationPoint:locationCoordinate withLatitude:locationCoordinate.latitude withLongitude:locationCoordinate.longitude];

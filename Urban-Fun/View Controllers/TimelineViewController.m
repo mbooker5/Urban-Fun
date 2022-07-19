@@ -10,6 +10,7 @@
 #import "SceneDelegate.h"
 #import "Activity.h"
 #import "TimelineCell.h"
+#import "ActivityDetailsViewController.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -86,14 +87,16 @@
     
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"activitydetails"]){
+        NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
+        Activity *dataToPass = self.arrayOfActivities[myIndexPath.row];
+        ActivityDetailsViewController *vc = [segue destinationViewController];
+        vc.activity = dataToPass;
+    }
 }
-*/
+
 
 @end

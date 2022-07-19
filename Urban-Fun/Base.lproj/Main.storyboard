@@ -165,6 +165,7 @@
                                             <outlet property="activityDescriptionLabel" destination="s9J-8i-8EW" id="K7p-fS-sU0"/>
                                             <outlet property="activityImage" destination="pQ8-3K-Gr3" id="hEx-dt-RBE"/>
                                             <outlet property="activityTitleLabel" destination="euh-O1-gp9" id="y05-6r-f5l"/>
+                                            <segue destination="n6B-zb-LZM" kind="presentation" identifier="activitydetails" id="Gho-ey-Vu4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -203,6 +204,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ww-yh-aFc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3781.1594202898555" y="811.60714285714278"/>
+        </scene>
+        <!--Activity Details View Controller-->
+        <scene sceneID="ZLt-XX-CXL">
+            <objects>
+                <viewController id="n6B-zb-LZM" customClass="ActivityDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="54t-cM-8EC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1m0-Wv-8nH">
+                                <rect key="frame" x="93" y="152" width="245" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CG3-DL-390"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fw2-C7-HgK"/>
+                    <connections>
+                        <outlet property="detailsTitle" destination="1m0-Wv-8nH" id="NLU-lc-6pa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hhK-T8-NEw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3779.7101449275365" y="1550.8928571428571"/>
         </scene>
         <!--Host View Controller-->
         <scene sceneID="wZu-9l-5mc">

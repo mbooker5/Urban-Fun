@@ -32,9 +32,7 @@
 
     - (void)viewDidLoad {
         [super viewDidLoad];
-        // Do any additional setup after loading the view.
         self.activityCategories = [[NSMutableArray alloc] init];
-        // dismiss keyboard when tap outside a text field
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
         [tapGestureRecognizer setCancelsTouchesInView:NO];
         [self.view addGestureRecognizer:tapGestureRecognizer];
@@ -80,10 +78,7 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"setCategories"]){
         SelectCategoriesViewController *scVC = [segue destinationViewController];
         scVC.delegate1 = self;
@@ -95,7 +90,6 @@
         slVC.delegate2 = self;
         if (self.location){
             MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
-//            slVC.mapView.delegate = slVC.self;
             slVC.mapView = [[MKMapView alloc] init];
             [slVC.mapView addAnnotation:pin];
         }

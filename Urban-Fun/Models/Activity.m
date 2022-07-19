@@ -59,7 +59,7 @@
     CGSize size = CGSizeMake(414.0, 345.0);
     image = [self resizeImage:image withSize:size];
     NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
+    // gets image data and check if that is not nil
     if (!imageData) {
         return nil;
     }
