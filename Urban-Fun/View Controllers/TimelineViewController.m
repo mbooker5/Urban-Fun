@@ -12,9 +12,11 @@
 #import "TimelineCell.h"
 #import "ActivityDetailsViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *arrayOfActivities;
+@property (nonatomic, strong) const CLLocationManager *manager;
+@property (nonatomic, strong) CLLocation *currentUserLocation;
 @end
 
 @implementation TimelineViewController
@@ -31,6 +33,13 @@
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     [self.tableView reloadData];
+    self.manager = [[CLLocationManager alloc] init];
+    self.manager.delegate = self;
+    self.manager.desiredAccuracy = kCLLocationAccuracyHundredMeters; //battery
+    [self.manager requestWhenInUseAuthorization];
+    if (CLLocationManager.locationServicesEnabled){
+        [self.manager startUpdatingLocation];
+    }
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -52,11 +61,26 @@
         if (activities) {
             self.arrayOfActivities = activities;
         }
-        else {
+        else if (error != nil){
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
+                                           message:@"Please connect to the internet and press OK."
+                                           preferredStyle:UIAlertControllerStyleAlert];
+             
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                handler:^(UIAlertAction * action){[self getActivities];}];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         [self.tableView reloadData];
     }];
     
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    if (locations.firstObject){
+        [manager stopUpdatingLocation];
+        self.currentUserLocation = locations.firstObject;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -65,11 +89,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TimelineCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TimelineCell" forIndexPath:indexPath];
-    
     Activity *activity = self.arrayOfActivities[indexPath.row];
     cell.activity = activity;
+    cell.currentUserLocation = self.currentUserLocation;
     [cell setTimelineCell];
-
     
     return cell;
 }
@@ -86,6 +109,7 @@
     }];
     
 }
+
 
 
 #pragma mark - Navigation

@@ -25,8 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *selectLocation;
 @property (strong, nonatomic) NSString *locationAddress;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel2;
-
-    @end
+@end
 
     @implementation HostViewController
 
