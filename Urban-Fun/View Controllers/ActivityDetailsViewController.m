@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.detailsTitle.text = self.activity.title;
-    self.detailsHostLabel.text = [NSString stringWithFormat:@"%@%@", @"Host: ", self.activity.host.username];
+    self.detailsHostLabel.text = [NSString stringWithFormat:@"%@%@", @"Host: ", self.activity.host[@"username"]];
 }
 
 /*

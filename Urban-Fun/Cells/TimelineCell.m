@@ -49,8 +49,5 @@
         NSString *distanceString = [formatter stringFromNumber:distanceDouble];
         self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
     }
-//    MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
-//    NSString *distance = [formatter stringFromDistance:distanceFromUser];
-//    self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
 }
 @end
