@@ -9,6 +9,7 @@
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
+@property (strong, nonatomic) IBOutlet UILabel *detailsHostLabel;
 
 @end
 
@@ -18,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.detailsTitle.text = self.activity.title;
+    self.detailsHostLabel.text = [NSString stringWithFormat:@"%@%@", @"Host: ", self.activity.host.username];
 }
 
 /*
