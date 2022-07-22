@@ -23,12 +23,13 @@
 @dynamic queueList;
 @dynamic location;
 @dynamic address;
+@dynamic maxUsers;
 
 + (nonnull NSString *)parseClassName {
     return @"Activity";
 }
 
-+ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withAddress:(NSString *)address withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withAddress:(NSString *)address withMaxUsers:( NSNumber * _Nullable )maxUsers withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Activity *newActivity = [Activity new];
     newActivity.image = [self getPFFileFromImage:image];
@@ -44,11 +45,36 @@
     newActivity.queueList = [NSMutableArray new];
     newActivity.location = location;
     newActivity.address = address;
+    newActivity.maxUsers = maxUsers;
+
     
     
     [newActivity saveInBackgroundWithBlock: completion];
     
 }
+
++ (void) updateAttendanceListWithUserId:(NSString *)userID withActivity:(Activity *)activity withCompletion: (PFBooleanResultBlock  _Nullable)completion{
+    if ([activity.attendanceList containsObject:userID]){
+        [activity removeObject:userID forKey:@"attendanceList"];
+    }
+    else {
+        [activity addObject:userID forKey:@"attendanceList"];
+    }
+    [activity saveInBackgroundWithBlock:completion];
+}
+
+
+/*
+ 1. get query of all activities
+ 2. get ids
+ 3. function
+    pass in activity id and string (userID)
+ 4. make new array
+ 5. set activity.attendanceList to new array
+ 6. add to new array
+ 7. reset activity.attendanceList to new array
+ 8. save in background
+ */
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
  

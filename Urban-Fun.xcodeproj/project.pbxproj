@@ -11,6 +11,7 @@
 		40698F04EC293C0AFA27FE36 /* libPods-Urban-Fun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0847A0BCCF961BF9139F3C16 /* libPods-Urban-Fun.a */; };
 		575BDA45D0012E05A2B6BA9E /* libPods-Urban-FunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */; };
 		6957F7E828861C2700B26433 /* ActivityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */; };
+		6957F7EB288B1B9F00B26433 /* HelperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957F7EA288B1B9F00B26433 /* HelperClass.m */; };
 		6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF7D2874B510003E1723 /* AppDelegate.m */; };
 		6978DF812874B510003E1723 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF802874B510003E1723 /* SceneDelegate.m */; };
 		6978DF872874B510003E1723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF852874B510003E1723 /* Main.storyboard */; };
@@ -62,6 +63,8 @@
 		660BDA34CE6DB9E1DE98A38D /* Pods-Urban-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-Fun/Pods-Urban-Fun.debug.xcconfig"; sourceTree = "<group>"; };
 		6957F7E628861C2700B26433 /* ActivityDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityDetailsViewController.h; sourceTree = "<group>"; };
 		6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailsViewController.m; sourceTree = "<group>"; };
+		6957F7E9288B1B9F00B26433 /* HelperClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelperClass.h; sourceTree = "<group>"; };
+		6957F7EA288B1B9F00B26433 /* HelperClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelperClass.m; sourceTree = "<group>"; };
 		6978DF792874B510003E1723 /* Urban-Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Urban-Fun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6978DF7C2874B510003E1723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6978DF7D2874B510003E1723 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 		6978DF7B2874B510003E1723 /* Urban-Fun */ = {
 			isa = PBXGroup;
 			children = (
+				6957F7E9288B1B9F00B26433 /* HelperClass.h */,
+				6957F7EA288B1B9F00B26433 /* HelperClass.m */,
 				6978DFB12874BCAB003E1723 /* Delegates */,
 				6978DFE328778CA4003E1723 /* Cells */,
 				6978DFB22874BD34003E1723 /* View Controllers */,
@@ -246,8 +251,8 @@
 				6978DFB62874C1AF003E1723 /* LoginViewController.h */,
 				6978DFB72874C1AF003E1723 /* LoginViewController.m */,
 				6978DFBA2874E07D003E1723 /* SignUpViewController.m */,
-				6978DFBF2874E791003E1723 /* TimelineViewController.h */,
 				6978DFB92874E07D003E1723 /* SignUpViewController.h */,
+				6978DFBF2874E791003E1723 /* TimelineViewController.h */,
 				6978DFC02874E791003E1723 /* TimelineViewController.m */,
 				6978DFCD287646D3003E1723 /* HostViewController.h */,
 				6978DFCE287646D4003E1723 /* HostViewController.m */,
@@ -502,6 +507,7 @@
 				6978DFDF287788DB003E1723 /* SelectCategoriesViewController.m in Sources */,
 				6978DF8F2874B518003E1723 /* main.m in Sources */,
 				6978DFE228778C9F003E1723 /* CategoryCell.m in Sources */,
+				6957F7EB288B1B9F00B26433 /* HelperClass.m in Sources */,
 				6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */,
 				6978DFBE2874E77A003E1723 /* ProfileViewController.m in Sources */,
 				6978DFCF287646D4003E1723 /* HostViewController.m in Sources */,

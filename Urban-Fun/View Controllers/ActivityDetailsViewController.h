@@ -8,6 +8,9 @@
 #import <UIKit/UIKit.h>
 #import "TimelineViewController.h"
 #import "Activity.h"
+#import "Parse/Parse.h"
+#import "PFObject.h"
+#import "Parse/ParseUIConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

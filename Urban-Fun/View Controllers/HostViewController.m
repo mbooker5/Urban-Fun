@@ -20,13 +20,13 @@
 @property (strong, nonatomic) IBOutlet UITextField *minAge;
 @property (strong, nonatomic) IBOutlet UITextField *maxAge;
 @property (strong, nonatomic) IBOutlet UILabel *errorMessage;
+@property (strong, nonatomic) IBOutlet UITextField *maxUsersTextField;
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (nonatomic) CLLocationCoordinate2D locationLatLong;
 @property (strong, nonatomic) IBOutlet UIButton *selectLocation;
 @property (strong, nonatomic) NSString *locationAddress;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel2;
-
-    @end
+@end
 
     @implementation HostViewController
 
@@ -41,11 +41,13 @@
 
 
     - (IBAction)uploadActivity:(id)sender {
-        // next four lines convert UITextField text into an NSNumber
+        // next six lines convert UITextFields text into an NSNumber
         int minAgeInt = [self.minAge.text intValue];
         int maxAgeInt = [self.maxAge.text intValue];
+        int maxUsersInt = [self.maxUsersTextField.text intValue];
         NSNumber *minimumAge = [NSNumber numberWithInt:minAgeInt];
         NSNumber *maximumAge = [NSNumber numberWithInt:maxAgeInt];
+        NSNumber *maxUsers = [NSNumber numberWithInt:maxUsersInt];
         //
         if (([self.activityTitle hasText]) && ([self.activityDescription hasText])){
             if ([self.addressLabel2.text isEqualToString:@""]){
@@ -58,7 +60,7 @@
                     self.errorMessage.text = @"Invalid Age Range";
                 }
                 else{
-                    [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                    [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                     }];
                 }

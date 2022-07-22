@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *activityTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *activityDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *activityImage;
+@property (nonatomic, strong) CLLocation *currentUserLocation;
+@property (strong, nonatomic) IBOutlet UILabel *activityDistanceLabel;
 - (void) setTimelineCell;
 @end
 
