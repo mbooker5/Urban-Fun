@@ -74,7 +74,7 @@
 
     if ([self.activity.maxUsers intValue] > 0){
         self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers];
-        if (self.activity.attendanceList.count >= [self.activity.maxUsers intValue]){
+        if (self.activity.attendanceList.count >= [self.activity.maxUsers intValue] && ![_activity.attendanceList containsObject:currentUser.objectId]){
             [self.detailsJoinButton setTitle:@"Join Queue" forState:UIControlStateNormal];
             self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)"];
             NSUInteger placeInLine = [_activity.attendanceList indexOfObject:currentUser.objectId];
