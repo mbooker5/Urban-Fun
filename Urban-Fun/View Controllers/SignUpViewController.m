@@ -45,25 +45,16 @@
         
     }
     else{
-    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error != nil) {
-            [HelperClass showAlertWithTitle:@"Cannot Register User" withMessage:[NSString stringWithFormat:@"%@", error.localizedDescription] withActionTitle:@"OK" withHandler:nil  onVC:self];
+        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (error != nil) {
+                [HelperClass showAlertWithTitle:@"Cannot Register User" withMessage:[NSString stringWithFormat:@"%@", error.localizedDescription] withActionTitle:@"OK" withHandler:nil  onVC:self];
+            }
+            else {
+                [self performSegueWithIdentifier:@"registerUser" sender:nil];
+            }
+                }];
         }
-        else {
-            [self performSegueWithIdentifier:@"registerUser" sender:nil];
-        }
-    }];
-}
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

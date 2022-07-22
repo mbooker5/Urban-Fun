@@ -7,6 +7,7 @@
 
 #import "ActivityDetailsViewController.h"
 #import "PFUser.h"
+#import "HelperClass.h"
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
@@ -53,24 +54,39 @@
     self.detailsTitle.text = self.activity.title;
     self.detailsHostLabel.text = [NSString stringWithFormat:@"%@%@", @"Host - ", self.activity.host[@"username"]];
     self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu", @"Attendance - ", (unsigned long)self.activity.attendanceList.count];
+    self.detailsDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", @"Description - ", self.activity.activityDescription];
+    [self.detailsJoinButton setTitle:@"Join" forState:UIControlStateNormal];
     PFUser *currentUser = [PFUser currentUser];
+    
     if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
         self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
     }
-    else if ([_activity.attendanceList containsObject:currentUser.objectId]){
-        self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
-    }
-    else{
-        self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", @"Join to see address"];
-    }
-    self.detailsDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", @"Description - ", self.activity.activityDescription];
     if ([_activity.attendanceList containsObject:currentUser.objectId]){
         [self.detailsJoinButton setSelected:YES];
+        NSUInteger placeInLine = [_activity.attendanceList indexOfObject:currentUser.objectId];
+        if (placeInLine <= [self.activity.maxUsers intValue] - 1){
+            self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
+        }
     }
+    else {
+        self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", @"Join to see address"];
+    }
+
     if ([self.activity.maxUsers intValue] > 0){
         self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers];
         if (self.activity.attendanceList.count >= [self.activity.maxUsers intValue]){
             [self.detailsJoinButton setTitle:@"Join Queue" forState:UIControlStateNormal];
+            self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)"];
+            NSUInteger placeInLine = [_activity.attendanceList indexOfObject:currentUser.objectId];
+            if ([_activity.attendanceList containsObject:currentUser.objectId]){
+                if (placeInLine <= [self.activity.maxUsers intValue] - 1){
+                    self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
+                    self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)", @" *Joined*"];
+                }
+                else {
+                    self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)", @" *In Queue*"];
+                }
+            }
         }
     }
     
