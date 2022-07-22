@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.contentView.layer setBorderColor:(__bridge CGColorRef _Nullable)([UIColor colorNamed:@"Black"])];
+    [self.contentView.layer setBorderColor:[UIColor blackColor].CGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -22,7 +22,7 @@
     // Configure the view for the selected state
 }
 
-- getCLLocation:(PFGeoPoint *)location{
+- (CLLocation *)getCLLocation:(PFGeoPoint *)location{
     return [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
 }
 
@@ -33,8 +33,8 @@
     CLLocationDistance distanceFromUser = [self.currentUserLocation distanceFromLocation:activityLocation];
     CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
     NSNumber *distanceDouble = [NSNumber numberWithDouble:distanceInMiles];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     if ([distanceDouble intValue] < 10){
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.numberStyle = NSNumberFormatterDecimalStyle;
         formatter.maximumFractionDigits = 1;
         formatter.roundingMode = NSNumberFormatterRoundHalfUp;
@@ -42,7 +42,6 @@
         self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
     }
     else{
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.numberStyle = NSNumberFormatterDecimalStyle;
         formatter.maximumFractionDigits = 0;
         formatter.roundingMode = NSNumberFormatterRoundHalfUp;

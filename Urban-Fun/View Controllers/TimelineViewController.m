@@ -11,6 +11,7 @@
 #import "Activity.h"
 #import "TimelineCell.h"
 #import "ActivityDetailsViewController.h"
+#import "HelperClass.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -50,10 +51,9 @@
 }
 
 -(void)getActivities{
-
     PFQuery *activityQuery = [Activity query];
     [activityQuery orderByDescending:@"createdAt"];
-    [activityQuery includeKey:@"author"];
+    [activityQuery includeKey:@"host"];
     activityQuery.limit = 20;
 
   
@@ -62,14 +62,7 @@
             self.arrayOfActivities = activities;
         }
         else if (error != nil){
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
-                                           message:@"Please connect to the internet and press OK."
-                                           preferredStyle:UIAlertControllerStyleAlert];
-             
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                handler:^(UIAlertAction * action){[self getActivities];}];
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
+            [HelperClass showAlertWithTitle:@"Network Error" withMessage:@"Please connect to the internet and press OK." withActionTitle:@"OK" withHandler:@selector(getActivities) onVC:self];
         }
         [self.tableView reloadData];
     }];
