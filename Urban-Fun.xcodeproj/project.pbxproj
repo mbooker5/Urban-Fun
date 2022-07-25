@@ -168,6 +168,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6957F7EC288B667400B26433 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6957F7E9288B1B9F00B26433 /* HelperClass.h */,
+				6957F7EA288B1B9F00B26433 /* HelperClass.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6978DF702874B510003E1723 = {
 			isa = PBXGroup;
 			children = (
@@ -193,12 +202,11 @@
 		6978DF7B2874B510003E1723 /* Urban-Fun */ = {
 			isa = PBXGroup;
 			children = (
-				6957F7E9288B1B9F00B26433 /* HelperClass.h */,
-				6957F7EA288B1B9F00B26433 /* HelperClass.m */,
-				6978DFB12874BCAB003E1723 /* Delegates */,
 				6978DFE328778CA4003E1723 /* Cells */,
-				6978DFB22874BD34003E1723 /* View Controllers */,
+				6978DFB12874BCAB003E1723 /* Delegates */,
+				6957F7EC288B667400B26433 /* Helpers */,
 				6978DFD328764A90003E1723 /* Models */,
+				6978DFB22874BD34003E1723 /* View Controllers */,
 				6978DF852874B510003E1723 /* Main.storyboard */,
 				6978DF882874B518003E1723 /* Assets.xcassets */,
 				6978DF8A2874B518003E1723 /* LaunchScreen.storyboard */,

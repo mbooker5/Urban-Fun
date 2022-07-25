@@ -75,8 +75,7 @@
     if ([self.activity.maxUsers intValue] > 0){
         self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers];
         if (self.activity.attendanceList.count >= [self.activity.maxUsers intValue]){
-            [self.detailsJoinButton setTitle:@"Join Queue" forState:UIControlStateNormal];
-            self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)"];
+            self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@", @"Attendance - ", self.activity.maxUsers, @"/", self.activity.maxUsers, @" (Full)"];
             NSUInteger placeInLine = [_activity.attendanceList indexOfObject:currentUser.objectId];
             if ([_activity.attendanceList containsObject:currentUser.objectId]){
                 if (placeInLine <= [self.activity.maxUsers intValue] - 1){
@@ -84,12 +83,24 @@
                     self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)", @" *Joined*"];
                 }
                 else {
-                    self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)", @" *In Queue*"];
+                    if (((placeInLine + 1) - [self.activity.maxUsers intValue]) - 1 % 10 == 0)
+                    {
+                        self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@%@", @"Attendance - ", self.activity.maxUsers, @"/", self.activity.maxUsers, @" (Full)", @" *1st In Queue*"];
+                    }
+                    else if (((placeInLine + 1) - [self.activity.maxUsers intValue]) - 2 % 10 == 0){
+                        self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@%@", @"Attendance - ", self.activity.maxUsers, @"/", self.activity.maxUsers, @" (Full)", @" *2nd In Queue*"];
+                    }
+                    else if (((placeInLine + 1) - [self.activity.maxUsers intValue]) - 3 % 10 == 0){
+                        self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@%@", @"Attendance - ", self.activity.maxUsers, @"/", self.activity.maxUsers, @" (Full)", @" *3rd In Queue*"];
+                    }
+                    else{
+                        NSUInteger placeInQueue = (placeInLine + 1) - [self.activity.maxUsers intValue];
+                        self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%lu%@", @"Attendance - ", self.activity.maxUsers, @"/", self.activity.maxUsers, @" (Full)", @" *", (unsigned long)placeInQueue, @"th In Queue*"];
+                    }
                 }
             }
         }
     }
-    
 }
 
 /*
