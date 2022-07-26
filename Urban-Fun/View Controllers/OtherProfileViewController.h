@@ -1,8 +1,8 @@
 //
-//  ProfileViewController.h
+//  OtherProfileViewController.h
 //  Urban-Fun
 //
-//  Created by Maize Booker on 7/5/22.
+//  Created by Maize Booker on 7/26/22.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : UIViewController
+@interface OtherProfileViewController : UIViewController
 @property (strong, nonatomic) PFUser *profileToView;
 @end
 

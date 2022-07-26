@@ -8,6 +8,8 @@
 #import "ActivityDetailsViewController.h"
 #import "PFUser.h"
 #import "HelperClass.h"
+#import "ProfileViewController.h"
+#import "OtherProfileViewController.h"
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
@@ -36,12 +38,6 @@
         }
     else{
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-//            if ([self.activity.attendanceList containsObject:currentUser.objectId]){
-//                [self.detailsJoinButton setSelected:YES];
-//            }
-//            else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
-//                [self.detailsJoinButton setSelected:NO];
-//            }
             [self setUpView];
         }];
         
@@ -103,14 +99,12 @@
     }
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+ if ([[segue identifier] isEqualToString:@"profileFromDetails"]){
+     OtherProfileViewController *vc = [segue destinationViewController];
+     vc.profileToView = self.activity.host;
+ }
 }
-*/
 
 @end

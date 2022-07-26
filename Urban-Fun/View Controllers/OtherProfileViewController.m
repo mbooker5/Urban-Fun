@@ -1,14 +1,14 @@
 //
-//  ProfileViewController.m
+//  OtherProfileViewController.m
 //  Urban-Fun
 //
-//  Created by Maize Booker on 7/5/22.
+//  Created by Maize Booker on 7/26/22.
 //
 
-#import "ProfileViewController.h"
+#import "OtherProfileViewController.h"
 #import "User.h"
 
-@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface OtherProfileViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) PFUser *currentUser;
@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
 @end
 
-@implementation ProfileViewController
+@implementation OtherProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,11 +32,11 @@
 
 - (void)setUpView {
     self.usernameLabel.text = self.profileToView.username;
-    if (self.profileToView == self.currentUser){
+    if ([self.profileToView.objectId isEqualToString:self.currentUser.objectId]){
         [self.followButton setTitle:@"Profile Settings" forState:UIControlStateNormal];
     }
     else{
-        if ([self.profileToView[@"followerList"] containsObject:self.currentUser.objectId]){
+        if ([self.profileToView[@"followerList"] containsObject:self.currentUser]){
             [self.followButton setSelected:YES];
         }
         else{
@@ -54,7 +54,7 @@
 }
 
 - (IBAction)didTapFollowButton:(id)sender {
-    if (self.profileToView == self.currentUser){
+    if ([self.profileToView.objectId isEqualToString:self.currentUser.objectId]){
         [self performSegueWithIdentifier:@"profileSettings" sender:self];
     }
     else{

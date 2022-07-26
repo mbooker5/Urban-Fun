@@ -36,6 +36,9 @@
 		6978DFDF287788DB003E1723 /* SelectCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFDE287788DB003E1723 /* SelectCategoriesViewController.m */; };
 		6978DFE228778C9F003E1723 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFE128778C9F003E1723 /* CategoryCell.m */; };
 		6978DFE6287C9B7E003E1723 /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DFE5287C9B7E003E1723 /* TimelineCell.m */; };
+		69BB1E44288FB0A00094F2CA /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E43288FB0A00094F2CA /* User.m */; };
+		69BB1E47289059030094F2CA /* OtherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E46289059030094F2CA /* OtherProfileViewController.m */; };
+		69BB1E4A2890638F0094F2CA /* CollectionViewGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +112,12 @@
 		6978DFE128778C9F003E1723 /* CategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCell.m; sourceTree = "<group>"; };
 		6978DFE4287C9B7E003E1723 /* TimelineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
 		6978DFE5287C9B7E003E1723 /* TimelineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
+		69BB1E42288FB0A00094F2CA /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		69BB1E43288FB0A00094F2CA /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		69BB1E45289059030094F2CA /* OtherProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherProfileViewController.h; sourceTree = "<group>"; };
+		69BB1E46289059030094F2CA /* OtherProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherProfileViewController.m; sourceTree = "<group>"; };
+		69BB1E482890638F0094F2CA /* CollectionViewGridCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewGridCell.h; sourceTree = "<group>"; };
+		69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewGridCell.m; sourceTree = "<group>"; };
 		794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AB8A609D869622A7E42E7E /* Pods-Urban-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -256,10 +265,12 @@
 				6978DFC32874E7AB003E1723 /* SearchViewController.m */,
 				6978DFBC2874E77A003E1723 /* ProfileViewController.h */,
 				6978DFBD2874E77A003E1723 /* ProfileViewController.m */,
+				69BB1E45289059030094F2CA /* OtherProfileViewController.h */,
+				69BB1E46289059030094F2CA /* OtherProfileViewController.m */,
 				6978DFB62874C1AF003E1723 /* LoginViewController.h */,
 				6978DFB72874C1AF003E1723 /* LoginViewController.m */,
-				6978DFBA2874E07D003E1723 /* SignUpViewController.m */,
 				6978DFB92874E07D003E1723 /* SignUpViewController.h */,
+				6978DFBA2874E07D003E1723 /* SignUpViewController.m */,
 				6978DFBF2874E791003E1723 /* TimelineViewController.h */,
 				6978DFC02874E791003E1723 /* TimelineViewController.m */,
 				6978DFCD287646D3003E1723 /* HostViewController.h */,
@@ -281,6 +292,8 @@
 				6978DFD128764A85003E1723 /* Activity.m */,
 				6978DFDA287763E0003E1723 /* Category.h */,
 				6978DFDB287763E0003E1723 /* Category.m */,
+				69BB1E42288FB0A00094F2CA /* User.h */,
+				69BB1E43288FB0A00094F2CA /* User.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,6 +305,8 @@
 				6978DFE128778C9F003E1723 /* CategoryCell.m */,
 				6978DFE4287C9B7E003E1723 /* TimelineCell.h */,
 				6978DFE5287C9B7E003E1723 /* TimelineCell.m */,
+				69BB1E482890638F0094F2CA /* CollectionViewGridCell.h */,
+				69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -508,9 +523,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69BB1E44288FB0A00094F2CA /* User.m in Sources */,
 				6978DFB82874C1AF003E1723 /* LoginViewController.m in Sources */,
 				6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */,
 				6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */,
+				69BB1E4A2890638F0094F2CA /* CollectionViewGridCell.m in Sources */,
 				6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */,
 				6978DFDF287788DB003E1723 /* SelectCategoriesViewController.m in Sources */,
 				6978DF8F2874B518003E1723 /* main.m in Sources */,
@@ -527,6 +544,7 @@
 				6978DFDC287763E0003E1723 /* Category.m in Sources */,
 				6978DF812874B510003E1723 /* SceneDelegate.m in Sources */,
 				6978DFE6287C9B7E003E1723 /* TimelineCell.m in Sources */,
+				69BB1E47289059030094F2CA /* OtherProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

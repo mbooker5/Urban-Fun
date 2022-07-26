@@ -12,6 +12,7 @@
 #import "TimelineCell.h"
 #import "ActivityDetailsViewController.h"
 #import "HelperClass.h"
+#import "ProfileViewController.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
