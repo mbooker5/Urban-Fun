@@ -13,8 +13,14 @@
 #import "Parse/ParseUIConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol ActivityDetailsDelegate <NSObject>
+
+- (void)syncButtons;
+
+@end
 
 @interface ActivityDetailsViewController : UIViewController
+@property (nonatomic, weak) id <ActivityDetailsDelegate> activitydetailsDelegate;
 @property (nonatomic, strong) Activity *activity;
 
 @end

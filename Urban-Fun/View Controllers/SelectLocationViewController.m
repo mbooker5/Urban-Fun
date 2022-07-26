@@ -33,6 +33,8 @@
     UILongPressGestureRecognizer *longTapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongTapGesture:)];
     [self.mapView addGestureRecognizer: longTapGesture];
     
+    [[self.addressLabel layer] setCornerRadius:9.0f];
+    [[self.addressLabel layer] setMasksToBounds:YES];
 }
 
 - (void) handleLongTapGesture: (UILongPressGestureRecognizer *) gestureRecognizer {

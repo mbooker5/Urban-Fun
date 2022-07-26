@@ -8,6 +8,7 @@
 #import "TimelineCell.h"
 #import <MapKit/MapKit.h>
 
+
 @implementation TimelineCell
 
 - (void)awakeFromNib {
@@ -48,5 +49,36 @@
         NSString *distanceString = [formatter stringFromNumber:distanceDouble];
         self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
     }
+    PFUser *currentUser = [PFUser currentUser];
+    if ([self.activity.attendanceList containsObject:currentUser.objectId]){
+        [self.timelineJoinButton setSelected:YES];
+    }
+    else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
+        [self.timelineJoinButton setSelected:NO];
+    }
 }
+
+- (IBAction)didTapFavorite:(id)sender {
+}
+
+- (IBAction)didTapJoin:(id)sender {
+    PFUser *currentUser = [PFUser currentUser];
+    if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
+        }
+    else{
+        [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if ([self.activity.attendanceList containsObject:currentUser.objectId]){
+                [self.timelineJoinButton setSelected:YES];
+            }
+            else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
+                [self.timelineJoinButton setSelected:NO];
+            }
+//            [self setUpView];
+        }];
+        
+    }
+    
+}
+
+
 @end

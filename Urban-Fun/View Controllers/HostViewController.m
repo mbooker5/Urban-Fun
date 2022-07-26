@@ -15,7 +15,7 @@
 
 @interface HostViewController () <CategoriesViewDelegate, LocationViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *activityTitle;
-@property (strong, nonatomic) IBOutlet UITextField *activityDescription;
+@property (strong, nonatomic) IBOutlet UITextView *activityDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *activityImage;
 @property (strong, nonatomic) IBOutlet UITextField *minAge;
 @property (strong, nonatomic) IBOutlet UITextField *maxAge;

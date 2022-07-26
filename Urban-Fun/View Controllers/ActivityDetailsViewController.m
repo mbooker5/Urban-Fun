@@ -36,18 +36,17 @@
         }
     else{
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if ([self.activity.attendanceList containsObject:currentUser.objectId]){
-                [self.detailsJoinButton setSelected:YES];
-            }
-            else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
-                [self.detailsJoinButton setSelected:NO];
-            }
+//            if ([self.activity.attendanceList containsObject:currentUser.objectId]){
+//                [self.detailsJoinButton setSelected:YES];
+//            }
+//            else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
+//                [self.detailsJoinButton setSelected:NO];
+//            }
             [self setUpView];
-            
         }];
         
     }
-    
+    [self.activitydetailsDelegate syncButtons];
 }
 
 - (void)setUpView {
@@ -69,6 +68,7 @@
         }
     }
     else {
+        [self.detailsJoinButton setSelected:NO];
         self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", @"Join to see address"];
     }
 
