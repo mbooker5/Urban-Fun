@@ -15,7 +15,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.contentView.layer setBorderColor:[UIColor blackColor].CGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -37,20 +36,12 @@
     CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
     NSNumber *distanceDouble = [NSNumber numberWithDouble:distanceInMiles];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    if ([distanceDouble intValue] < 10){
-        formatter.numberStyle = NSNumberFormatterDecimalStyle;
-        formatter.maximumFractionDigits = 1;
-        formatter.roundingMode = NSNumberFormatterRoundHalfUp;
-        NSString *distanceString = [formatter stringFromNumber:distanceDouble];
-        self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
-    }
-    else{
-        formatter.numberStyle = NSNumberFormatterDecimalStyle;
-        formatter.maximumFractionDigits = 0;
-        formatter.roundingMode = NSNumberFormatterRoundHalfUp;
-        NSString *distanceString = [formatter stringFromNumber:distanceDouble];
-        self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
-    }
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    formatter.maximumFractionDigits = [distanceDouble intValue] < 10 ? 1 : 0;
+    formatter.roundingMode = NSNumberFormatterRoundHalfUp;
+    NSString *distanceString = [formatter stringFromNumber:distanceDouble];
+    self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
+    
     PFUser *currentUser = [PFUser currentUser];
     if ([self.activity.attendanceList containsObject:currentUser.objectId]){
         [self.timelineJoinButton setSelected:YES];
@@ -62,6 +53,8 @@
 
 - (IBAction)didTapFavorite:(id)sender {
 }
+
+
 
 - (IBAction)didTapJoin:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
@@ -76,9 +69,7 @@
                 [self.timelineJoinButton setSelected:NO];
             }
         }];
-        
     }
-    
 }
 
 
