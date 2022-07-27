@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *followingList;
 
 
-+ (void) updateFollowersforUser:(PFUser *)user1 withUserID:(NSString *)user1ID followedBy:(PFUser *)user2 withUserID:(NSString *)user2ID withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) updateFollowersforUser:(User *)user1 followedBy:(User *)user2 withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

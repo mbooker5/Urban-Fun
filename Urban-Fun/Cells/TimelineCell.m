@@ -24,7 +24,7 @@
     // Configure the view for the selected state
 }
 
-- (CLLocation *)getCLLocation:(PFGeoPoint *)location{
+- (CLLocation *)getCLLocationForGeoPoint:(PFGeoPoint *)location{
     return [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
 }
 
@@ -32,7 +32,7 @@
     self.activityTitleLabel.text = self.activity.title;
     self.activityDescriptionLabel.text = self.activity.activityDescription;
     self.timelineUsernameLabel.text = [NSString stringWithFormat:@"%@%@", @"@", self.activity.host.username];
-    CLLocation *activityLocation = [self getCLLocation:self.activity.location];
+    CLLocation *activityLocation = [self getCLLocationForGeoPoint:self.activity.location];
     CLLocationDistance distanceFromUser = [self.currentUserLocation distanceFromLocation:activityLocation];
     CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
     NSNumber *distanceDouble = [NSNumber numberWithDouble:distanceInMiles];

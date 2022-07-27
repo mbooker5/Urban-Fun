@@ -58,7 +58,7 @@
         [self performSegueWithIdentifier:@"profileSettings" sender:self];
     }
     else{
-        [User updateFollowersforUser:self.profileToView withUserID:self.profileToView.objectId followedBy:self.currentUser withUserID:self.currentUser.objectId withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [User updateFollowersforUser:self.profileToView followedBy:self.currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             [self setUpView];
         }];
     }

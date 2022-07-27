@@ -416,6 +416,15 @@
                                     <segue destination="5fn-H4-Uos" kind="presentation" identifier="profileFromDetails" id="0vi-oB-MUZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7p0-0m-Mfr">
+                                <rect key="frame" x="20" y="205" width="374" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <segue destination="xKW-S4-UJY" kind="show" identifier="attendanceList" id="Jm6-eI-3hB"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="1m0-Wv-8nH">
                                 <rect key="frame" x="20" y="20" width="374" height="34"/>
                                 <constraints>
@@ -452,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhK-T8-NEw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3781" y="1505"/>
+            <point key="canvasLocation" x="3779.7101449275365" y="1504.6875"/>
         </scene>
         <!--Host View Controller-->
         <scene sceneID="wZu-9l-5mc">
@@ -1441,6 +1450,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dHg-fd-kYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4762" y="1505"/>
+        </scene>
+        <!--Attendance View Controller-->
+        <scene sceneID="QBB-Ci-4rF">
+            <objects>
+                <viewController id="xKW-S4-UJY" customClass="AttendanceViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4hp-Zn-8Fg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pwh-UD-gy7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="85" id="ypk-qk-azG" customClass="AttendanceListCell">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ypk-qk-azG" id="nin-Hw-dYd">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BWg-Oq-Qh5"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstItem="Pwh-UD-gy7" firstAttribute="bottom" secondItem="BWg-Oq-Qh5" secondAttribute="bottom" id="51H-Ae-tv0"/>
+                            <constraint firstItem="Pwh-UD-gy7" firstAttribute="top" secondItem="4hp-Zn-8Fg" secondAttribute="top" id="N3z-rY-TpK"/>
+                            <constraint firstItem="Pwh-UD-gy7" firstAttribute="leading" secondItem="BWg-Oq-Qh5" secondAttribute="leading" id="YXf-Dk-QuW"/>
+                            <constraint firstItem="Pwh-UD-gy7" firstAttribute="trailing" secondItem="BWg-Oq-Qh5" secondAttribute="trailing" id="tvJ-56-VsH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="SCL-WW-IQh"/>
+                    <connections>
+                        <outlet property="tableView" destination="Pwh-UD-gy7" id="rFO-1H-hUq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AK0-h7-86k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3779.7101449275365" y="2203.7946428571427"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

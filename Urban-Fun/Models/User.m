@@ -15,18 +15,18 @@
 @dynamic followingList;
 
 
-+ (void) updateFollowersforUser:(PFUser *)user1 withUserID:(NSString *)user1ID followedBy:(PFUser *)user2 withUserID:(NSString *)user2ID withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) updateFollowersforUser:(User *)user1 followedBy:(User *)user2 withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     
-    if ([user1[@"followerList"] containsObject:user2ID]){
-        [user1 removeObject:user2ID forKey:@"followerList"];
-        [user2 removeObject:user1ID forKey:@"followingList"];
+    if ([user2.followingList containsObject:user1.objectId]){
+        [user1 removeObject:user2.objectId forKey:@"followerList"];
+        [user2 removeObject:user1.objectId forKey:@"followingList"];
     }
     else {
-        [user1 addObject:user2ID forKey:@"followerList"];
-        [user2 addObject:user1ID forKey:@"followingList"];
+        [user1 addObject:user2.objectId forKey:@"followerList"];
+        [user2 addObject:user1.objectId forKey:@"followingList"];
     }
-    [user1 saveInBackground];
-    [user2 saveInBackground];
+    [user1 saveInBackgroundWithBlock:completion];
+    [user2 saveInBackgroundWithBlock:completion];
 }
 
 

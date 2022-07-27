@@ -7,6 +7,7 @@
 
 #import "Activity.h"
 
+
 @implementation Activity
 @dynamic activityID;
 @dynamic userID;
@@ -33,7 +34,7 @@
     
     Activity *newActivity = [Activity new];
     newActivity.image = [self getPFFileFromImage:image];
-    newActivity.host = [PFUser currentUser];
+    newActivity.host = [User currentUser];
     newActivity.title = title;
     newActivity.activityDescription = activityDescription;
     newActivity.categories = categories;
@@ -47,7 +48,7 @@
     newActivity.address = address;
     newActivity.maxUsers = maxUsers;
 
-    
+
     
     [newActivity saveInBackgroundWithBlock: completion];
     

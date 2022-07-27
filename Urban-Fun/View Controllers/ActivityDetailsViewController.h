@@ -11,6 +11,7 @@
 #import "Parse/Parse.h"
 #import "PFObject.h"
 #import "Parse/ParseUIConstants.h"
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol ActivityDetailsDelegate <NSObject>

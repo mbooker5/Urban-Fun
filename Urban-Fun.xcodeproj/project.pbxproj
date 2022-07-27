@@ -39,6 +39,8 @@
 		69BB1E44288FB0A00094F2CA /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E43288FB0A00094F2CA /* User.m */; };
 		69BB1E47289059030094F2CA /* OtherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E46289059030094F2CA /* OtherProfileViewController.m */; };
 		69BB1E4A2890638F0094F2CA /* CollectionViewGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */; };
+		69BB1E502890A6590094F2CA /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E4F2890A6590094F2CA /* AttendanceViewController.m */; };
+		69BB1E532890AA200094F2CA /* AttendanceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E522890AA200094F2CA /* AttendanceListCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,10 @@
 		69BB1E46289059030094F2CA /* OtherProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherProfileViewController.m; sourceTree = "<group>"; };
 		69BB1E482890638F0094F2CA /* CollectionViewGridCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewGridCell.h; sourceTree = "<group>"; };
 		69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewGridCell.m; sourceTree = "<group>"; };
+		69BB1E4E2890A6590094F2CA /* AttendanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttendanceViewController.h; sourceTree = "<group>"; };
+		69BB1E4F2890A6590094F2CA /* AttendanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttendanceViewController.m; sourceTree = "<group>"; };
+		69BB1E512890AA200094F2CA /* AttendanceListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttendanceListCell.h; sourceTree = "<group>"; };
+		69BB1E522890AA200094F2CA /* AttendanceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttendanceListCell.m; sourceTree = "<group>"; };
 		794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AB8A609D869622A7E42E7E /* Pods-Urban-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -259,6 +265,10 @@
 			children = (
 				6957F7E628861C2700B26433 /* ActivityDetailsViewController.h */,
 				6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */,
+				69BB1E4E2890A6590094F2CA /* AttendanceViewController.h */,
+				69BB1E4F2890A6590094F2CA /* AttendanceViewController.m */,
+				69BB1E512890AA200094F2CA /* AttendanceListCell.h */,
+				69BB1E522890AA200094F2CA /* AttendanceListCell.m */,
 				6978DFC52874E7C7003E1723 /* FavoritesViewController.h */,
 				6978DFC62874E7C7003E1723 /* FavoritesViewController.m */,
 				6978DFC22874E7AB003E1723 /* SearchViewController.h */,
@@ -525,6 +535,7 @@
 			files = (
 				69BB1E44288FB0A00094F2CA /* User.m in Sources */,
 				6978DFB82874C1AF003E1723 /* LoginViewController.m in Sources */,
+				69BB1E502890A6590094F2CA /* AttendanceViewController.m in Sources */,
 				6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */,
 				6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */,
 				69BB1E4A2890638F0094F2CA /* CollectionViewGridCell.m in Sources */,
@@ -540,6 +551,7 @@
 				6978DFC42874E7AB003E1723 /* SearchViewController.m in Sources */,
 				6957F7E828861C2700B26433 /* ActivityDetailsViewController.m in Sources */,
 				6978DFD228764A85003E1723 /* Activity.m in Sources */,
+				69BB1E532890AA200094F2CA /* AttendanceListCell.m in Sources */,
 				6978DFD62877513C003E1723 /* SelectLocationViewController.m in Sources */,
 				6978DFDC287763E0003E1723 /* Category.m in Sources */,
 				6978DF812874B510003E1723 /* SceneDelegate.m in Sources */,

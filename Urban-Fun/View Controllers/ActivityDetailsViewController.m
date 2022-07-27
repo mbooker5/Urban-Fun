@@ -10,6 +10,7 @@
 #import "HelperClass.h"
 #import "ProfileViewController.h"
 #import "OtherProfileViewController.h"
+#import "AttendanceViewController.h"
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
@@ -19,7 +20,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *detailsJoinButton;
 @property (strong, nonatomic) IBOutlet UILabel *detailsAttendanceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *detailsDescriptionLabel;
-@property (strong,nonatomic) PFUser *currentUser;
+@property (strong,nonatomic) User *currentUser;
 
 - (void) setUpView;
 @end
@@ -33,7 +34,7 @@
 }
 
 - (IBAction)didTapJoin:(id)sender {
-    PFUser *currentUser = [PFUser currentUser];
+    User *currentUser = [User currentUser];
     if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
         }
     else{
@@ -51,7 +52,7 @@
     self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu", @"Attendance - ", (unsigned long)self.activity.attendanceList.count];
     self.detailsDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", @"Description - ", self.activity.activityDescription];
     [self.detailsJoinButton setTitle:@"Join" forState:UIControlStateNormal];
-    PFUser *currentUser = [PFUser currentUser];
+    User *currentUser = [User currentUser];
     
     if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
         self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
@@ -105,6 +106,12 @@
      OtherProfileViewController *vc = [segue destinationViewController];
      vc.profileToView = self.activity.host;
  }
+    if ([[segue identifier] isEqualToString:@"activitydetails"]){
+        AttendanceViewController *vc = [segue destinationViewController];
+        vc.activity = self.activity;
+    }
 }
+
+
 
 @end
