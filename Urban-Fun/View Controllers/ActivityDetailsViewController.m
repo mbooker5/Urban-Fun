@@ -35,21 +35,18 @@
 
 - (IBAction)didTapJoin:(id)sender {
     User *currentUser = [User currentUser];
-    if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
-        }
-    else{
+    if (![self.activity.host.objectId isEqualToString:currentUser.objectId]){
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             [self setUpView];
-        }];
-        
-    }
+    }];
+        }
     [self.activitydetailsDelegate syncButtons];
 }
 
 - (void)setUpView {
     self.detailsTitle.text = self.activity.title;
     self.detailsHostLabel.text = [NSString stringWithFormat:@"%@%@", @"Host - ", self.activity.host[@"username"]];
-    self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu", @"Attendance - ", (unsigned long)self.activity.attendanceList.count];
+    self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu", @"Attendance - ", self.activity.attendanceList.count];
     self.detailsDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", @"Description - ", self.activity.activityDescription];
     [self.detailsJoinButton setTitle:@"Join" forState:UIControlStateNormal];
     User *currentUser = [User currentUser];
@@ -57,9 +54,10 @@
     if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
         self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
     }
-    if ([_activity.attendanceList containsObject:currentUser.objectId]){
+    else if ([_activity.attendanceList containsObject:currentUser.objectId]){
         [self.detailsJoinButton setSelected:YES];
         NSUInteger placeInLine = [_activity.attendanceList indexOfObject:currentUser.objectId];
+        // conditional below addresses edge case: only users who are able to attend should be able to see address
         if (placeInLine <= [self.activity.maxUsers intValue] - 1){
             self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
         }
@@ -70,13 +68,17 @@
     }
 
     if ([self.activity.maxUsers intValue] > 0){
-        self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers];
+        if ([_activity.attendanceList containsObject:currentUser.objectId]){
+        self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@", @"Attendance - ", self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" *Joined*"];
+        }
+        else{
+            self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@", @"Attendance - ", self.activity.attendanceList.count, @"/", self.activity.maxUsers];
+        }
         if (self.activity.attendanceList.count >= [self.activity.maxUsers intValue]){
             self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@", @"Attendance - ", self.activity.maxUsers, @"/", self.activity.maxUsers, @" (Full)"];
             NSUInteger placeInLine = [_activity.attendanceList indexOfObject:currentUser.objectId];
             if ([_activity.attendanceList containsObject:currentUser.objectId]){
                 if (placeInLine <= [self.activity.maxUsers intValue] - 1){
-                    self.detailsLocationLabel.text = [NSString stringWithFormat:@"%@%@", @"Location - ", self.activity.address];
                     self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu%@%@%@%@", @"Attendance - ", (unsigned long)self.activity.attendanceList.count, @"/", self.activity.maxUsers, @" (Full)", @" *Joined*"];
                 }
                 else {
