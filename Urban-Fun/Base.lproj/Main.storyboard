@@ -212,7 +212,7 @@
                                                     <buttonConfiguration key="configuration" style="plain"/>
                                                     <connections>
                                                         <action selector="didTapUsername:" destination="Fdc-03-WRS" eventType="touchUpInside" id="4Rt-5D-egi"/>
-                                                        <segue destination="44o-Iw-DLZ" kind="show" identifier="profileFromTImeline" id="LIh-nL-zZC"/>
+                                                        <segue destination="5fn-H4-Uos" kind="presentation" id="dGv-0l-2zJ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -868,7 +868,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IeK-MP-qmw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6616" y="154"/>
+            <point key="canvasLocation" x="7526.0869565217399" y="153.34821428571428"/>
         </scene>
         <!--Select Location View Controller-->
         <scene sceneID="bla-4G-Dye">
@@ -1263,13 +1263,78 @@
                         <color key="selectedImageTintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ePQ-zb-eXF" kind="relationship" relationship="viewControllers" id="3Oc-ih-fLr"/>
                         <segue destination="fvh-AD-NGu" kind="relationship" relationship="viewControllers" id="Msr-wd-SDV"/>
+                        <segue destination="ePQ-zb-eXF" kind="relationship" relationship="viewControllers" id="3Oc-ih-fLr"/>
+                        <segue destination="tak-dV-YiD" kind="relationship" relationship="viewControllers" id="Aas-dk-O4A"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8T-Qw-1fy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1022" y="92"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="uTy-kZ-Hh5">
+            <objects>
+                <viewController id="cIc-hd-D4y" customClass="SearchViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0g5-35-qBz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="UGJ-D1-RU8">
+                                <rect key="frame" x="0.0" y="37" width="339" height="51"/>
+                                <color key="barTintColor" systemColor="systemGray4Color"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Vz3-VA-h2g">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pWw-5v-Gp7"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Vz3-VA-h2g" secondAttribute="bottom" id="1ax-Ru-3hD"/>
+                            <constraint firstAttribute="trailing" secondItem="UGJ-D1-RU8" secondAttribute="trailing" constant="75" id="8au-Tl-uO2"/>
+                            <constraint firstItem="Vz3-VA-h2g" firstAttribute="trailing" secondItem="pWw-5v-Gp7" secondAttribute="trailing" id="Goi-4p-Gnb"/>
+                            <constraint firstItem="UGJ-D1-RU8" firstAttribute="leading" secondItem="0g5-35-qBz" secondAttribute="leading" id="Kar-gT-WQT"/>
+                            <constraint firstItem="Vz3-VA-h2g" firstAttribute="leading" secondItem="pWw-5v-Gp7" secondAttribute="leading" id="XZj-Le-n4y"/>
+                            <constraint firstItem="Vz3-VA-h2g" firstAttribute="top" secondItem="UGJ-D1-RU8" secondAttribute="bottom" id="Y7B-GV-V4q"/>
+                            <constraint firstItem="Vz3-VA-h2g" firstAttribute="top" secondItem="pWw-5v-Gp7" secondAttribute="top" id="bZr-Lh-WVt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="C9a-hF-4ZC">
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="Ibk-96-Ivw">
+                            <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="h4f-GU-RF2" kind="presentation" id="wCQ-GP-DA3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="filtersButton" destination="Ibk-96-Ivw" id="Bfb-Qp-6Te"/>
+                        <outlet property="searchBar" destination="UGJ-D1-RU8" id="Y2b-7f-5MB"/>
+                        <outlet property="tableView" destination="Vz3-VA-h2g" id="N5Y-W3-dVH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D9A-kq-VvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2842.0289855072465" y="92.410714285714278"/>
+        </scene>
+        <!--Filters View Controller-->
+        <scene sceneID="562-ZG-fad">
+            <objects>
+                <viewController id="h4f-GU-RF2" customClass="FiltersViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tsh-aQ-NhX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ZSc-nZ-9sS"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6eE-if-JQh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pnA-nx-REx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3781" y="92"/>
         </scene>
         <!--Timeline-->
         <scene sceneID="Iaq-CJ-9LK">
@@ -1492,11 +1557,32 @@
             </objects>
             <point key="canvasLocation" x="3779.7101449275365" y="2203.7946428571427"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="HhN-pt-BIh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tak-dV-YiD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" selectedImage="magnifyingglass" id="waf-Au-nQe"/>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iDd-If-BzM">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cIc-hd-D4y" kind="relationship" relationship="rootViewController" id="Tdb-oQ-IEY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yzo-jS-qCZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1931.8840579710147" y="91.741071428571431"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="dGv-0l-2zJ"/>
         <segue reference="eEu-bv-fbo"/>
         <segue reference="hMj-kF-kOg"/>
-        <segue reference="LIh-nL-zZC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Urbanfun" width="255" height="189"/>
@@ -1504,6 +1590,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="mappin" catalog="system" width="105" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>

@@ -1,20 +1,17 @@
 //
-//  SearchViewController.m
+//  FiltersViewController.m
 //  Urban-Fun
 //
-//  Created by Maize Booker on 7/5/22.
+//  Created by Maize Booker on 7/28/22.
 //
 
-#import "SearchViewController.h"
+#import "FiltersViewController.h"
 
-@interface SearchViewController ()
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *filtersButton;
+@interface FiltersViewController ()
 
 @end
 
-@implementation SearchViewController
+@implementation FiltersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
