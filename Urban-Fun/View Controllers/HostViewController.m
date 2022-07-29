@@ -15,7 +15,7 @@
 
 @interface HostViewController () <CategoriesViewDelegate, LocationViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *activityTitle;
-@property (strong, nonatomic) IBOutlet UITextField *activityDescription;
+@property (strong, nonatomic) IBOutlet UITextView *activityDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *activityImage;
 @property (strong, nonatomic) IBOutlet UITextField *minAge;
 @property (strong, nonatomic) IBOutlet UITextField *maxAge;
@@ -61,6 +61,7 @@
                 }
                 else{
                     [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+//                        [[PFUser currentUser][@"hostedActivities"] addObject:]
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                     }];
                 }

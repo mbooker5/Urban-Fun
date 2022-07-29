@@ -7,13 +7,14 @@
 
 #import "PFObject.h"
 #import "Parse/Parse.h"
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Activity : PFObject<PFSubclassing>
 @property (nonatomic, strong) NSString *activityID;
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) PFUser *host;
+@property (nonatomic, strong) User *host;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *activityDescription;
 @property (nonatomic, strong) NSMutableArray *categories;

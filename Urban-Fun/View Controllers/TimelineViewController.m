@@ -12,8 +12,9 @@
 #import "TimelineCell.h"
 #import "ActivityDetailsViewController.h"
 #import "HelperClass.h"
+#import "ProfileViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *arrayOfActivities;
 @property (nonatomic, strong) const CLLocationManager *manager;
@@ -90,6 +91,13 @@
     return cell;
 }
 
+- (void)syncButtons{
+    [self.tableView reloadData];
+}
+
+
+
+
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
 
@@ -112,6 +120,7 @@
         Activity *dataToPass = self.arrayOfActivities[myIndexPath.row];
         ActivityDetailsViewController *vc = [segue destinationViewController];
         vc.activity = dataToPass;
+        vc.activitydetailsDelegate = self;
     }
 }
 
