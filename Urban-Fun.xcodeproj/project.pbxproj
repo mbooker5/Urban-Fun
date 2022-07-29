@@ -42,6 +42,7 @@
 		69BB1E502890A6590094F2CA /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E4F2890A6590094F2CA /* AttendanceViewController.m */; };
 		69BB1E532890AA200094F2CA /* AttendanceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E522890AA200094F2CA /* AttendanceListCell.m */; };
 		69BB1E562893184B0094F2CA /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E552893184B0094F2CA /* FiltersViewController.m */; };
+		69BB1E592893AC370094F2CA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BB1E582893AC370094F2CA /* UserCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,8 @@
 		69BB1E522890AA200094F2CA /* AttendanceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttendanceListCell.m; sourceTree = "<group>"; };
 		69BB1E542893184B0094F2CA /* FiltersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
 		69BB1E552893184B0094F2CA /* FiltersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
+		69BB1E572893AC370094F2CA /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		69BB1E582893AC370094F2CA /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urban-FunUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AB8A609D869622A7E42E7E /* Pods-Urban-FunUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -322,6 +325,8 @@
 				6978DFE5287C9B7E003E1723 /* TimelineCell.m */,
 				69BB1E482890638F0094F2CA /* CollectionViewGridCell.h */,
 				69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */,
+				69BB1E572893AC370094F2CA /* UserCell.h */,
+				69BB1E582893AC370094F2CA /* UserCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				6978DFE228778C9F003E1723 /* CategoryCell.m in Sources */,
 				6957F7EB288B1B9F00B26433 /* HelperClass.m in Sources */,
 				6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */,
+				69BB1E592893AC370094F2CA /* UserCell.m in Sources */,
 				6978DFBE2874E77A003E1723 /* ProfileViewController.m in Sources */,
 				6978DFCF287646D4003E1723 /* HostViewController.m in Sources */,
 				6978DFCA2876013E003E1723 /* SettingsViewController.m in Sources */,

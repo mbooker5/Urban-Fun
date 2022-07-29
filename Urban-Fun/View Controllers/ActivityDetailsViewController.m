@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "OtherProfileViewController.h"
 #import "AttendanceViewController.h"
+#import "SceneDelegate.h"
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
@@ -102,11 +103,14 @@
         }
     }
 }
+- (IBAction)didTapHost:(id)sender {
+    [self performSegueWithIdentifier:@"profileFromDetails" sender:sender];
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  if ([[segue identifier] isEqualToString:@"profileFromDetails"]){
-     OtherProfileViewController *vc = [segue destinationViewController];
+     ProfileViewController *vc = [segue destinationViewController];
      vc.profileToView = self.activity.host;
  }
     if ([[segue identifier] isEqualToString:@"activitydetails"]){

@@ -9,8 +9,10 @@
 #import "Activity.h"
 #import "User.h"
 #import "TimelineCell.h"
+#import "ProfileViewController.h"
+#import "ActivityDetailsViewController.h"
 
-@interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate>
+@interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate, ActivityDetailsDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *filtersButton;
@@ -29,6 +31,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.searchBar.delegate = self;
+    
+    // dismisses keyboard when tap outside a text field
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
+    [tapGestureRecognizer setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    // dismisses keyboard when user scrolls
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
     // Do any additional setup after loading the view.
     UIFont *font = [UIFont fontWithName:@"Verdana-Bold" size:12.0f];
     UIColor *color = [UIColor lightGrayColor];
@@ -59,10 +69,7 @@
 }
 
 - (IBAction)changedSearchType:(id)sender {
-    [self.tableView reloadData];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSString *searchText = self.searchBar.text;
     if (self.searchControl.selectedSegmentIndex == 0){
         //removing white space
         searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -106,10 +113,63 @@
     }
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (self.searchControl.selectedSegmentIndex == 0){
+        //removing white space
+        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        PFQuery *activityQuery = [Activity query];
+        [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
+        [activityQuery orderByDescending:@"createdAt"];
+        [activityQuery includeKey:@"host"];
+        self.activitiesArray = [[NSMutableArray alloc] init];
+        [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
+            if (error) {
+                
+            }
+            for (Activity *activity in activities) {
+                if (![self.activitiesArray containsObject:activity]){
+                    [self.activitiesArray addObject:activity];
+                }
+            }
+            [self.tableView reloadData];
+        }];
+    }
+    if (self.searchControl.selectedSegmentIndex == 1){
+        //removing white space
+        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        PFQuery *userQuery = [User query];
+        [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
+        [userQuery includeKey:@"host"];
+        self.usersArray = [[NSMutableArray alloc] init];
+        [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
+            if (error) {
+                
+            }
+            for (User *user in users) {
+                if (![self.usersArray containsObject:user]){
+                    [self.usersArray addObject:user];
+                }
+            }
+            [self.tableView reloadData];
+        }];
+    }
+    
+}
+
+// delegate method to pass tapped user from cell
 - (void)didTapUsername:(nonnull User *)user {
     self.profileToView = user;
-    [self performSegueWithIdentifier:@"otherProfileView" sender:NULL];
 }
+// action method
+- (IBAction)usernameTapped:(id)sender {
+    [self performSegueWithIdentifier:@"profileFromSearch" sender:sender];
+}
+
+- (void)syncButtons {
+    [self.tableView reloadData];
+}
+
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (self.searchControl.selectedSegmentIndex == 0){
@@ -133,70 +193,37 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.searchControl.selectedSegmentIndex == 0){
+    if (self.searchControl.selectedSegmentIndex == 0 && self.searchBar.text.length > 0){
         return self.activitiesArray.count;
     }
-    if (self.searchControl.selectedSegmentIndex == 1){
+    if (self.searchControl.selectedSegmentIndex == 1 && self.searchBar.text.length > 0){
         return self.usersArray.count;
     }
     return 0;
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+//#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"activitydetails"]){
+        NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
+        Activity *dataToPass = self.activitiesArray[myIndexPath.row];
+        ActivityDetailsViewController *vc = [segue destinationViewController];
+        vc.activity = dataToPass;
+        vc.activitydetailsDelegate = self;
+    }
+    if ([[segue identifier] isEqualToString:@"profileFromSearch"]){
+        ProfileViewController *vc = [segue destinationViewController];
+        if (![self.profileToView.objectId isEqualToString:[User currentUser].objectId]){
+            vc.profileToView = self.profileToView;
+        }
+    }
 }
-*/
 
 
-//- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-//    <#code#>
-//}
-//
-//- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-//    <#code#>
-//}
-//
-//- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    <#code#>
-//}
-//
-//- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-//    <#code#>
-//}
-//
-//- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    <#code#>
-//}
-//
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    <#code#>
-//}
-//
-//- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    <#code#>
-//}
-//
-//- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-//    <#code#>
-//}
-//
-//- (void)setNeedsFocusUpdate {
-//    <#code#>
-//}
-//
-//- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-//    <#code#>
-//}
-//
-//- (void)updateFocusIfNeeded {
-//    <#code#>
-//}
+
+
 
 
 

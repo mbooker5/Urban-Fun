@@ -114,6 +114,15 @@
     
 }
 
+// delegate method to pass tapped user from cell
+- (void)didTapUsername:(nonnull User *)user {
+    self.profileToView = user;
+}
+
+// action method
+- (IBAction)usernameTapped:(id)sender {
+    [self performSegueWithIdentifier:@"profileFromTimeline" sender:sender];
+}
 
 
 #pragma mark - Navigation
@@ -125,17 +134,18 @@
         vc.activity = dataToPass;
         vc.activitydetailsDelegate = self;
     }
-    if ([[segue identifier] isEqualToString:@"otherProfileView"]){
-        OtherProfileViewController *vc = [segue destinationViewController];
-        vc.profileToView = self.profileToView;
+    if ([[segue identifier] isEqualToString:@"profileFromTimeline"]){
+        ProfileViewController *vc = [segue destinationViewController];
+        if (![self.profileToView.objectId isEqualToString:[User currentUser].objectId]){
+            vc.profileToView = self.profileToView;
+        }
     }
 }
 
 
-- (void)didTapUsername:(nonnull User *)user {
-    self.profileToView = user;
-    [self performSegueWithIdentifier:@"otherProfileView" sender:NULL];
-}
+
+
+
 
 
 @end
