@@ -7,16 +7,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Activity.h"
-#import "ActivityDetailsViewController.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol TimelineCellDelegate <NSObject>
 
-- (void)didTapUsername:(PFUser *)user;
+- (void)didTapUsername:(User *)user;
 
 @end
 
 @interface TimelineCell : UITableViewCell
+@property (nonatomic, weak) id <TimelineCellDelegate> timelineCellDelegate;
 @property (strong, nonatomic) Activity *activity;
 @property (strong, nonatomic) IBOutlet UILabel *activityTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *activityDescriptionLabel;

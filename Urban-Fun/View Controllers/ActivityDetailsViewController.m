@@ -38,9 +38,10 @@
     if (![self.activity.host.objectId isEqualToString:currentUser.objectId]){
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             [self setUpView];
+            [self.activitydetailsDelegate syncButtons];
     }];
         }
-    [self.activitydetailsDelegate syncButtons];
+    
 }
 
 - (void)setUpView {
