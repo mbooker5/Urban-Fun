@@ -60,10 +60,8 @@
 
 
 - (IBAction)didTapJoin:(id)sender {
-    PFUser *currentUser = [PFUser currentUser];
-    if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
-        }
-    else{
+    User *currentUser = [User currentUser];
+    if (![self.activity.host.objectId isEqualToString:currentUser.objectId]){
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if ([self.activity.attendanceList containsObject:currentUser.objectId]){
                 [self.timelineJoinButton setSelected:YES];
