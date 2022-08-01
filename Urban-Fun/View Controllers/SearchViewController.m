@@ -11,14 +11,12 @@
 #import "TimelineCell.h"
 #import "ProfileViewController.h"
 #import "ActivityDetailsViewController.h"
+#import "HelperClass.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate, ActivityDetailsDelegate>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *filtersButton;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *searchControl;
-@property (nonatomic, strong) NSMutableArray<User *> *usersArray;
-@property (nonatomic, strong) NSMutableArray<Activity *> *activitiesArray;
 @property (nonatomic, strong) User *profileToView;
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
@@ -39,19 +37,20 @@
     // dismisses keyboard when user scrolls
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    // Do any additional setup after loading the view.
+    // font for selected segment control
     UIFont *font = [UIFont fontWithName:@"Verdana-Bold" size:12.0f];
-    UIColor *color = [UIColor lightGrayColor];
-    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    UIColor *selectedColor = [UIColor lightGrayColor];
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObject:selectedColor forKey:NSForegroundColorAttributeName];
     [attributes setObject:font forKey:NSFontAttributeName];
-    
     [self.searchControl setTitleTextAttributes:attributes
                                     forState:UIControlStateSelected];
-    UIColor *color2 = [UIColor colorWithRed:68.0/255.0 green:85.0/255.0 blue:96.0/255.0 alpha:1.0];
-    NSMutableDictionary *attributesForNormal = [NSMutableDictionary dictionaryWithObject:color2 forKey:NSForegroundColorAttributeName];
+    // font for normal segment control
+    UIColor *color = [UIColor colorWithRed:68.0/255.0 green:85.0/255.0 blue:96.0/255.0 alpha:1.0];
+    NSMutableDictionary *attributesForNormal = [NSMutableDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     [attributesForNormal setObject:font forKey:NSFontAttributeName];
     [self.searchControl setTitleTextAttributes:attributesForNormal
                                     forState:UIControlStateNormal];
+    
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self;
     self.manager.desiredAccuracy = kCLLocationAccuracyHundredMeters; //battery
@@ -70,90 +69,25 @@
 
 - (IBAction)changedSearchType:(id)sender {
     NSString *searchText = self.searchBar.text;
+    //removing white space
+    searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *activityQuery = [Activity query];
-        [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
-        [activityQuery orderByDescending:@"createdAt"];
-        [activityQuery includeKey:@"host"];
-        self.activitiesArray = [[NSMutableArray alloc] init];
-        [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
-            if (error) {
-                
-            }
-            for (Activity *activity in activities) {
-                if (![self.activitiesArray containsObject:activity]){
-                    [self.activitiesArray addObject:activity];
-                }
-            }
-            [self.tableView reloadData];
-
-        }];
+        [HelperClass activityQuerywithText:searchText onVC:self];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *userQuery = [User query];
-        [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
-        [userQuery includeKey:@"host"];
-        self.usersArray = [[NSMutableArray alloc] init];
-        [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
-            if (error) {
-                
-            }
-            for (User *user in users) {
-                if (![self.usersArray containsObject:user]){
-                    [self.usersArray addObject:user];
-                }
-            }
-            [self.tableView reloadData];
-
-        }];
+        [HelperClass userQuerywithText:searchText onVC:self];
     }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    //removing white space
+    searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *activityQuery = [Activity query];
-        [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
-        [activityQuery orderByDescending:@"createdAt"];
-        [activityQuery includeKey:@"host"];
-        self.activitiesArray = [[NSMutableArray alloc] init];
-        [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
-            if (error) {
-                
-            }
-            for (Activity *activity in activities) {
-                if (![self.activitiesArray containsObject:activity]){
-                    [self.activitiesArray addObject:activity];
-                }
-            }
-            [self.tableView reloadData];
-        }];
+        [HelperClass activityQuerywithText:searchText onVC:self];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *userQuery = [User query];
-        [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
-        [userQuery includeKey:@"host"];
-        self.usersArray = [[NSMutableArray alloc] init];
-        [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
-            if (error) {
-                
-            }
-            for (User *user in users) {
-                if (![self.usersArray containsObject:user]){
-                    [self.usersArray addObject:user];
-                }
-            }
-            [self.tableView reloadData];
-        }];
+        [HelperClass userQuerywithText:searchText onVC:self];
     }
-    
 }
 
 // delegate method to pass tapped user from cell
@@ -165,11 +99,13 @@
     [self performSegueWithIdentifier:@"profileFromSearch" sender:sender];
 }
 
+- (IBAction)filtersTapped:(id)sender {
+    [self performSegueWithIdentifier:@"filters" sender:sender];
+}
+
 - (void)syncButtons {
     [self.tableView reloadData];
 }
-
-
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (self.searchControl.selectedSegmentIndex == 0){
@@ -188,7 +124,6 @@
         
         return cell;
     }
-    
     return nil;
 }
 
@@ -201,8 +136,6 @@
     }
     return 0;
 }
-
-
 
 //#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -220,11 +153,5 @@
         }
     }
 }
-
-
-
-
-
-
 
 @end

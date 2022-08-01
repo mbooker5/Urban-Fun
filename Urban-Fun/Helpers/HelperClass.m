@@ -7,6 +7,7 @@
 
 #import "HelperClass.h"
 
+
 @implementation HelperClass
 
 + (void)showAlertWithTitle:(NSString *)alertTitle withMessage:(NSString *)alertMessage withActionTitle:(NSString *)actionTitle withHandler:(nullable SEL)func onVC:(UIViewController *)vc {
@@ -16,4 +17,33 @@
     [alert addAction:defaultAction];
     [vc presentViewController:alert animated:YES completion:nil];
 }
+
++ (void) activityQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc {
+    PFQuery *activityQuery = [Activity query];
+    [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
+    [activityQuery orderByDescending:@"createdAt"];
+    [activityQuery includeKey:@"host"];
+    [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
+        if (error) {
+            
+        }
+        vc.activitiesArray = activities;
+        [vc.tableView reloadData];
+    }];
+    
+}
+
++ (void) userQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc {
+    PFQuery *userQuery = [User query];
+    [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
+    [userQuery includeKey:@"host"];
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
+        if (error) {
+            
+        }
+        vc.usersArray = users;
+        [vc.tableView reloadData];
+    }];
+}
+
 @end

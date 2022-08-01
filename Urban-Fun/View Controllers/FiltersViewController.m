@@ -8,7 +8,8 @@
 #import "FiltersViewController.h"
 
 @interface FiltersViewController ()
-
+@property (strong, nonatomic) IBOutlet UISlider *distanceSlider;
+@property (strong, nonatomic) NSMutableDictionary *filtersDictionary;
 @end
 
 @implementation FiltersViewController
@@ -16,6 +17,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)distanceChanged:(id)sender {
+    _distanceSlider.value = roundf(_distanceSlider.value);
+    if (_distanceSlider.value == 1){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:5];
+    }
+    if (_distanceSlider.value == 2){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:10];
+    }
+    if (_distanceSlider.value == 3){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:20];
+    }
+    if (_distanceSlider.value == 4){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:30];
+    }
+    if (_distanceSlider.value == 5){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:40];
+    }
+    if (_distanceSlider.value == 6){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:50];
+    }
+    if (_distanceSlider.value == 7){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:75];
+    }
+    if (_distanceSlider.value == 8){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:100];
+    }
+    if (_distanceSlider.value == 9){
+        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:200];
+    }
+    if (_distanceSlider.value == 10){
+        _filtersDictionary[@"distance"] = nil;
+    }
 }
 
 /*

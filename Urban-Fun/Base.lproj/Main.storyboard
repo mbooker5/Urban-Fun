@@ -1540,8 +1540,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="Hn1-jW-ArC">
-                        <barButtonItem key="leftBarButtonItem" title="Filters" id="s6h-Rg-Qhi">
+                        <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="s6h-Rg-Qhi">
                             <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="filtersTapped:" destination="cIc-hd-D4y" id="3jr-sP-jis"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1549,6 +1552,7 @@
                         <outlet property="searchControl" destination="KAO-Cf-mAk" id="M2P-dj-s5t"/>
                         <outlet property="tableView" destination="Vz3-VA-h2g" id="N5Y-W3-dVH"/>
                         <segue destination="44o-Iw-DLZ" kind="presentation" identifier="profileFromSearch" id="QHD-tM-lQw"/>
+                        <segue destination="h4f-GU-RF2" kind="presentation" identifier="filters" id="6gD-hC-twE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9A-kq-VvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1560,16 +1564,52 @@
             <objects>
                 <viewController id="h4f-GU-RF2" customClass="FiltersViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsh-aQ-NhX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eP0-Uy-Ber">
+                                <rect key="frame" x="20" y="96" width="73" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="8wL-Q0-IXP"/>
+                                    <constraint firstAttribute="height" constant="21" id="IYD-Ta-kYD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <color key="textColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ysy-mI-WSp">
+                                <rect key="frame" x="104" y="92" width="292" height="30"/>
+                                <color key="tintColor" systemColor="tintColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="MJu-yn-rFl"/>
+                                    <constraint firstAttribute="height" constant="29" id="bTc-ib-BId"/>
+                                </constraints>
+                                <color key="minimumTrackTintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="thumbTintColor" systemColor="systemGray2Color"/>
+                                <connections>
+                                    <action selector="distanceChanged:" destination="h4f-GU-RF2" eventType="valueChanged" id="MuB-m2-xzb"/>
+                                </connections>
+                            </slider>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZSc-nZ-9sS"/>
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstItem="ysy-mI-WSp" firstAttribute="leading" secondItem="eP0-Uy-Ber" secondAttribute="trailing" constant="13" id="4J8-Qa-PGf"/>
+                            <constraint firstItem="ZSc-nZ-9sS" firstAttribute="trailing" secondItem="ysy-mI-WSp" secondAttribute="trailing" constant="20" id="Gb9-F2-Lff"/>
+                            <constraint firstItem="ysy-mI-WSp" firstAttribute="centerY" secondItem="eP0-Uy-Ber" secondAttribute="centerY" id="KWG-Pc-H4L"/>
+                            <constraint firstItem="eP0-Uy-Ber" firstAttribute="top" secondItem="ZSc-nZ-9sS" secondAttribute="top" constant="52" id="sPW-e2-kbe"/>
+                            <constraint firstItem="eP0-Uy-Ber" firstAttribute="leading" secondItem="ZSc-nZ-9sS" secondAttribute="leading" constant="20" id="sXU-Pc-kOD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6eE-if-JQh"/>
+                    <connections>
+                        <outlet property="distanceSlider" destination="ysy-mI-WSp" id="rzu-He-Mbs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnA-nx-REx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3781" y="92"/>
+            <point key="canvasLocation" x="3779.7101449275365" y="91.741071428571431"/>
         </scene>
         <!--Timeline-->
         <scene sceneID="Iaq-CJ-9LK">
@@ -1705,8 +1745,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="TAG-I6-8aN"/>
-        <segue reference="pfb-dm-Zw9"/>
-        <segue reference="NFf-bH-70J"/>
+        <segue reference="QHD-tM-lQw"/>
+        <segue reference="Jut-mf-dNH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Urbanfun" width="255" height="189"/>
@@ -1718,10 +1758,14 @@
         <image name="mappin" catalog="system" width="105" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
