@@ -6,6 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
+#import "Activity.h"
+#import <Parse/Parse.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

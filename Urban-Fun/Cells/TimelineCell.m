@@ -7,7 +7,7 @@
 
 #import "TimelineCell.h"
 #import <MapKit/MapKit.h>
-#import "ProfileViewController.h"
+
 
 
 @implementation TimelineCell
@@ -54,13 +54,14 @@
 - (IBAction)didTapFavorite:(id)sender {
 }
 
+- (IBAction)tappedUsername:(id)sender {
+    [self.timelineCellDelegate didTapUsername:self.activity.host];
+}
 
 
 - (IBAction)didTapJoin:(id)sender {
-    PFUser *currentUser = [PFUser currentUser];
-    if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
-        }
-    else{
+    User *currentUser = [User currentUser];
+    if (![self.activity.host.objectId isEqualToString:currentUser.objectId]){
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if ([self.activity.attendanceList containsObject:currentUser.objectId]){
                 [self.timelineJoinButton setSelected:YES];

@@ -9,11 +9,12 @@
 #import "Parse/Parse.h"
 #import "PFObject.h"
 #import "Parse/ParseUIConstants.h"
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
-@property (strong, nonatomic) PFUser *profileToView;
+@property (strong, nonatomic) User *profileToView;
 @end
 
 NS_ASSUME_NONNULL_END

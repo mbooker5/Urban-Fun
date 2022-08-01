@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "OtherProfileViewController.h"
 #import "AttendanceViewController.h"
+#import "SceneDelegate.h"
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
@@ -38,9 +39,10 @@
     if (![self.activity.host.objectId isEqualToString:currentUser.objectId]){
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             [self setUpView];
+            [self.activitydetailsDelegate syncButtons];
     }];
         }
-    [self.activitydetailsDelegate syncButtons];
+    
 }
 
 - (void)setUpView {
@@ -101,11 +103,14 @@
         }
     }
 }
+- (IBAction)didTapHost:(id)sender {
+    [self performSegueWithIdentifier:@"profileFromDetails" sender:sender];
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  if ([[segue identifier] isEqualToString:@"profileFromDetails"]){
-     OtherProfileViewController *vc = [segue destinationViewController];
+     ProfileViewController *vc = [segue destinationViewController];
      vc.profileToView = self.activity.host;
  }
     if ([[segue identifier] isEqualToString:@"activitydetails"]){

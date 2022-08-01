@@ -13,12 +13,14 @@
 #import "ActivityDetailsViewController.h"
 #import "HelperClass.h"
 #import "ProfileViewController.h"
+#import "OtherProfileViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *arrayOfActivities;
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
+@property (nonatomic, strong) User *profileToView;
 @end
 
 @implementation TimelineViewController
@@ -84,6 +86,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TimelineCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TimelineCell" forIndexPath:indexPath];
     Activity *activity = self.arrayOfActivities[indexPath.row];
+    cell.timelineCellDelegate = self;
     cell.activity = activity;
     cell.currentUserLocation = self.currentUserLocation;
     [cell setTimelineCell];
@@ -111,6 +114,15 @@
     
 }
 
+// delegate method to pass tapped user from cell
+- (void)didTapUsername:(nonnull User *)user {
+    self.profileToView = user;
+}
+
+// action method
+- (IBAction)usernameTapped:(id)sender {
+    [self performSegueWithIdentifier:@"profileFromTimeline" sender:sender];
+}
 
 
 #pragma mark - Navigation
@@ -122,7 +134,18 @@
         vc.activity = dataToPass;
         vc.activitydetailsDelegate = self;
     }
+    if ([[segue identifier] isEqualToString:@"profileFromTimeline"]){
+        ProfileViewController *vc = [segue destinationViewController];
+        if (![self.profileToView.objectId isEqualToString:[User currentUser].objectId]){
+            vc.profileToView = self.profileToView;
+        }
+    }
 }
+
+
+
+
+
 
 
 @end
