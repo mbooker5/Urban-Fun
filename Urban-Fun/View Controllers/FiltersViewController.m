@@ -9,7 +9,7 @@
 
 @interface FiltersViewController ()
 @property (strong, nonatomic) IBOutlet UISlider *distanceSlider;
-@property (strong, nonatomic) NSMutableDictionary *filtersDictionary;
+@property (strong, nonatomic) IBOutlet UILabel *distanceSliderLabel;
 @end
 
 @implementation FiltersViewController
@@ -17,41 +17,73 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.filtersDictionary[@"distanceSliderValue"] != nil){
+        [self.distanceSlider setValue:[self.filtersDictionary[@"distanceSliderValue"] floatValue]];
+    }
+    else{
+        [self.distanceSlider setValue:10.0];
+    }
+    [self setDistanceSliderLabel];
 }
 
 - (IBAction)distanceChanged:(id)sender {
-    _distanceSlider.value = roundf(_distanceSlider.value);
-    if (_distanceSlider.value == 1){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:5];
+    float sliderValue = floorf(self.distanceSlider.value);
+    NSLog(@"%f", sliderValue);
+    
+    if (sliderValue == 1){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:5];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:1];
     }
-    if (_distanceSlider.value == 2){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:10];
+    if (sliderValue == 2){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:10];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:2];
     }
-    if (_distanceSlider.value == 3){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:20];
+    if (sliderValue == 3){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:20];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:3];
     }
-    if (_distanceSlider.value == 4){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:30];
+    if (sliderValue == 4){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:30];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:4];
     }
-    if (_distanceSlider.value == 5){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:40];
+    if (sliderValue == 5){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:40];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:5];
     }
-    if (_distanceSlider.value == 6){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:50];
+    if (sliderValue == 6){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:50];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:6];
     }
-    if (_distanceSlider.value == 7){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:75];
+    if (sliderValue == 7){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:75];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:7];
     }
-    if (_distanceSlider.value == 8){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:100];
+    if (sliderValue == 8){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:100];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:8];
     }
-    if (_distanceSlider.value == 9){
-        _filtersDictionary[@"distance"] = [NSNumber numberWithInt:200];
+    if (sliderValue == 9){
+        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:200];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:9];
     }
-    if (_distanceSlider.value == 10){
-        _filtersDictionary[@"distance"] = nil;
+    if (sliderValue == 10){
+        self.filtersDictionary[@"distance"] = nil;
+        self.filtersDictionary[@"distanceSliderValue"] = nil;
+    }
+    [self setDistanceSliderLabel];
+    [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+    NSLog(@"%@", self.filtersDictionary[@"distance"]);
+}
+
+- (void) setDistanceSliderLabel{
+    if (self.filtersDictionary[@"distance"] != nil){
+        self.distanceSliderLabel.text = [NSString stringWithFormat:@"%@%@%@", @"Within ", self.filtersDictionary[@"distance"], @" miles" ];
+    }
+    else{
+        self.distanceSliderLabel.text = [NSString stringWithFormat:@"%@", @"Any"];
     }
 }
+
 
 /*
 #pragma mark - Navigation

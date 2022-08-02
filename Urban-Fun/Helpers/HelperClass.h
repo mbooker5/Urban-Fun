@@ -16,9 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HelperClass : NSObject
 + (void)showAlertWithTitle:(NSString *)alertTitle withMessage:(NSString *)alertMessage withActionTitle:(NSString *)actionTitle withHandler:(nullable SEL)func onVC:(UIViewController *)vc;
 
-+ (void) activityQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc;
++ (void) activityQuerywithText:(NSString *)searchText withFilters:(NSMutableDictionary *)filtersDictionary withCompletion:(void(^)(NSArray *activities))completion;
 
 + (void) userQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc;
+
++ (nonnull) distanceFromUserLocation:(CLLocation *)userLocation forActivity:(Activity *)activity;
+
++ (CLLocation *)getCLLocationForGeoPoint:(PFGeoPoint *)location;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -34,12 +34,12 @@
     CLLocation *activityLocation = [self getCLLocationForGeoPoint:self.activity.location];
     CLLocationDistance distanceFromUser = [self.currentUserLocation distanceFromLocation:activityLocation];
     CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
-    NSNumber *distanceDouble = [NSNumber numberWithDouble:distanceInMiles];
+    self.distanceDouble = [NSNumber numberWithDouble:distanceInMiles];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    formatter.maximumFractionDigits = [distanceDouble intValue] < 10 ? 1 : 0;
+    formatter.maximumFractionDigits = [self.distanceDouble intValue] < 10 ? 1 : 0;
     formatter.roundingMode = NSNumberFormatterRoundHalfUp;
-    NSString *distanceString = [formatter stringFromNumber:distanceDouble];
+    NSString *distanceString = [formatter stringFromNumber:self.distanceDouble];
     self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
     
     PFUser *currentUser = [PFUser currentUser];

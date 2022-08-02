@@ -1577,7 +1577,7 @@
                                 <color key="textColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ysy-mI-WSp">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ysy-mI-WSp">
                                 <rect key="frame" x="104" y="92" width="292" height="30"/>
                                 <color key="tintColor" systemColor="tintColor"/>
                                 <constraints>
@@ -1591,6 +1591,16 @@
                                     <action selector="distanceChanged:" destination="h4f-GU-RF2" eventType="valueChanged" id="MuB-m2-xzb"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdD-EG-hrT">
+                                <rect key="frame" x="106" y="129" width="288" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="RjG-Ha-aej"/>
+                                    <constraint firstAttribute="width" constant="288" id="p0b-1V-WbG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
+                                <color key="textColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZSc-nZ-9sS"/>
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
@@ -1598,6 +1608,8 @@
                             <constraint firstItem="ysy-mI-WSp" firstAttribute="leading" secondItem="eP0-Uy-Ber" secondAttribute="trailing" constant="13" id="4J8-Qa-PGf"/>
                             <constraint firstItem="ZSc-nZ-9sS" firstAttribute="trailing" secondItem="ysy-mI-WSp" secondAttribute="trailing" constant="20" id="Gb9-F2-Lff"/>
                             <constraint firstItem="ysy-mI-WSp" firstAttribute="centerY" secondItem="eP0-Uy-Ber" secondAttribute="centerY" id="KWG-Pc-H4L"/>
+                            <constraint firstItem="kdD-EG-hrT" firstAttribute="centerX" secondItem="ysy-mI-WSp" secondAttribute="centerX" id="Rie-gm-Ar2"/>
+                            <constraint firstItem="kdD-EG-hrT" firstAttribute="top" secondItem="ysy-mI-WSp" secondAttribute="bottom" constant="8" symbolic="YES" id="eIs-rN-0vI"/>
                             <constraint firstItem="eP0-Uy-Ber" firstAttribute="top" secondItem="ZSc-nZ-9sS" secondAttribute="top" constant="52" id="sPW-e2-kbe"/>
                             <constraint firstItem="eP0-Uy-Ber" firstAttribute="leading" secondItem="ZSc-nZ-9sS" secondAttribute="leading" constant="20" id="sXU-Pc-kOD"/>
                         </constraints>
@@ -1605,6 +1617,7 @@
                     <navigationItem key="navigationItem" id="6eE-if-JQh"/>
                     <connections>
                         <outlet property="distanceSlider" destination="ysy-mI-WSp" id="rzu-He-Mbs"/>
+                        <outlet property="distanceSliderLabel" destination="kdD-EG-hrT" id="bQB-Qe-XyR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnA-nx-REx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

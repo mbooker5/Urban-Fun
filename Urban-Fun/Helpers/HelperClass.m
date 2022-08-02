@@ -6,6 +6,7 @@
 //
 
 #import "HelperClass.h"
+#import <MapKit/MapKit.h>
 
 
 @implementation HelperClass
@@ -18,7 +19,7 @@
     [vc presentViewController:alert animated:YES completion:nil];
 }
 
-+ (void) activityQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc {
++ (void) activityQuerywithText:(NSString *)searchText withFilters:(NSMutableDictionary *)filtersDictionary withCompletion:(void(^)(NSArray *activities))completion {
     PFQuery *activityQuery = [Activity query];
     [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
     [activityQuery orderByDescending:@"createdAt"];
@@ -27,10 +28,21 @@
         if (error) {
             
         }
-        vc.activitiesArray = activities;
-        [vc.tableView reloadData];
+        
+        completion(activities);
     }];
-    
+}
+
++ (CLLocation *)getCLLocationForGeoPoint:(PFGeoPoint *)location{
+    return [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
+}
+
++ (NSNumber *)distanceFromUserLocation:(CLLocation *)userLocation forActivity:(Activity *)activity {
+    CLLocation *activityLocationCL = [self getCLLocationForGeoPoint:activity.location];
+    CLLocationDistance distanceFromUser = [userLocation distanceFromLocation:activityLocationCL];
+    CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
+    NSNumber *distance = [NSNumber numberWithDouble:distanceInMiles];
+    return distance;
 }
 
 + (void) userQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc {
