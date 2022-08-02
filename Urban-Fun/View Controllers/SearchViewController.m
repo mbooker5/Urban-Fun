@@ -8,6 +8,7 @@
 #import "SearchViewController.h"
 #import "Activity.h"
 #import "User.h"
+#import "Category.h"
 #import "TimelineCell.h"
 #import "ProfileViewController.h"
 #import "ActivityDetailsViewController.h"
@@ -61,6 +62,7 @@
         [self.manager startUpdatingLocation];
     }
     self.filtersDictionary = [[NSMutableDictionary alloc] init];
+    self.filtersDictionary[@"categories"] = [[NSMutableArray alloc] init];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
@@ -103,18 +105,32 @@
 
 - (void) applyFilters{
     if (self.filtersDictionary.allKeys.count > 0){
-        NSMutableArray *temporaryArray = [[NSMutableArray alloc] init];
-        for (Activity *activity in self.activitiesArray){
+        NSMutableArray *temporaryDistanceArray = [[NSMutableArray alloc] init];
             if (self.filtersDictionary[@"distance"] != nil){
+                for (Activity *activity in self.activitiesArray){
                 NSNumber *activityDistance = [HelperClass distanceFromUserLocation:self.currentUserLocation forActivity:activity];
-                if ([activityDistance floatValue] <= [self.filtersDictionary[@"distance"] floatValue]){
-                    [temporaryArray addObject:activity];
+                    if ([activityDistance floatValue] <= [self.filtersDictionary[@"distance"] floatValue]){
+                        [temporaryDistanceArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryDistanceArray;
+            }
+            if (self.filtersDictionary[@"categoriesCount"] > 0){
+                NSMutableArray *temporaryCategoryArray = [[NSMutableArray alloc] init];
+                for (Activity *activity in self.activitiesArray){
+                    for (Category *category in self.filtersDictionary[@"categories"]){
+                        if ([activity.categories containsObject:category]){
+                            if (![temporaryCategoryArray containsObject:activity]){
+                                [temporaryCategoryArray addObject:activity];
+                                
+                            }
+                        }
+                    }
+                self.activitiesArray = temporaryCategoryArray;
                 }
             }
         }
-        self.activitiesArray = temporaryArray;
     }
-}
 
 
 // delegate method to pass tapped user from cell

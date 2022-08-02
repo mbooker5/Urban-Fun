@@ -7,9 +7,11 @@
 
 #import "FiltersViewController.h"
 
-@interface FiltersViewController ()
+@interface FiltersViewController () <CategoriesViewDelegate>
 @property (strong, nonatomic) IBOutlet UISlider *distanceSlider;
 @property (strong, nonatomic) IBOutlet UILabel *distanceSliderLabel;
+@property (strong, nonatomic) IBOutlet UIButton *selectCategoriesButton;
+@property (strong, nonatomic) IBOutlet UILabel *selectCategoriesLabel;
 @end
 
 @implementation FiltersViewController
@@ -24,6 +26,7 @@
         [self.distanceSlider setValue:10.0];
     }
     [self setDistanceSliderLabel];
+    [self setSelectCategoriesLabel];
 }
 
 - (IBAction)distanceChanged:(id)sender {
@@ -75,6 +78,10 @@
     NSLog(@"%@", self.filtersDictionary[@"distance"]);
 }
 
+- (IBAction)didTapCategories:(id)sender {
+    [self performSegueWithIdentifier:@"categoriesFromFilters" sender:sender];
+}
+
 - (void) setDistanceSliderLabel{
     if (self.filtersDictionary[@"distance"] != nil){
         self.distanceSliderLabel.text = [NSString stringWithFormat:@"%@%@%@", @"Within ", self.filtersDictionary[@"distance"], @" miles" ];
@@ -84,15 +91,44 @@
     }
 }
 
+- (void) setSelectCategoriesLabel{
+    if (self.filtersDictionary[@"categoriesCount"] > 0){
+        self.selectCategoriesLabel.text = [NSString stringWithFormat:@"%@%@", self.filtersDictionary[@"categoriesCount"], @" selected"];
+    }
+    else{
+        self.selectCategoriesLabel.text = @"Select";
+    }
+}
 
-/*
+
+- (void)setCategoryArray:(nonnull NSMutableArray *)selectedCategories {
+    if (selectedCategories.count > 0){
+        self.filtersDictionary[@"categories"] = selectedCategories;
+        self.filtersDictionary[@"categoriesCount"] = [NSNumber numberWithUnsignedLong:selectedCategories.count];
+    }
+    else{
+        self.filtersDictionary[@"categories"] = [[NSMutableArray alloc] init];
+        self.filtersDictionary[@"categoriesCount"] = 0;
+    }
+    [self setSelectCategoriesLabel];
+    [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+}
+
+
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"categoriesFromFilters"]){
+        SelectCategoriesViewController *selectCategoriesVC = [segue destinationViewController];
+        selectCategoriesVC.categoriesVCDelegate = self;
+        selectCategoriesVC.selectedCategories = self.filtersDictionary[@"categories"];
+    }
 }
-*/
+
 
 @end
