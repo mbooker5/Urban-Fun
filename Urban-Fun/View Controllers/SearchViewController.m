@@ -121,7 +121,7 @@
                 }
                 self.activitiesArray = temporaryDistanceArray;
             }
-            if (self.filtersDictionary[@"categoriesCount"] > 0){
+            if ([self.filtersDictionary[@"categoriesCount"] intValue] > 0){
                 NSMutableArray *temporaryCategoryArray = [[NSMutableArray alloc] init];
                 for (Activity *activity in self.activitiesArray){
                     for (Category *category in self.filtersDictionary[@"categories"]){
@@ -155,6 +155,22 @@
                     }
                 }
                 self.activitiesArray = temporaryMaxAgeArray;
+            }
+            if (self.filtersDictionary[@"availability"] != nil){
+                NSMutableArray *temporaryAvailabilityArray = [[NSMutableArray alloc] init];
+                int availability = [self.filtersDictionary[@"availability"] intValue];
+                for (Activity *activity in self.activitiesArray){
+                    if ([activity.maxUsers intValue] > 0){
+                        int spaceLeft = [activity.maxUsers intValue] - [[NSNumber numberWithUnsignedLong:activity.attendanceList.count] intValue];
+                        if (spaceLeft >= availability){
+                            [temporaryAvailabilityArray addObject:activity];
+                        }
+                    }
+                    else{
+                        [temporaryAvailabilityArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryAvailabilityArray;
             }
         }
     }

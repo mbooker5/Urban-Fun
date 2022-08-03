@@ -14,6 +14,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *selectCategoriesLabel;
 @property (strong, nonatomic) IBOutlet UITextField *minAgeTF;
 @property (strong, nonatomic) IBOutlet UITextField *maxAgeTF;
+@property (strong, nonatomic) IBOutlet UISlider *availabilitySlider;
+@property (strong, nonatomic) IBOutlet UILabel *availabilitySliderLabel;
 @end
 
 @implementation FiltersViewController
@@ -33,12 +35,25 @@
     else{
         [self.distanceSlider setValue:10.0];
     }
+    
+    if (self.filtersDictionary[@"availability"] != nil){
+        [self.availabilitySlider setValue:[self.filtersDictionary[@"availability"] floatValue]];
+    }
+    else{
+        [self.availabilitySlider setValue:31.0];
+    }
+    
     [self setDistanceSliderLabel];
     [self setSelectCategoriesLabel];
     [self setMinAgeTF];
     [self setMaxAgeTF];
-    
+    [self setAvailabilitySliderLabel];
 }
+
+- (IBAction)startedEditingMinAge:(id)sender {
+    self.minAgeTF.text = @"";
+}
+
 
 - (IBAction)didEditMinAge:(id)sender {
     if ([self.minAgeTF hasText]){
@@ -57,6 +72,10 @@
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
 }
 
+- (IBAction)startedEditingMaxAge:(id)sender {
+    self.maxAgeTF.text = @"";
+}
+
 - (IBAction)didEditMaxAge:(id)sender {
     if ([self.maxAgeTF hasText]){
         self.filtersDictionary[@"maximumAge"] = [NSNumber numberWithInt:[self.maxAgeTF.text intValue]];
@@ -71,6 +90,20 @@
         self.filtersDictionary[@"maximumAge"] = nil;
         self.maxAgeTF.text = @"Any";
     }
+    [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+}
+
+- (IBAction)availabilityChanged:(id)sender {
+    float sliderValue = floorf(self.availabilitySlider.value);
+    
+    if (sliderValue < 31){
+        self.filtersDictionary[@"availability"] = [NSNumber numberWithFloat:sliderValue];
+        
+    }
+    else{
+        self.filtersDictionary[@"availability"] = nil;
+    }
+    [self setAvailabilitySliderLabel];
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
 }
 
@@ -132,6 +165,15 @@
     }
 }
 
+- (void) setAvailabilitySliderLabel{
+    if (self.filtersDictionary[@"availability"] != nil){
+        self.availabilitySliderLabel.text = [NSString stringWithFormat:@"%@%@", self.filtersDictionary[@"availability"], @"+" ];
+    }
+    else{
+        self.availabilitySliderLabel.text = [NSString stringWithFormat:@"%@", @"Any"];
+    }
+}
+
 
 - (void)setCategoryArray:(nonnull NSMutableArray *)selectedCategories {
     if (selectedCategories.count > 0){
@@ -144,6 +186,18 @@
     }
     [self setSelectCategoriesLabel];
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+}
+
+- (IBAction)didTapReset:(id)sender {
+    self.filtersDictionary[@"distance"] = nil;
+    self.filtersDictionary[@"distanceSliderValue"] = nil;
+    self.filtersDictionary[@"categories"] = [[NSMutableArray alloc] init];
+    self.filtersDictionary[@"categoriesCount"] = 0;
+    self.filtersDictionary[@"minimumAge"] = nil;
+    self.filtersDictionary[@"maximumAge"] = nil;
+    self.filtersDictionary[@"availability"] = nil;
+    [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+    [self viewDidLoad];
 }
 
 
