@@ -69,6 +69,7 @@
         }
         [self.tableView reloadData];
     }];
+    
 }
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{

@@ -6,8 +6,6 @@
 //
 
 #import "HelperClass.h"
-#import <MapKit/MapKit.h>
-
 
 @implementation HelperClass
 
@@ -18,44 +16,4 @@
     [alert addAction:defaultAction];
     [vc presentViewController:alert animated:YES completion:nil];
 }
-
-+ (void) activityQuerywithText:(NSString *)searchText useFilters:(NSMutableDictionary *)filtersDictionary withCompletion:(void(^)(NSArray *activities))completion {
-    PFQuery *activityQuery = [Activity query];
-    [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
-    [activityQuery orderByDescending:@"createdAt"];
-    [activityQuery includeKey:@"host"];
-    [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
-        if (error) {
-            
-        }
-        completion(activities);
-    }];
-}
-
-+ (void) userQuerywithText:(NSString *)searchText withCompletion:(void(^)(NSArray *users))completion {
-    PFQuery *userQuery = [User query];
-    [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
-    [userQuery includeKey:@"host"];
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
-        if (error) {
-            
-        }
-        completion(users);
-    }];
-}
-
-+ (CLLocation *)getCLLocationForGeoPoint:(PFGeoPoint *)location{
-    return [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
-}
-
-+ (NSNumber *)distanceFromUserLocation:(CLLocation *)userLocation forActivity:(Activity *)activity {
-    CLLocation *activityLocationCL = [self getCLLocationForGeoPoint:activity.location];
-    CLLocationDistance distanceFromUser = [userLocation distanceFromLocation:activityLocationCL];
-    CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
-    NSNumber *distance = [NSNumber numberWithDouble:distanceInMiles];
-    return distance;
-}
-
-
-
 @end
