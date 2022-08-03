@@ -13,9 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchViewController : UIViewController
-@property (nonatomic, strong) NSArray<User *> *usersArray;
-@property (nonatomic, strong) NSArray<Activity *> *activitiesArray;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 NS_ASSUME_NONNULL_END
