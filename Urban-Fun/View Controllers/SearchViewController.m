@@ -77,14 +77,17 @@
     //removing white space
     searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        [HelperClass activityQuerywithText:searchText withFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
+        [HelperClass activityQuerywithText:searchText useFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
             self.activitiesArray = activities;
             [self applyFilters];
             [self.tableView reloadData];
         }];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        [HelperClass userQuerywithText:searchText onVC:self];
+        [HelperClass userQuerywithText:searchText withCompletion:^(NSArray * _Nonnull users){
+            self.usersArray = users;
+            [self.tableView reloadData];
+        }];
     }
 }
 
@@ -92,14 +95,17 @@
     //removing white space
     searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        [HelperClass activityQuerywithText:searchText withFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
+        [HelperClass activityQuerywithText:searchText useFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
             self.activitiesArray = activities;
             [self applyFilters];
             [self.tableView reloadData];
         }];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        [HelperClass userQuerywithText:searchText onVC:self];
+        [HelperClass userQuerywithText:searchText withCompletion:^(NSArray * _Nonnull users){
+            self.usersArray = users;
+            [self.tableView reloadData];
+        }];
     }
 }
 
@@ -174,14 +180,17 @@
     self.filtersDictionary = filtersDictionary;
     searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        [HelperClass activityQuerywithText:searchText withFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
+        [HelperClass activityQuerywithText:searchText useFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
             self.activitiesArray = activities;
             [self applyFilters];
             [self.tableView reloadData];
         }];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        [HelperClass userQuerywithText:searchText onVC:self];
+        [HelperClass userQuerywithText:searchText withCompletion:^(NSArray * _Nonnull users){
+            self.usersArray = users;
+            [self.tableView reloadData];
+        }];
     }
 }
 

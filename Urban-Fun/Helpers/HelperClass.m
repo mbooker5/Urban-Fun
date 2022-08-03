@@ -19,7 +19,7 @@
     [vc presentViewController:alert animated:YES completion:nil];
 }
 
-+ (void) activityQuerywithText:(NSString *)searchText withFilters:(NSMutableDictionary *)filtersDictionary withCompletion:(void(^)(NSArray *activities))completion {
++ (void) activityQuerywithText:(NSString *)searchText useFilters:(NSMutableDictionary *)filtersDictionary withCompletion:(void(^)(NSArray *activities))completion {
     PFQuery *activityQuery = [Activity query];
     [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
     [activityQuery orderByDescending:@"createdAt"];
@@ -30,6 +30,18 @@
         }
         
         completion(activities);
+    }];
+}
+
++ (void) userQuerywithText:(NSString *)searchText withCompletion:(void(^)(NSArray *users))completion {
+    PFQuery *userQuery = [User query];
+    [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
+    [userQuery includeKey:@"host"];
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
+        if (error) {
+            
+        }
+        completion(users);
     }];
 }
 
@@ -45,17 +57,6 @@
     return distance;
 }
 
-+ (void) userQuerywithText:(NSString *)searchText onVC:(SearchViewController *)vc {
-    PFQuery *userQuery = [User query];
-    [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
-    [userQuery includeKey:@"host"];
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
-        if (error) {
-            
-        }
-        vc.usersArray = users;
-        [vc.tableView reloadData];
-    }];
-}
+
 
 @end
