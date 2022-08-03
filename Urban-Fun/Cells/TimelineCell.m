@@ -7,6 +7,7 @@
 
 #import "TimelineCell.h"
 #import <MapKit/MapKit.h>
+#import "HelperClass.h"
 
 
 
@@ -31,15 +32,12 @@
     self.activityTitleLabel.text = self.activity.title;
     self.activityDescriptionLabel.text = self.activity.activityDescription;
     self.timelineUsernameLabel.text = [NSString stringWithFormat:@"%@%@", @"@", self.activity.host.username];
-    CLLocation *activityLocation = [self getCLLocationForGeoPoint:self.activity.location];
-    CLLocationDistance distanceFromUser = [self.currentUserLocation distanceFromLocation:activityLocation];
-    CLLocationDistance distanceInMiles = distanceFromUser * 0.000621371;
-    self.distanceDouble = [NSNumber numberWithDouble:distanceInMiles];
+    NSNumber *distance = [HelperClass distanceFromUserLocation:self.currentUserLocation forActivity:self.activity];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    formatter.maximumFractionDigits = [self.distanceDouble intValue] < 10 ? 1 : 0;
+    formatter.maximumFractionDigits = [distance intValue] < 10 ? 1 : 0;
     formatter.roundingMode = NSNumberFormatterRoundHalfUp;
-    NSString *distanceString = [formatter stringFromNumber:self.distanceDouble];
+    NSString *distanceString = [formatter stringFromNumber:distance];
     self.activityDistanceLabel.text = [[NSString alloc] initWithFormat: @"%@%@", distanceString, @" mi"];
     
     PFUser *currentUser = [PFUser currentUser];

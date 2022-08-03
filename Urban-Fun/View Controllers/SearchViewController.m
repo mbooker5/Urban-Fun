@@ -126,9 +126,11 @@
                 for (Activity *activity in self.activitiesArray){
                     for (Category *category in self.filtersDictionary[@"categories"]){
                         if ([activity.categories containsObject:category]){
-                            if (![temporaryCategoryArray containsObject:activity]){
-                                [temporaryCategoryArray addObject:activity];
-                            }
+                            [temporaryCategoryArray addObject:activity];
+                            break;
+//                            if (![temporaryCategoryArray containsObject:activity]){
+//                                [temporaryCategoryArray addObject:activity];
+//                            }
                         }
                     }
                     self.activitiesArray = temporaryCategoryArray;

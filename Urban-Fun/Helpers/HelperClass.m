@@ -28,7 +28,6 @@
         if (error) {
             
         }
-        
         completion(activities);
     }];
 }

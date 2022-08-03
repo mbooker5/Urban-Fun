@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UIButton *timelineFavoriteButton;
 @property (strong, nonatomic) IBOutlet UILabel *timelineUsernameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *timelineJoinButton;
-@property (strong, nonatomic) IBOutlet NSNumber *distanceDouble;
 @end
 
 NS_ASSUME_NONNULL_END

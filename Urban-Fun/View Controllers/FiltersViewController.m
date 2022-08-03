@@ -37,6 +37,7 @@
     [self setSelectCategoriesLabel];
     [self setMinAgeTF];
     [self setMaxAgeTF];
+    
 }
 
 - (IBAction)didEditMinAge:(id)sender {
@@ -75,52 +76,20 @@
 
 
 - (IBAction)distanceChanged:(id)sender {
+    NSArray<NSNumber *> *const mDistances = @[@5, @10, @20, @30, @40, @50, @75, @100, @200];
     float sliderValue = floorf(self.distanceSlider.value);
-    NSLog(@"%f", sliderValue);
     
-    if (sliderValue == 1){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:5];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:1];
+    if (sliderValue < 10){
+        self.filtersDictionary[@"distance"] = mDistances[(int)sliderValue - 1];
+        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithFloat:sliderValue];
     }
-    if (sliderValue == 2){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:10];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:2];
-    }
-    if (sliderValue == 3){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:20];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:3];
-    }
-    if (sliderValue == 4){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:30];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:4];
-    }
-    if (sliderValue == 5){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:40];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:5];
-    }
-    if (sliderValue == 6){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:50];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:6];
-    }
-    if (sliderValue == 7){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:75];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:7];
-    }
-    if (sliderValue == 8){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:100];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:8];
-    }
-    if (sliderValue == 9){
-        self.filtersDictionary[@"distance"] = [NSNumber numberWithInt:200];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithInt:9];
-    }
-    if (sliderValue == 10){
+    else{
         self.filtersDictionary[@"distance"] = nil;
         self.filtersDictionary[@"distanceSliderValue"] = nil;
     }
+    
     [self setDistanceSliderLabel];
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
-    NSLog(@"%@", self.filtersDictionary[@"distance"]);
 }
 
 - (IBAction)didTapCategories:(id)sender {

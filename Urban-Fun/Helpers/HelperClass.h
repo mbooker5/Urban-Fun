@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Activity.h"
 #import "User.h"
-#import "SearchViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void) userQuerywithText:(NSString *)searchText withCompletion:(void(^)(NSArray *users))completion;
 
-+ (nonnull) distanceFromUserLocation:(CLLocation *)userLocation forActivity:(Activity *)activity;
++ (NSNumber *) distanceFromUserLocation:(CLLocation *)userLocation forActivity:(Activity *)activity;
 
 + (CLLocation *)getCLLocationForGeoPoint:(PFGeoPoint *)location;
 @end
