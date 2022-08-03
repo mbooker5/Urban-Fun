@@ -12,6 +12,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *distanceSliderLabel;
 @property (strong, nonatomic) IBOutlet UIButton *selectCategoriesButton;
 @property (strong, nonatomic) IBOutlet UILabel *selectCategoriesLabel;
+@property (strong, nonatomic) IBOutlet UITextField *minAgeTF;
+@property (strong, nonatomic) IBOutlet UITextField *maxAgeTF;
 @end
 
 @implementation FiltersViewController
@@ -19,6 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // dismisses keyboard when tap outside a text field
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
+    [tapGestureRecognizer setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
     if (self.filtersDictionary[@"distanceSliderValue"] != nil){
         [self.distanceSlider setValue:[self.filtersDictionary[@"distanceSliderValue"] floatValue]];
     }
@@ -27,7 +35,44 @@
     }
     [self setDistanceSliderLabel];
     [self setSelectCategoriesLabel];
+    [self setMinAgeTF];
+    [self setMaxAgeTF];
 }
+
+- (IBAction)didEditMinAge:(id)sender {
+    if ([self.minAgeTF hasText]){
+        self.filtersDictionary[@"minimumAge"] = [NSNumber numberWithInt:[self.minAgeTF.text intValue]];
+        if ([self.maxAgeTF hasText]){
+            if ([self.maxAgeTF.text intValue] < [self.minAgeTF.text intValue]){
+                self.filtersDictionary[@"maximumAge"] = nil;
+                self.maxAgeTF.text = @"Any";
+            }
+        }
+    }
+    else{
+        self.filtersDictionary[@"minimumAge"] = nil;
+        self.minAgeTF.text = @"Any";
+    }
+    [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+}
+
+- (IBAction)didEditMaxAge:(id)sender {
+    if ([self.maxAgeTF hasText]){
+        self.filtersDictionary[@"maximumAge"] = [NSNumber numberWithInt:[self.maxAgeTF.text intValue]];
+        if ([self.minAgeTF hasText]){
+            if ([self.minAgeTF.text intValue] > [self.maxAgeTF.text intValue]){
+                self.filtersDictionary[@"minimumAge"] = nil;
+                self.minAgeTF.text = @"Any";
+            }
+        }
+    }
+    else{
+        self.filtersDictionary[@"maximumAge"] = nil;
+        self.maxAgeTF.text = @"Any";
+    }
+    [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
+}
+
 
 - (IBAction)distanceChanged:(id)sender {
     float sliderValue = floorf(self.distanceSlider.value);
@@ -97,6 +142,24 @@
     }
     else{
         self.selectCategoriesLabel.text = @"Select";
+    }
+}
+
+- (void) setMinAgeTF{
+    if (self.filtersDictionary[@"minimumAge"] != nil){
+        self.minAgeTF.text = [NSString stringWithFormat:@"%@", self.filtersDictionary[@"minimumAge"]];
+    }
+    else{
+        self.minAgeTF.text = @"Any";
+    }
+}
+
+- (void) setMaxAgeTF{
+    if (self.filtersDictionary[@"maximumAge"] != nil){
+        self.maxAgeTF.text = [NSString stringWithFormat:@"%@", self.filtersDictionary[@"maximumAge"]];
+    }
+    else{
+        self.maxAgeTF.text = @"Any";
     }
 }
 

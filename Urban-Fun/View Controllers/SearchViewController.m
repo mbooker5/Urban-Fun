@@ -122,12 +122,31 @@
                         if ([activity.categories containsObject:category]){
                             if (![temporaryCategoryArray containsObject:activity]){
                                 [temporaryCategoryArray addObject:activity];
-                                
                             }
                         }
                     }
-                self.activitiesArray = temporaryCategoryArray;
+                    self.activitiesArray = temporaryCategoryArray;
                 }
+            }
+            if (self.filtersDictionary[@"minimumAge"] != nil){
+                NSMutableArray *temporaryMinAgeArray = [[NSMutableArray alloc] init];
+                int minAge = [self.filtersDictionary[@"minimumAge"] intValue];
+                for (Activity *activity in self.activitiesArray){
+                    if (([activity.minimumAge intValue] >= minAge) && ([activity.minimumAge intValue] > 0)){
+                        [temporaryMinAgeArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryMinAgeArray;
+            }
+            if (self.filtersDictionary[@"maximumAge"] != nil){
+                NSMutableArray *temporaryMaxAgeArray = [[NSMutableArray alloc] init];
+                int maxAge = [self.filtersDictionary[@"maximumAge"] intValue];
+                for (Activity *activity in self.activitiesArray){
+                    if (([activity.maximumAge intValue] <= maxAge) && ([activity.maximumAge intValue] > 0)){
+                        [temporaryMaxAgeArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryMaxAgeArray;
             }
         }
     }
@@ -150,7 +169,7 @@
     [self.tableView reloadData];
 }
 
-- (void) updateFiltersDictionary:(NSMutableDictionary *)filtersDictionary{
+- (void)updateFiltersDictionary:(NSMutableDictionary *)filtersDictionary{
     NSString *searchText = self.searchBar.text;
     self.filtersDictionary = filtersDictionary;
     searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
