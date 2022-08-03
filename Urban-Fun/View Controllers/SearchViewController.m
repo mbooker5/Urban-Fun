@@ -8,20 +8,21 @@
 #import "SearchViewController.h"
 #import "Activity.h"
 #import "User.h"
+#import "Category.h"
 #import "TimelineCell.h"
 #import "ProfileViewController.h"
 #import "ActivityDetailsViewController.h"
+#import "HelperClass.h"
+#import "FiltersViewController.h"
 
-@interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate, ActivityDetailsDelegate>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate, ActivityDetailsDelegate, FiltersVCDelegate>
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *filtersButton;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *searchControl;
-@property (nonatomic, strong) NSMutableArray<User *> *usersArray;
-@property (nonatomic, strong) NSMutableArray<Activity *> *activitiesArray;
 @property (nonatomic, strong) User *profileToView;
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
+@property (nonatomic, strong) NSMutableDictionary *filtersDictionary;
 @end
 
 @implementation SearchViewController
@@ -39,19 +40,20 @@
     // dismisses keyboard when user scrolls
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    // Do any additional setup after loading the view.
+    // font for selected segment control
     UIFont *font = [UIFont fontWithName:@"Verdana-Bold" size:12.0f];
-    UIColor *color = [UIColor lightGrayColor];
-    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    UIColor *selectedColor = [UIColor lightGrayColor];
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObject:selectedColor forKey:NSForegroundColorAttributeName];
     [attributes setObject:font forKey:NSFontAttributeName];
-    
     [self.searchControl setTitleTextAttributes:attributes
                                     forState:UIControlStateSelected];
-    UIColor *color2 = [UIColor colorWithRed:68.0/255.0 green:85.0/255.0 blue:96.0/255.0 alpha:1.0];
-    NSMutableDictionary *attributesForNormal = [NSMutableDictionary dictionaryWithObject:color2 forKey:NSForegroundColorAttributeName];
+    // font for normal segment control
+    UIColor *color = [UIColor colorWithRed:68.0/255.0 green:85.0/255.0 blue:96.0/255.0 alpha:1.0];
+    NSMutableDictionary *attributesForNormal = [NSMutableDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     [attributesForNormal setObject:font forKey:NSFontAttributeName];
     [self.searchControl setTitleTextAttributes:attributesForNormal
                                     forState:UIControlStateNormal];
+    
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self;
     self.manager.desiredAccuracy = kCLLocationAccuracyHundredMeters; //battery
@@ -59,6 +61,8 @@
     if (CLLocationManager.locationServicesEnabled){
         [self.manager startUpdatingLocation];
     }
+    self.filtersDictionary = [[NSMutableDictionary alloc] init];
+    self.filtersDictionary[@"categories"] = [[NSMutableArray alloc] init];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
@@ -70,91 +74,107 @@
 
 - (IBAction)changedSearchType:(id)sender {
     NSString *searchText = self.searchBar.text;
+    //removing white space
+    searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *activityQuery = [Activity query];
-        [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
-        [activityQuery orderByDescending:@"createdAt"];
-        [activityQuery includeKey:@"host"];
-        self.activitiesArray = [[NSMutableArray alloc] init];
-        [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
-            if (error) {
-                
-            }
-            for (Activity *activity in activities) {
-                if (![self.activitiesArray containsObject:activity]){
-                    [self.activitiesArray addObject:activity];
-                }
-            }
+        [HelperClass activityQuerywithText:searchText useFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
+            self.activitiesArray = activities;
+            [self applyFilters];
             [self.tableView reloadData];
-
         }];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *userQuery = [User query];
-        [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
-        [userQuery includeKey:@"host"];
-        self.usersArray = [[NSMutableArray alloc] init];
-        [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
-            if (error) {
-                
-            }
-            for (User *user in users) {
-                if (![self.usersArray containsObject:user]){
-                    [self.usersArray addObject:user];
-                }
-            }
+        [HelperClass userQuerywithText:searchText withCompletion:^(NSArray * _Nonnull users){
+            self.usersArray = users;
             [self.tableView reloadData];
-
         }];
     }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    //removing white space
+    searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.searchControl.selectedSegmentIndex == 0){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *activityQuery = [Activity query];
-        [activityQuery whereKey:@"title" matchesRegex:searchText modifiers:@"i"];
-        [activityQuery orderByDescending:@"createdAt"];
-        [activityQuery includeKey:@"host"];
-        self.activitiesArray = [[NSMutableArray alloc] init];
-        [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *>*activities , NSError *error) {
-            if (error) {
-                
-            }
-            for (Activity *activity in activities) {
-                if (![self.activitiesArray containsObject:activity]){
-                    [self.activitiesArray addObject:activity];
-                }
-            }
+        [HelperClass activityQuerywithText:searchText useFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
+            self.activitiesArray = activities;
+            [self applyFilters];
             [self.tableView reloadData];
         }];
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-        //removing white space
-        searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFQuery *userQuery = [User query];
-        [userQuery whereKey:@"username" matchesRegex:searchText modifiers:@"i"];
-        [userQuery includeKey:@"host"];
-        self.usersArray = [[NSMutableArray alloc] init];
-        [userQuery findObjectsInBackgroundWithBlock:^(NSArray<User *>*users , NSError *error) {
-            if (error) {
-                
-            }
-            for (User *user in users) {
-                if (![self.usersArray containsObject:user]){
-                    [self.usersArray addObject:user];
-                }
-            }
+        [HelperClass userQuerywithText:searchText withCompletion:^(NSArray * _Nonnull users){
+            self.usersArray = users;
             [self.tableView reloadData];
         }];
     }
-    
 }
+
+- (void) applyFilters{
+    if (self.filtersDictionary.allKeys.count > 0){
+        NSMutableArray *temporaryDistanceArray = [[NSMutableArray alloc] init];
+            if (self.filtersDictionary[kDistance] != nil){
+                for (Activity *activity in self.activitiesArray){
+                NSNumber *activityDistance = [HelperClass distanceFromUserLocation:self.currentUserLocation forActivity:activity];
+                    if ([activityDistance floatValue] <= [self.filtersDictionary[kDistance] floatValue]){
+                        [temporaryDistanceArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryDistanceArray;
+            }
+            if ([self.filtersDictionary[kCategoriesCount] intValue] > 0){
+                NSMutableArray *temporaryCategoryArray = [[NSMutableArray alloc] init];
+                for (Activity *activity in self.activitiesArray){
+                    for (Category *category in self.filtersDictionary[kCategories]){
+                        if ([activity.categories containsObject:category]){
+                            [temporaryCategoryArray addObject:activity];
+                            break;
+//                            if (![temporaryCategoryArray containsObject:activity]){
+//                                [temporaryCategoryArray addObject:activity];
+//                            }
+                        }
+                    }
+                    self.activitiesArray = temporaryCategoryArray;
+                }
+            }
+            if (self.filtersDictionary[kMinimumAge] != nil){
+                NSMutableArray *temporaryMinAgeArray = [[NSMutableArray alloc] init];
+                int minAge = [self.filtersDictionary[kMinimumAge] intValue];
+                for (Activity *activity in self.activitiesArray){
+                    if (([activity.minimumAge intValue] >= minAge) && ([activity.minimumAge intValue] > 0)){
+                        [temporaryMinAgeArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryMinAgeArray;
+            }
+            if (self.filtersDictionary[kMaximumAge] != nil){
+                NSMutableArray *temporaryMaxAgeArray = [[NSMutableArray alloc] init];
+                int maxAge = [self.filtersDictionary[kMaximumAge] intValue];
+                for (Activity *activity in self.activitiesArray){
+                    if (([activity.maximumAge intValue] <= maxAge) && ([activity.maximumAge intValue] > 0)){
+                        [temporaryMaxAgeArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryMaxAgeArray;
+            }
+            if (self.filtersDictionary[kAvailability] != nil){
+                NSMutableArray *temporaryAvailabilityArray = [[NSMutableArray alloc] init];
+                int availability = [self.filtersDictionary[kAvailability] intValue];
+                for (Activity *activity in self.activitiesArray){
+                    if ([activity.maxUsers intValue] > 0){
+                        int spaceLeft = [activity.maxUsers intValue] - [[NSNumber numberWithUnsignedLong:activity.attendanceList.count] intValue];
+                        if (spaceLeft >= availability){
+                            [temporaryAvailabilityArray addObject:activity];
+                        }
+                    }
+                    else{
+                        [temporaryAvailabilityArray addObject:activity];
+                    }
+                }
+                self.activitiesArray = temporaryAvailabilityArray;
+            }
+        }
+    }
+
 
 // delegate method to pass tapped user from cell
 - (void)didTapUsername:(nonnull User *)user {
@@ -165,11 +185,32 @@
     [self performSegueWithIdentifier:@"profileFromSearch" sender:sender];
 }
 
+- (IBAction)filtersTapped:(id)sender {
+    [self performSegueWithIdentifier:@"filters" sender:sender];
+}
+
 - (void)syncButtons {
     [self.tableView reloadData];
 }
 
-
+- (void)updateFiltersDictionary:(NSMutableDictionary *)filtersDictionary{
+    NSString *searchText = self.searchBar.text;
+    self.filtersDictionary = filtersDictionary;
+    searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (self.searchControl.selectedSegmentIndex == 0){
+        [HelperClass activityQuerywithText:searchText useFilters:self.filtersDictionary withCompletion:^(NSArray * _Nonnull activities) {
+            self.activitiesArray = activities;
+            [self applyFilters];
+            [self.tableView reloadData];
+        }];
+    }
+    if (self.searchControl.selectedSegmentIndex == 1){
+        [HelperClass userQuerywithText:searchText withCompletion:^(NSArray * _Nonnull users){
+            self.usersArray = users;
+            [self.tableView reloadData];
+        }];
+    }
+}
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (self.searchControl.selectedSegmentIndex == 0){
@@ -188,9 +229,9 @@
         
         return cell;
     }
-    
     return nil;
 }
+
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.searchControl.selectedSegmentIndex == 0 && self.searchBar.text.length > 0){
@@ -201,8 +242,6 @@
     }
     return 0;
 }
-
-
 
 //#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -219,12 +258,11 @@
             vc.profileToView = self.profileToView;
         }
     }
+    if ([[segue identifier] isEqualToString:@"filters"]){
+        FiltersViewController *vc = [segue destinationViewController];
+        vc.filtersDictionary = self.filtersDictionary;
+        vc.filtersVCDelegate = self;
+    }
 }
-
-
-
-
-
-
 
 @end
