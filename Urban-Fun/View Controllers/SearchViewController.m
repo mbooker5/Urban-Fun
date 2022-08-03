@@ -112,19 +112,19 @@
 - (void) applyFilters{
     if (self.filtersDictionary.allKeys.count > 0){
         NSMutableArray *temporaryDistanceArray = [[NSMutableArray alloc] init];
-            if (self.filtersDictionary[@"distance"] != nil){
+            if (self.filtersDictionary[kDistance] != nil){
                 for (Activity *activity in self.activitiesArray){
                 NSNumber *activityDistance = [HelperClass distanceFromUserLocation:self.currentUserLocation forActivity:activity];
-                    if ([activityDistance floatValue] <= [self.filtersDictionary[@"distance"] floatValue]){
+                    if ([activityDistance floatValue] <= [self.filtersDictionary[kDistance] floatValue]){
                         [temporaryDistanceArray addObject:activity];
                     }
                 }
                 self.activitiesArray = temporaryDistanceArray;
             }
-            if ([self.filtersDictionary[@"categoriesCount"] intValue] > 0){
+            if ([self.filtersDictionary[kCategoriesCount] intValue] > 0){
                 NSMutableArray *temporaryCategoryArray = [[NSMutableArray alloc] init];
                 for (Activity *activity in self.activitiesArray){
-                    for (Category *category in self.filtersDictionary[@"categories"]){
+                    for (Category *category in self.filtersDictionary[kCategories]){
                         if ([activity.categories containsObject:category]){
                             [temporaryCategoryArray addObject:activity];
                             break;
@@ -136,9 +136,9 @@
                     self.activitiesArray = temporaryCategoryArray;
                 }
             }
-            if (self.filtersDictionary[@"minimumAge"] != nil){
+            if (self.filtersDictionary[kMinimumAge] != nil){
                 NSMutableArray *temporaryMinAgeArray = [[NSMutableArray alloc] init];
-                int minAge = [self.filtersDictionary[@"minimumAge"] intValue];
+                int minAge = [self.filtersDictionary[kMinimumAge] intValue];
                 for (Activity *activity in self.activitiesArray){
                     if (([activity.minimumAge intValue] >= minAge) && ([activity.minimumAge intValue] > 0)){
                         [temporaryMinAgeArray addObject:activity];
@@ -146,9 +146,9 @@
                 }
                 self.activitiesArray = temporaryMinAgeArray;
             }
-            if (self.filtersDictionary[@"maximumAge"] != nil){
+            if (self.filtersDictionary[kMaximumAge] != nil){
                 NSMutableArray *temporaryMaxAgeArray = [[NSMutableArray alloc] init];
-                int maxAge = [self.filtersDictionary[@"maximumAge"] intValue];
+                int maxAge = [self.filtersDictionary[kMaximumAge] intValue];
                 for (Activity *activity in self.activitiesArray){
                     if (([activity.maximumAge intValue] <= maxAge) && ([activity.maximumAge intValue] > 0)){
                         [temporaryMaxAgeArray addObject:activity];
@@ -156,9 +156,9 @@
                 }
                 self.activitiesArray = temporaryMaxAgeArray;
             }
-            if (self.filtersDictionary[@"availability"] != nil){
+            if (self.filtersDictionary[kAvailability] != nil){
                 NSMutableArray *temporaryAvailabilityArray = [[NSMutableArray alloc] init];
-                int availability = [self.filtersDictionary[@"availability"] intValue];
+                int availability = [self.filtersDictionary[kAvailability] intValue];
                 for (Activity *activity in self.activitiesArray){
                     if ([activity.maxUsers intValue] > 0){
                         int spaceLeft = [activity.maxUsers intValue] - [[NSNumber numberWithUnsignedLong:activity.attendanceList.count] intValue];

@@ -172,25 +172,25 @@
                                                     </constraints>
                                                     <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="star" catalog="system"/>
-                                                    <state key="selected" image="star.fill" catalog="system"/>
+                                                    <state key="normal" image="heart" catalog="system"/>
+                                                    <state key="selected" image="heart.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="didTapFavorite:" destination="Fdc-03-WRS" eventType="touchUpInside" id="4gX-jD-BjT"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="peU-gi-4cU">
-                                                    <rect key="frame" x="373" y="160" width="21" height="18"/>
+                                                    <rect key="frame" x="373" y="158" width="21" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="Aqe-T9-Px8"/>
+                                                        <constraint firstAttribute="height" constant="20" id="Aqe-T9-Px8"/>
                                                         <constraint firstAttribute="width" constant="21" id="c6e-ek-C8S"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="heart" catalog="system">
+                                                    <state key="normal" image="star" catalog="system">
                                                         <color key="titleColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
-                                                    <state key="selected" image="heart.fill" catalog="system"/>
+                                                    <state key="selected" image="star.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="didTapJoin:" destination="Fdc-03-WRS" eventType="touchUpInside" id="kDI-xI-oAa"/>
                                                     </connections>
@@ -290,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ww-yh-aFc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3846" y="812"/>
+            <point key="canvasLocation" x="3844.9275362318845" y="811.60714285714278"/>
         </scene>
         <!--Activity Details View Controller-->
         <scene sceneID="ZLt-XX-CXL">
@@ -323,8 +323,8 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemGray4Color"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="star" catalog="system"/>
-                                <state key="selected" image="star.fill" catalog="system"/>
+                                <state key="normal" image="heart" catalog="system"/>
+                                <state key="selected" image="heart.fill" catalog="system"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="7"/>
@@ -1414,28 +1414,28 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igB-1B-msZ">
-                                                    <rect key="frame" x="344" y="159" width="22" height="20"/>
+                                                    <rect key="frame" x="343" y="159" width="22" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="CH9-hE-hTc"/>
                                                         <constraint firstAttribute="height" constant="20" id="CYg-zG-uxR"/>
                                                     </constraints>
                                                     <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="star" catalog="system"/>
-                                                    <state key="selected" image="star.fill" catalog="system"/>
+                                                    <state key="normal" image="heart" catalog="system"/>
+                                                    <state key="selected" image="heart.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="didTapFavorite:" destination="g3f-Xc-YDF" eventType="touchUpInside" id="GeD-Xt-SKk"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apk-n3-EaH">
-                                                    <rect key="frame" x="373" y="160" width="21" height="18"/>
+                                                    <rect key="frame" x="372" y="158" width="22" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="heart" catalog="system">
+                                                    <state key="normal" image="star" catalog="system">
                                                         <color key="titleColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
-                                                    <state key="selected" image="heart.fill" catalog="system"/>
+                                                    <state key="selected" image="star.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="didTapJoin:" destination="g3f-Xc-YDF" eventType="touchUpInside" id="PZl-4j-39J"/>
                                                     </connections>
@@ -1963,7 +1963,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="TAG-I6-8aN"/>
-        <segue reference="QHD-tM-lQw"/>
+        <segue reference="TM9-A6-ZoH"/>
         <segue reference="Cw4-rB-tBZ"/>
         <segue reference="Jut-mf-dNH"/>
     </inferredMetricsTieBreakers>

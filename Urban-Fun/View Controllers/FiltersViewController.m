@@ -6,6 +6,7 @@
 //
 
 #import "FiltersViewController.h"
+#import "HelperClass.h"
 
 @interface FiltersViewController () <CategoriesViewDelegate>
 @property (strong, nonatomic) IBOutlet UISlider *distanceSlider;
@@ -29,15 +30,15 @@
     [tapGestureRecognizer setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    if (self.filtersDictionary[@"distanceSliderValue"] != nil){
-        [self.distanceSlider setValue:[self.filtersDictionary[@"distanceSliderValue"] floatValue]];
+    if (self.filtersDictionary[kDistanceSliderValue] != nil){
+        [self.distanceSlider setValue:[self.filtersDictionary[kDistanceSliderValue] floatValue]];
     }
     else{
         [self.distanceSlider setValue:10.0];
     }
     
-    if (self.filtersDictionary[@"availability"] != nil){
-        [self.availabilitySlider setValue:[self.filtersDictionary[@"availability"] floatValue]];
+    if (self.filtersDictionary[kAvailability] != nil){
+        [self.availabilitySlider setValue:[self.filtersDictionary[kAvailability] floatValue]];
     }
     else{
         [self.availabilitySlider setValue:31.0];
@@ -57,16 +58,16 @@
 
 - (IBAction)didEditMinAge:(id)sender {
     if ([self.minAgeTF hasText]){
-        self.filtersDictionary[@"minimumAge"] = [NSNumber numberWithInt:[self.minAgeTF.text intValue]];
+        self.filtersDictionary[kMinimumAge] = [NSNumber numberWithInt:[self.minAgeTF.text intValue]];
         if ([self.maxAgeTF hasText]){
             if ([self.maxAgeTF.text intValue] < [self.minAgeTF.text intValue]){
-                self.filtersDictionary[@"maximumAge"] = nil;
+                self.filtersDictionary[kMaximumAge] = nil;
                 self.maxAgeTF.text = @"Any";
             }
         }
     }
     else{
-        self.filtersDictionary[@"minimumAge"] = nil;
+        self.filtersDictionary[kMinimumAge] = nil;
         self.minAgeTF.text = @"Any";
     }
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
@@ -78,16 +79,16 @@
 
 - (IBAction)didEditMaxAge:(id)sender {
     if ([self.maxAgeTF hasText]){
-        self.filtersDictionary[@"maximumAge"] = [NSNumber numberWithInt:[self.maxAgeTF.text intValue]];
+        self.filtersDictionary[kMaximumAge] = [NSNumber numberWithInt:[self.maxAgeTF.text intValue]];
         if ([self.minAgeTF hasText]){
             if ([self.minAgeTF.text intValue] > [self.maxAgeTF.text intValue]){
-                self.filtersDictionary[@"minimumAge"] = nil;
+                self.filtersDictionary[kMinimumAge] = nil;
                 self.minAgeTF.text = @"Any";
             }
         }
     }
     else{
-        self.filtersDictionary[@"maximumAge"] = nil;
+        self.filtersDictionary[kMaximumAge] = nil;
         self.maxAgeTF.text = @"Any";
     }
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
@@ -97,11 +98,11 @@
     float sliderValue = floorf(self.availabilitySlider.value);
     
     if (sliderValue < 31){
-        self.filtersDictionary[@"availability"] = [NSNumber numberWithFloat:sliderValue];
+        self.filtersDictionary[kAvailability] = [NSNumber numberWithFloat:sliderValue];
         
     }
     else{
-        self.filtersDictionary[@"availability"] = nil;
+        self.filtersDictionary[kAvailability] = nil;
     }
     [self setAvailabilitySliderLabel];
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
@@ -113,12 +114,12 @@
     float sliderValue = floorf(self.distanceSlider.value);
     
     if (sliderValue < 10){
-        self.filtersDictionary[@"distance"] = mDistances[(int)sliderValue - 1];
-        self.filtersDictionary[@"distanceSliderValue"] = [NSNumber numberWithFloat:sliderValue];
+        self.filtersDictionary[kDistance] = mDistances[(int)sliderValue - 1];
+        self.filtersDictionary[kDistanceSliderValue] = [NSNumber numberWithFloat:sliderValue];
     }
     else{
-        self.filtersDictionary[@"distance"] = nil;
-        self.filtersDictionary[@"distanceSliderValue"] = nil;
+        self.filtersDictionary[kDistance] = nil;
+        self.filtersDictionary[kDistanceSliderValue] = nil;
     }
     
     [self setDistanceSliderLabel];
@@ -130,8 +131,8 @@
 }
 
 - (void) setDistanceSliderLabel{
-    if (self.filtersDictionary[@"distance"] != nil){
-        self.distanceSliderLabel.text = [NSString stringWithFormat:@"%@%@%@", @"Within ", self.filtersDictionary[@"distance"], @" miles" ];
+    if (self.filtersDictionary[kDistance] != nil){
+        self.distanceSliderLabel.text = [NSString stringWithFormat:@"%@%@%@", @"Within ", self.filtersDictionary[kDistance], @" miles" ];
     }
     else{
         self.distanceSliderLabel.text = [NSString stringWithFormat:@"%@", @"Any"];
@@ -139,8 +140,8 @@
 }
 
 - (void) setSelectCategoriesLabel{
-    if (self.filtersDictionary[@"categoriesCount"] > 0){
-        self.selectCategoriesLabel.text = [NSString stringWithFormat:@"%@%@", self.filtersDictionary[@"categoriesCount"], @" selected"];
+    if (self.filtersDictionary[kCategoriesCount] > 0){
+        self.selectCategoriesLabel.text = [NSString stringWithFormat:@"%@%@", self.filtersDictionary[kCategoriesCount], @" selected"];
     }
     else{
         self.selectCategoriesLabel.text = @"Select";
@@ -148,8 +149,8 @@
 }
 
 - (void) setMinAgeTF{
-    if (self.filtersDictionary[@"minimumAge"] != nil){
-        self.minAgeTF.text = [NSString stringWithFormat:@"%@", self.filtersDictionary[@"minimumAge"]];
+    if (self.filtersDictionary[kMinimumAge] != nil){
+        self.minAgeTF.text = [NSString stringWithFormat:@"%@", self.filtersDictionary[kMinimumAge]];
     }
     else{
         self.minAgeTF.text = @"Any";
@@ -157,8 +158,8 @@
 }
 
 - (void) setMaxAgeTF{
-    if (self.filtersDictionary[@"maximumAge"] != nil){
-        self.maxAgeTF.text = [NSString stringWithFormat:@"%@", self.filtersDictionary[@"maximumAge"]];
+    if (self.filtersDictionary[kMaximumAge] != nil){
+        self.maxAgeTF.text = [NSString stringWithFormat:@"%@", self.filtersDictionary[kMaximumAge]];
     }
     else{
         self.maxAgeTF.text = @"Any";
@@ -166,8 +167,8 @@
 }
 
 - (void) setAvailabilitySliderLabel{
-    if (self.filtersDictionary[@"availability"] != nil){
-        self.availabilitySliderLabel.text = [NSString stringWithFormat:@"%@%@", self.filtersDictionary[@"availability"], @"+" ];
+    if (self.filtersDictionary[kAvailability] != nil){
+        self.availabilitySliderLabel.text = [NSString stringWithFormat:@"%@%@", self.filtersDictionary[kAvailability], @"+" ];
     }
     else{
         self.availabilitySliderLabel.text = [NSString stringWithFormat:@"%@", @"Any"];
@@ -177,25 +178,25 @@
 
 - (void)setCategoryArray:(nonnull NSMutableArray *)selectedCategories {
     if (selectedCategories.count > 0){
-        self.filtersDictionary[@"categories"] = selectedCategories;
-        self.filtersDictionary[@"categoriesCount"] = [NSNumber numberWithUnsignedLong:selectedCategories.count];
+        self.filtersDictionary[kCategories] = selectedCategories;
+        self.filtersDictionary[kCategoriesCount] = [NSNumber numberWithUnsignedLong:selectedCategories.count];
     }
     else{
-        self.filtersDictionary[@"categories"] = [[NSMutableArray alloc] init];
-        self.filtersDictionary[@"categoriesCount"] = 0;
+        self.filtersDictionary[kCategories] = [[NSMutableArray alloc] init];
+        self.filtersDictionary[kCategoriesCount] = 0;
     }
     [self setSelectCategoriesLabel];
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
 }
 
 - (IBAction)didTapReset:(id)sender {
-    self.filtersDictionary[@"distance"] = nil;
-    self.filtersDictionary[@"distanceSliderValue"] = nil;
-    self.filtersDictionary[@"categories"] = [[NSMutableArray alloc] init];
-    self.filtersDictionary[@"categoriesCount"] = 0;
-    self.filtersDictionary[@"minimumAge"] = nil;
-    self.filtersDictionary[@"maximumAge"] = nil;
-    self.filtersDictionary[@"availability"] = nil;
+    self.filtersDictionary[kDistance] = nil;
+    self.filtersDictionary[kDistanceSliderValue] = nil;
+    self.filtersDictionary[kCategories] = [[NSMutableArray alloc] init];
+    self.filtersDictionary[kCategoriesCount] = 0;
+    self.filtersDictionary[kMinimumAge] = nil;
+    self.filtersDictionary[kMaximumAge] = nil;
+    self.filtersDictionary[kAvailability] = nil;
     [self.filtersVCDelegate updateFiltersDictionary:self.filtersDictionary];
     [self viewDidLoad];
 }
@@ -212,7 +213,7 @@
     if ([[segue identifier] isEqualToString:@"categoriesFromFilters"]){
         SelectCategoriesViewController *selectCategoriesVC = [segue destinationViewController];
         selectCategoriesVC.categoriesVCDelegate = self;
-        selectCategoriesVC.selectedCategories = self.filtersDictionary[@"categories"];
+        selectCategoriesVC.selectedCategories = self.filtersDictionary[kCategories];
     }
 }
 
