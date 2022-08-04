@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TimelineCellDelegate <NSObject>
 
 - (void)didTapUsername:(User *)user;
+- (void)didTapDistance:(Activity *)location;
 
 @end
 

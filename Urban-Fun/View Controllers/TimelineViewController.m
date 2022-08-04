@@ -14,6 +14,7 @@
 #import "HelperClass.h"
 #import "ProfileViewController.h"
 #import "OtherProfileViewController.h"
+#import "GoogleMapsViewController.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
 @property (nonatomic, strong) User *profileToView;
+@property (nonatomic, strong) Activity *tappedActivity;
 @end
 
 @implementation TimelineViewController
@@ -118,11 +120,17 @@
     self.profileToView = user;
 }
 
+- (void)didTapDistance:(Activity *)activity{
+    self.tappedActivity = activity;
+    if (([self.tappedActivity.host.objectId isEqualToString:[User currentUser].objectId]) || (([self.tappedActivity.attendanceList containsObject:[User currentUser].objectId]) && ([self.tappedActivity.attendanceList indexOfObject:[User currentUser].objectId] <= [self.tappedActivity.maxUsers intValue] - 1))){
+        [self performSegueWithIdentifier:@"googleMaps" sender:nil];
+    }
+}
+
 // action method
 - (IBAction)usernameTapped:(id)sender {
     [self performSegueWithIdentifier:@"profileFromTimeline" sender:sender];
 }
-
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -139,6 +147,11 @@
             vc.profileToView = self.profileToView;
         }
     }
+    if ([[segue identifier] isEqualToString:@"googleMaps"]){
+        GoogleMapsViewController *vc = [segue destinationViewController];
+            vc.activity = self.tappedActivity;
+    }
+
 }
 
 

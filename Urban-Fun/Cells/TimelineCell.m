@@ -56,6 +56,10 @@
     [self.timelineCellDelegate didTapUsername:self.activity.host];
 }
 
+- (IBAction)didTapDistance:(id)sender {
+    [self.timelineCellDelegate didTapDistance:self.activity];
+}
+
 
 - (IBAction)didTapJoin:(id)sender {
     User *currentUser = [User currentUser];

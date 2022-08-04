@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SelectLocationViewController : UIViewController
 @property (nonatomic, weak) id <LocationViewDelegate> locationVCDelegate;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic) CLLocationCoordinate2D pinLocation;
+@property (nonatomic, strong) NSString *addressString;
 @end
 
 NS_ASSUME_NONNULL_END

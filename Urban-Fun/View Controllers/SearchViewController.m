@@ -14,6 +14,7 @@
 #import "ActivityDetailsViewController.h"
 #import "HelperClass.h"
 #import "FiltersViewController.h"
+#import "GoogleMapsViewController.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate, ActivityDetailsDelegate, FiltersVCDelegate>
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
 @property (nonatomic, strong) NSMutableDictionary *filtersDictionary;
+@property (nonatomic, strong) Activity *tappedActivity;
 @end
 
 @implementation SearchViewController
@@ -185,6 +187,13 @@
     [self performSegueWithIdentifier:@"profileFromSearch" sender:sender];
 }
 
+- (void)didTapDistance:(Activity *)activity{
+    self.tappedActivity = activity;
+    if (([self.tappedActivity.host.objectId isEqualToString:[User currentUser].objectId]) || ([self.tappedActivity.attendanceList containsObject:[User currentUser].objectId])){
+        [self performSegueWithIdentifier:@"googleMaps" sender:nil];
+    }
+}
+
 - (IBAction)filtersTapped:(id)sender {
     [self performSegueWithIdentifier:@"filters" sender:sender];
 }
@@ -262,6 +271,10 @@
         FiltersViewController *vc = [segue destinationViewController];
         vc.filtersDictionary = self.filtersDictionary;
         vc.filtersVCDelegate = self;
+    }
+    if ([[segue identifier] isEqualToString:@"googleMaps"]){
+        GoogleMapsViewController *vc = [segue destinationViewController];
+            vc.activity = self.tappedActivity;
     }
 }
 

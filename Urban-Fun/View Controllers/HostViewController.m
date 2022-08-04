@@ -81,7 +81,7 @@
 }
 - (void)setLocationPoint:( CLLocationCoordinate2D)locationCoordinate withLatitude:(CLLocationDegrees)activityLatitude withLongitude:(CLLocationDegrees)activityLongitude {
     self.location = [PFGeoPoint geoPointWithLatitude:locationCoordinate.latitude longitude:locationCoordinate.longitude];
-    self.locationLatLong = CLLocationCoordinate2DMake(locationCoordinate.latitude, locationCoordinate.longitude);
+    self.locationLatLong = locationCoordinate;
 }
 
 -(void)setAddressLabel:(NSString *)address{
@@ -103,9 +103,11 @@
         SelectLocationViewController *selectLocationVC = [segue destinationViewController];
         selectLocationVC.locationVCDelegate = self;
         if (self.location){
-            MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
-            selectLocationVC.mapView = [[MKMapView alloc] init];
-            [selectLocationVC.mapView addAnnotation:pin];
+            selectLocationVC.pinLocation = CLLocationCoordinate2DMake(self.locationLatLong.latitude, self.locationLatLong.longitude);
+            selectLocationVC.addressString = self.locationAddress;
+//            MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
+//            pin.title = [[NSString alloc] initWithFormat:@"%@", @"My Activity"];
+//            [selectLocationVC.mapView addAnnotation:pin];
         }
         
     }

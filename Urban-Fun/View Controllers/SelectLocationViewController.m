@@ -31,10 +31,16 @@
         [self.manager startUpdatingLocation];
     }
     UILongPressGestureRecognizer *longTapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongTapGesture:)];
-    [self.mapView addGestureRecognizer: longTapGesture];
+    [self.mapView addGestureRecognizer:longTapGesture];
     
     [[self.addressLabel layer] setCornerRadius:9.0f];
     [[self.addressLabel layer] setMasksToBounds:YES];
+    if (self.addressString){
+        MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.pinLocation];
+        pin.title = @"My Activity";
+        [self.mapView addAnnotation:pin];
+        self.addressLabel.text = self.addressString;
+    }
 }
 
 - (void) handleLongTapGesture: (UILongPressGestureRecognizer *) gestureRecognizer {
@@ -55,7 +61,7 @@
     }
 }
 
--(void)getAddressFromLocation:(CLLocation *)location {
+- (void)getAddressFromLocation:(CLLocation *)location {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
      {
