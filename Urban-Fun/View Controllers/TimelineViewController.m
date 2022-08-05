@@ -60,7 +60,7 @@
     [activityQuery orderByDescending:@"createdAt"];
     [activityQuery includeKey:@"host"];
     activityQuery.limit = 20;
-
+    
   
     [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activities, NSError * _Nullable error) {
         if (activities) {

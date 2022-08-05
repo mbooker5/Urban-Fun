@@ -27,7 +27,7 @@
 
 // fetches category titles from Parse Database
 -(void)getCategories{
-
+    
     PFQuery *categoryQuery = [Category query];
     [categoryQuery orderByAscending:@"title"];
     [categoryQuery includeKey:@"title"];

@@ -7,6 +7,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Activity.h"
+#import "PFObject.h"
+#import "Parse/ParseUIConstants.h"
+#import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

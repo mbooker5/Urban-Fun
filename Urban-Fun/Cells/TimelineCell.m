@@ -8,6 +8,7 @@
 #import "TimelineCell.h"
 #import <MapKit/MapKit.h>
 #import "HelperClass.h"
+#import "UIImageView+AFNetworking.h"
 
 
 
@@ -47,6 +48,7 @@
     else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
         [self.timelineJoinButton setSelected:NO];
     }
+    [self.activityImage setImageWithURL:[NSURL URLWithString:self.activity.image.url]];
 }
 
 - (IBAction)didTapFavorite:(id)sender {
