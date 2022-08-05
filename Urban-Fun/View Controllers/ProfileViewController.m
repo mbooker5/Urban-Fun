@@ -53,6 +53,12 @@
     self.followingCount.text = [NSString stringWithFormat:@"%lu", followingList.count];
 }
 
+- (void) findActivitiesByUser{
+    PFQuery *activityQuery = [Activity query];
+    [activityQuery includeKey:@"host"];
+
+}
+
 - (IBAction)didTapFollowButton:(id)sender {
     if (self.profileToView == self.currentUser){
         [self performSegueWithIdentifier:@"profileSettings" sender:self];

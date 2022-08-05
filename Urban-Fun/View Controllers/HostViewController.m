@@ -60,10 +60,22 @@
                     self.errorMessage.text = @"Invalid Age Range";
                 }
                 else{
-                    [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-//                        [[PFUser currentUser][@"hostedActivities"] addObject:]
-                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                   [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                       PFQuery *activityQuery = [Activity query];
+                       [activityQuery includeKey:@"host"];
+                       [activityQuery orderByDescending:@"createdAt"];
+                       [activityQuery whereKey:@"host" equalTo:[User currentUser]];
+                       activityQuery.limit = 1;
+                       [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activity, NSError * _Nullable error) {
+                           if (activity){
+                               Activity *recentlyPosted = activity[0];
+                               [[User currentUser] addObject:recentlyPosted forKey:@"activitiesHosted"];
+                               [[User currentUser] saveInBackground];
+                           }
+                       }];
                     }];
+
                 }
         }
     }

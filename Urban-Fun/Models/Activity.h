@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSNumber *maxUsers;
 
 
-+ (void) postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withAddress:(NSString *)address withMaxUsers:( NSNumber * _Nullable )maxUsers withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void)postUserActivity:( UIImage * _Nullable )image withTitle: ( NSString * _Nullable)title withDescription:( NSString * _Nullable)activityDescription withCategories:( NSMutableArray * _Nullable)categories withMinAge:( NSNumber * _Nullable ) minimumAge withMaxAge:( NSNumber * _Nullable ) maximumAge withLocation:(PFGeoPoint *)location withAddress:(NSString *)address withMaxUsers:( NSNumber * _Nullable )maxUsers withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 
