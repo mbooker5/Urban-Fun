@@ -260,6 +260,7 @@
         ActivityDetailsViewController *vc = [segue destinationViewController];
         vc.activity = dataToPass;
         vc.activitydetailsDelegate = self;
+        vc.navigationItem.title = dataToPass.title;
     }
     if ([[segue identifier] isEqualToString:@"profileFromSearch"]){
         ProfileViewController *vc = [segue destinationViewController];

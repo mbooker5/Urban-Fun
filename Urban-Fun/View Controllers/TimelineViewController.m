@@ -138,6 +138,7 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
         Activity *dataToPass = self.arrayOfActivities[myIndexPath.row];
         ActivityDetailsViewController *vc = [segue destinationViewController];
+        vc.navigationItem.title = dataToPass.title;
         vc.activity = dataToPass;
         vc.activitydetailsDelegate = self;
     }
