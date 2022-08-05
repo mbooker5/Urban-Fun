@@ -10,10 +10,11 @@
 		2C9254DFCFB95DB74D67D408 /* libPods-Urban-FunUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3C17B43448D5F64C9FF307 /* libPods-Urban-FunUITests.a */; };
 		40698F04EC293C0AFA27FE36 /* libPods-Urban-Fun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0847A0BCCF961BF9139F3C16 /* libPods-Urban-Fun.a */; };
 		575BDA45D0012E05A2B6BA9E /* libPods-Urban-FunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */; };
+		692A2F98289C46AC002E3889 /* GoogleMapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 692A2F97289C46AC002E3889 /* GoogleMapsViewController.m */; };
+		6953E711289C43A400037C55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953E710289C43A400037C55 /* AppDelegate.m */; };
+		6953E712289C43A400037C55 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953E70F289C43A400037C55 /* SceneDelegate.m */; };
 		6957F7E828861C2700B26433 /* ActivityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */; };
 		6957F7EB288B1B9F00B26433 /* HelperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957F7EA288B1B9F00B26433 /* HelperClass.m */; };
-		6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF7D2874B510003E1723 /* AppDelegate.m */; };
-		6978DF812874B510003E1723 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978DF802874B510003E1723 /* SceneDelegate.m */; };
 		6978DF872874B510003E1723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF852874B510003E1723 /* Main.storyboard */; };
 		6978DF892874B518003E1723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF882874B518003E1723 /* Assets.xcassets */; };
 		6978DF8C2874B518003E1723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6978DF8A2874B518003E1723 /* LaunchScreen.storyboard */; };
@@ -68,15 +69,17 @@
 		11D334437CF962F314C84AC0 /* Pods-Urban-FunUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunUITests/Pods-Urban-FunUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1719A2DDDE9A0EBCD048129D /* Pods-Urban-FunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-FunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-FunTests/Pods-Urban-FunTests.release.xcconfig"; sourceTree = "<group>"; };
 		660BDA34CE6DB9E1DE98A38D /* Pods-Urban-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-Fun/Pods-Urban-Fun.debug.xcconfig"; sourceTree = "<group>"; };
+		692A2F96289C46AC002E3889 /* GoogleMapsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleMapsViewController.h; sourceTree = "<group>"; };
+		692A2F97289C46AC002E3889 /* GoogleMapsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleMapsViewController.m; sourceTree = "<group>"; };
+		6953E70D289C43A400037C55 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		6953E70E289C43A400037C55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6953E70F289C43A400037C55 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		6953E710289C43A400037C55 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6957F7E628861C2700B26433 /* ActivityDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityDetailsViewController.h; sourceTree = "<group>"; };
 		6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailsViewController.m; sourceTree = "<group>"; };
 		6957F7E9288B1B9F00B26433 /* HelperClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelperClass.h; sourceTree = "<group>"; };
 		6957F7EA288B1B9F00B26433 /* HelperClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelperClass.m; sourceTree = "<group>"; };
 		6978DF792874B510003E1723 /* Urban-Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Urban-Fun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6978DF7C2874B510003E1723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6978DF7D2874B510003E1723 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6978DF7F2874B510003E1723 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		6978DF802874B510003E1723 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		6978DF862874B510003E1723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6978DF882874B518003E1723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6978DF8B2874B518003E1723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -257,10 +260,10 @@
 		6978DFB12874BCAB003E1723 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				6978DF7C2874B510003E1723 /* AppDelegate.h */,
-				6978DF7D2874B510003E1723 /* AppDelegate.m */,
-				6978DF7F2874B510003E1723 /* SceneDelegate.h */,
-				6978DF802874B510003E1723 /* SceneDelegate.m */,
+				6953E70E289C43A400037C55 /* AppDelegate.h */,
+				6953E710289C43A400037C55 /* AppDelegate.m */,
+				6953E70D289C43A400037C55 /* SceneDelegate.h */,
+				6953E70F289C43A400037C55 /* SceneDelegate.m */,
 			);
 			name = Delegates;
 			path = ..;
@@ -277,6 +280,8 @@
 				69BB1E522890AA200094F2CA /* AttendanceListCell.m */,
 				6978DFC52874E7C7003E1723 /* FavoritesViewController.h */,
 				6978DFC62874E7C7003E1723 /* FavoritesViewController.m */,
+				692A2F96289C46AC002E3889 /* GoogleMapsViewController.h */,
+				692A2F97289C46AC002E3889 /* GoogleMapsViewController.m */,
 				6978DFC22874E7AB003E1723 /* SearchViewController.h */,
 				6978DFC32874E7AB003E1723 /* SearchViewController.m */,
 				69BB1E542893184B0094F2CA /* FiltersViewController.h */,
@@ -486,12 +491,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Urban-Fun/Pods-Urban-Fun-resources.sh",
 				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/ParseUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ParseUI.bundle",
 			);
@@ -545,13 +552,15 @@
 			files = (
 				69BB1E44288FB0A00094F2CA /* User.m in Sources */,
 				6978DFB82874C1AF003E1723 /* LoginViewController.m in Sources */,
+				6953E711289C43A400037C55 /* AppDelegate.m in Sources */,
+				6953E712289C43A400037C55 /* SceneDelegate.m in Sources */,
 				69BB1E502890A6590094F2CA /* AttendanceViewController.m in Sources */,
 				6978DFC12874E791003E1723 /* TimelineViewController.m in Sources */,
 				6978DFBB2874E07D003E1723 /* SignUpViewController.m in Sources */,
 				69BB1E4A2890638F0094F2CA /* CollectionViewGridCell.m in Sources */,
-				6978DF7E2874B510003E1723 /* AppDelegate.m in Sources */,
 				6978DFDF287788DB003E1723 /* SelectCategoriesViewController.m in Sources */,
 				6978DF8F2874B518003E1723 /* main.m in Sources */,
+				692A2F98289C46AC002E3889 /* GoogleMapsViewController.m in Sources */,
 				6978DFE228778C9F003E1723 /* CategoryCell.m in Sources */,
 				6957F7EB288B1B9F00B26433 /* HelperClass.m in Sources */,
 				6978DFC72874E7C7003E1723 /* FavoritesViewController.m in Sources */,
@@ -566,7 +575,6 @@
 				69BB1E532890AA200094F2CA /* AttendanceListCell.m in Sources */,
 				6978DFD62877513C003E1723 /* SelectLocationViewController.m in Sources */,
 				6978DFDC287763E0003E1723 /* Category.m in Sources */,
-				6978DF812874B510003E1723 /* SceneDelegate.m in Sources */,
 				6978DFE6287C9B7E003E1723 /* TimelineCell.m in Sources */,
 				69BB1E47289059030094F2CA /* OtherProfileViewController.m in Sources */,
 			);

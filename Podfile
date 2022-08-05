@@ -10,6 +10,7 @@ target 'Urban-Fun' do
     pod 'Parse/UI'
     pod 'AFNetworking'
     pod 'DateTools'
+    pod 'GoogleMaps'
     
   target 'Urban-FunTests' do
     inherit! :search_paths

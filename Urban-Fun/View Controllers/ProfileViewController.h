@@ -10,6 +10,7 @@
 #import "PFObject.h"
 #import "Parse/ParseUIConstants.h"
 #import "User.h"
+#import "Activity.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -14,6 +14,7 @@
 #import "ActivityDetailsViewController.h"
 #import "HelperClass.h"
 #import "FiltersViewController.h"
+#import "GoogleMapsViewController.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, TimelineCellDelegate, ActivityDetailsDelegate, FiltersVCDelegate>
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
 @property (nonatomic, strong) NSMutableDictionary *filtersDictionary;
+@property (nonatomic, strong) Activity *tappedActivity;
 @end
 
 @implementation SearchViewController
@@ -179,14 +181,19 @@
 // delegate method to pass tapped user from cell
 - (void)didTapUsername:(nonnull User *)user {
     self.profileToView = user;
+    [self performSegueWithIdentifier:profileFromSearchSegue sender:user];
 }
-// action method
-- (IBAction)usernameTapped:(id)sender {
-    [self performSegueWithIdentifier:@"profileFromSearch" sender:sender];
+
+
+- (void)didTapDistance:(Activity *)activity{
+    self.tappedActivity = activity;
+    if (([self.tappedActivity.host.objectId isEqualToString:[User currentUser].objectId]) || ([self.tappedActivity.attendanceList containsObject:[User currentUser].objectId])){
+        [self performSegueWithIdentifier:googleMapsVCSegue sender:nil];
+    }
 }
 
 - (IBAction)filtersTapped:(id)sender {
-    [self performSegueWithIdentifier:@"filters" sender:sender];
+    [self performSegueWithIdentifier:filtersSegue sender:sender];
 }
 
 - (void)syncButtons {
@@ -245,23 +252,29 @@
 
 //#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"activitydetails"]){
+    if ([[segue identifier] isEqualToString:activityDetailsSegue]){
         NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
-        Activity *dataToPass = self.activitiesArray[myIndexPath.row];
+        Activity *activity = self.activitiesArray[myIndexPath.row];
         ActivityDetailsViewController *vc = [segue destinationViewController];
-        vc.activity = dataToPass;
+        vc.activity = activity;
         vc.activitydetailsDelegate = self;
+        vc.navigationItem.title = activity.title;
     }
-    if ([[segue identifier] isEqualToString:@"profileFromSearch"]){
+    if ([[segue identifier] isEqualToString:profileFromSearchSegue]){
         ProfileViewController *vc = [segue destinationViewController];
-        if (![self.profileToView.objectId isEqualToString:[User currentUser].objectId]){
-            vc.profileToView = self.profileToView;
+        User *profileToView = sender;
+        if (![profileToView.objectId isEqualToString:[User currentUser].objectId]){
+            vc.profileToView = profileToView;
         }
     }
-    if ([[segue identifier] isEqualToString:@"filters"]){
+    if ([[segue identifier] isEqualToString:filtersSegue]){
         FiltersViewController *vc = [segue destinationViewController];
         vc.filtersDictionary = self.filtersDictionary;
         vc.filtersVCDelegate = self;
+    }
+    if ([[segue identifier] isEqualToString:googleMapsVCSegue]){
+        GoogleMapsViewController *vc = [segue destinationViewController];
+            vc.activity = self.tappedActivity;
     }
 }
 

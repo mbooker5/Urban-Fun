@@ -60,10 +60,22 @@
                     self.errorMessage.text = @"Invalid Age Range";
                 }
                 else{
-                    [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-//                        [[PFUser currentUser][@"hostedActivities"] addObject:]
-                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                   [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                       PFQuery *activityQuery = [Activity query];
+                       [activityQuery includeKey:@"host"];
+                       [activityQuery orderByDescending:@"createdAt"];
+                       [activityQuery whereKey:@"host" equalTo:[User currentUser]];
+                       activityQuery.limit = 1;
+                       [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activity, NSError * _Nullable error) {
+                           if (activity){
+                               Activity *recentlyPosted = activity[0];
+                               [[User currentUser] addObject:recentlyPosted forKey:@"activitiesHosted"];
+                               [[User currentUser] saveInBackground];
+                           }
+                       }];
                     }];
+
                 }
         }
     }
@@ -81,7 +93,7 @@
 }
 - (void)setLocationPoint:( CLLocationCoordinate2D)locationCoordinate withLatitude:(CLLocationDegrees)activityLatitude withLongitude:(CLLocationDegrees)activityLongitude {
     self.location = [PFGeoPoint geoPointWithLatitude:locationCoordinate.latitude longitude:locationCoordinate.longitude];
-    self.locationLatLong = CLLocationCoordinate2DMake(locationCoordinate.latitude, locationCoordinate.longitude);
+    self.locationLatLong = locationCoordinate;
 }
 
 -(void)setAddressLabel:(NSString *)address{
@@ -103,9 +115,8 @@
         SelectLocationViewController *selectLocationVC = [segue destinationViewController];
         selectLocationVC.locationVCDelegate = self;
         if (self.location){
-            MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
-            selectLocationVC.mapView = [[MKMapView alloc] init];
-            [selectLocationVC.mapView addAnnotation:pin];
+            selectLocationVC.pinLocation = CLLocationCoordinate2DMake(self.locationLatLong.latitude, self.locationLatLong.longitude);
+            selectLocationVC.addressString = self.locationAddress;
         }
         
     }
