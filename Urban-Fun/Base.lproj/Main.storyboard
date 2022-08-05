@@ -215,7 +215,6 @@
                                                     <buttonConfiguration key="configuration" style="plain"/>
                                                     <connections>
                                                         <action selector="tappedUsername:" destination="Fdc-03-WRS" eventType="touchUpInside" id="bGb-2z-yDo"/>
-                                                        <action selector="usernameTapped:" destination="4Xk-UK-09e" eventType="touchUpInside" id="ZaD-jO-fdo"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9c-7f-OV0">
@@ -1997,10 +1996,10 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="eEu-bv-fbo"/>
-        <segue reference="TM9-A6-ZoH"/>
+        <segue reference="pfb-dm-Zw9"/>
         <segue reference="Pgo-bb-P8b"/>
-        <segue reference="kKc-lq-bCf"/>
-        <segue reference="Jut-mf-dNH"/>
+        <segue reference="BjV-2d-6lX"/>
+        <segue reference="NFf-bH-70J"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Urban Fun" width="518" height="384"/>

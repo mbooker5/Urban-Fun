@@ -118,39 +118,37 @@
 // delegate method to pass tapped user from cell
 - (void)didTapUsername:(nonnull User *)user {
     self.profileToView = user;
+    [self performSegueWithIdentifier:@"profileFromTimeline" sender:user];
 }
 
 - (void)didTapDistance:(Activity *)activity{
-    self.tappedActivity = activity;
-    if (([self.tappedActivity.host.objectId isEqualToString:[User currentUser].objectId]) || (([self.tappedActivity.attendanceList containsObject:[User currentUser].objectId]) && ([self.tappedActivity.attendanceList indexOfObject:[User currentUser].objectId] <= [self.tappedActivity.maxUsers intValue] - 1))){
-        [self performSegueWithIdentifier:@"googleMaps" sender:nil];
+    if (([activity.host.objectId isEqualToString:[User currentUser].objectId]) || (([activity.attendanceList containsObject:[User currentUser].objectId]) && ([activity.attendanceList indexOfObject:[User currentUser].objectId] <= [activity.maxUsers intValue] - 1))){
+        
+        [self performSegueWithIdentifier:@"googleMaps" sender:activity];
     }
 }
 
-// action method
-- (IBAction)usernameTapped:(id)sender {
-    [self performSegueWithIdentifier:@"profileFromTimeline" sender:sender];
-}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"activitydetails"]){
+    if ([[segue identifier] isEqualToString:activityDetailsSegue]){
         NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
-        Activity *dataToPass = self.arrayOfActivities[myIndexPath.row];
+        Activity *activity = self.arrayOfActivities[myIndexPath.row];
         ActivityDetailsViewController *vc = [segue destinationViewController];
-        vc.navigationItem.title = dataToPass.title;
-        vc.activity = dataToPass;
+        vc.activity = activity;
         vc.activitydetailsDelegate = self;
+        vc.navigationItem.title = activity.title;
     }
-    if ([[segue identifier] isEqualToString:@"profileFromTimeline"]){
+    if ([[segue identifier] isEqualToString:profileFromTimelineSegue]){
         ProfileViewController *vc = [segue destinationViewController];
-        if (![self.profileToView.objectId isEqualToString:[User currentUser].objectId]){
-            vc.profileToView = self.profileToView;
+        User *profileToView = sender;
+        if (![profileToView.objectId isEqualToString:[User currentUser].objectId]){
+            vc.profileToView = profileToView;
         }
     }
-    if ([[segue identifier] isEqualToString:@"googleMaps"]){
+    if ([[segue identifier] isEqualToString:googleMapsVCSegue]){
         GoogleMapsViewController *vc = [segue destinationViewController];
-            vc.activity = self.tappedActivity;
+        vc.activity = (Activity *)sender;
     }
 
 }

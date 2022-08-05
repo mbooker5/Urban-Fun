@@ -19,6 +19,13 @@ static NSString *const kMinimumAge = @"minimumAge";
 static NSString *const kMaximumAge = @"maximumAge";
 static NSString *const kAvailability = @"availability";
 
+static NSString *const activityDetailsSegue = @"activitydetails";
+static NSString *const filtersSegue = @"filters";
+static NSString *const googleMapsVCSegue = @"googleMaps";
+static NSString *const profileFromSearchSegue = @"profileFromSearch";
+static NSString *const profileFromTimelineSegue = @"profileFromTimeline";
+
+
 @interface HelperClass : NSObject
 + (void)showAlertWithTitle:(NSString *)alertTitle withMessage:(NSString *)alertMessage withActionTitle:(NSString *)actionTitle withHandler:(nullable SEL)func onVC:(UIViewController *)vc;
 

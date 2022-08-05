@@ -105,9 +105,6 @@
         if (self.location){
             selectLocationVC.pinLocation = CLLocationCoordinate2DMake(self.locationLatLong.latitude, self.locationLatLong.longitude);
             selectLocationVC.addressString = self.locationAddress;
-//            MKPointAnnotation *pin = [[MKPointAnnotation alloc] initWithCoordinate:self.locationLatLong];
-//            pin.title = [[NSString alloc] initWithFormat:@"%@", @"My Activity"];
-//            [selectLocationVC.mapView addAnnotation:pin];
         }
         
     }
