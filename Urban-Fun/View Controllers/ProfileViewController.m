@@ -39,6 +39,7 @@
     [self getUserActivities];
     [self.collectionView reloadData];
 }
+
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self getUserActivities];
     [refreshControl endRefreshing];

@@ -17,6 +17,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.shimmeringView.contentView = self.activityTitleLabel;
+    self.shimmeringView.shimmering = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

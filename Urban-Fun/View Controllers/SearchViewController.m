@@ -227,13 +227,18 @@
         cell.activity = activity;
         cell.currentUserLocation = self.currentUserLocation;
         [cell setTimelineCell];
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
         return cell;
     }
     if (self.searchControl.selectedSegmentIndex == 1){
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Users" forIndexPath:indexPath];
         
         cell.textLabel.text = self.usersArray[indexPath.row].username;
-        
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
         return cell;
     }
     return nil;

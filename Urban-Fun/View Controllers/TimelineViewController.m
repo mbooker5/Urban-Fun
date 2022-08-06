@@ -15,8 +15,9 @@
 #import "ProfileViewController.h"
 #import "OtherProfileViewController.h"
 #import "GoogleMapsViewController.h"
+#import "HostViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate, HostVCDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *arrayOfActivities;
 @property (nonatomic, strong) const CLLocationManager *manager;
@@ -51,6 +52,7 @@
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self getActivities];
     [refreshControl endRefreshing];
+    
     [self.tableView reloadData];
     
 }
@@ -91,7 +93,9 @@
     cell.activity = activity;
     cell.currentUserLocation = self.currentUserLocation;
     [cell setTimelineCell];
-    
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
     return cell;
 }
 
@@ -113,6 +117,14 @@
 
     }];
     
+}
+- (void) didPostActivity:(Activity *)activity{
+    NSMutableArray *temporaryActivitiesArray = [[NSMutableArray alloc] initWithArray:self.arrayOfActivities];
+    [temporaryActivitiesArray insertObject:activity atIndex:0];
+    [self.tableView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 }
 
 // delegate method to pass tapped user from cell

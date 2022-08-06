@@ -27,6 +27,7 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
   - Parse/UI (1.19.3):
     - Parse/Core
+  - Shimmer (1.0.2)
 
 DEPENDENCIES:
   - AFNetworking
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - GoogleMaps
   - Parse
   - Parse/UI
+  - Shimmer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - DateTools
     - GoogleMaps
     - Parse
+    - Shimmer
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
@@ -49,7 +52,8 @@ SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   GoogleMaps: 20d7b12be49a14287f797e88e0e31bc4156aaeb4
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
 
-PODFILE CHECKSUM: 191b51b21a3e6724240307c7a1aa352184cdc359
+PODFILE CHECKSUM: 58c4d24ec1cfe8a84da2ea8e2151781fa2bc47f1
 
 COCOAPODS: 1.5.2

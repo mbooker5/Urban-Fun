@@ -113,6 +113,7 @@
                                Activity *recentlyPosted = activity[0];
                                [[User currentUser] addObject:recentlyPosted forKey:@"activitiesHosted"];
                                [[User currentUser] saveInBackground];
+                               [self.hostVCDelegate didPostActivity:recentlyPosted];
                            }
                        }];
                     }];
@@ -124,6 +125,7 @@
             self.errorMessage.text = @"Invalid Title/Description";
         }
     }
+
 
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
