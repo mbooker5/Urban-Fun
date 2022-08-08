@@ -7,80 +7,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CF7CA594-14F1-4F6A-BCE7-37648A937B7B"
+            uuid = "32B3C28F-495E-4C24-B3A6-9694B46E6016"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Urban-Fun/View Controllers/ProfileViewController.m"
+            filePath = "Urban-Fun/Cells/TimelineCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-didTapJoin:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "ACDF96C7-7A40-4404-BD4E-18D15D18F796"
+            uuid = "BD7DE106-7789-461E-9EB0-C38891828CB2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Urban-Fun/View Controllers/ProfileViewController.m"
+            filePath = "Urban-Fun/Cells/TimelineCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-beginRefresh:"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-didTapJoin:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6C22B8C6-F32C-4B90-8D6E-76CECDEC54F0"
+            uuid = "044EA9CD-E915-4B28-AAAD-5E98CD1A81B2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Urban-Fun/View Controllers/ProfileViewController.m"
+            filePath = "Urban-Fun/Cells/TimelineCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-beginRefresh:"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-didTapJoin:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0EA1B489-AA0D-4313-9B5F-5D3C76C27293"
+            uuid = "32973645-41B9-471E-B40D-08E7F47CCBE3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Urban-Fun/View Controllers/SearchViewController.m"
+            filePath = "Urban-Fun/Cells/TimelineCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-didTapJoin:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F12E1427-9448-4D1D-8F64-02D3F90BCD02"
+            uuid = "8628B58D-2B50-4A49-B187-4F4B72A5873F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Urban-Fun/View Controllers/SearchViewController.m"
+            filePath = "Urban-Fun/Cells/TimelineCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-didTapJoin:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

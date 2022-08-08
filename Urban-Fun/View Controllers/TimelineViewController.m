@@ -93,9 +93,6 @@
     cell.activity = activity;
     cell.currentUserLocation = self.currentUserLocation;
     [cell setTimelineCell];
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
     return cell;
 }
 

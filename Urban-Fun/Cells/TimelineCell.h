@@ -11,6 +11,7 @@
 #import "Parse/ParseUIConstants.h"
 #import "Parse/Parse.h"
 #import "FBShimmeringView.h"
+#import <QuartzCore/QuartzCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TimelineCell : UITableViewCell
 @property (nonatomic, weak) id <TimelineCellDelegate> timelineCellDelegate;
 @property (strong, nonatomic) Activity *activity;
+@property (strong, nonatomic) IBOutlet UIView *validationView;
 @property (strong, nonatomic) IBOutlet UILabel *activityTitleLabel;
 @property (strong, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
 @property (strong, nonatomic) IBOutlet UILabel *activityDescriptionLabel;
