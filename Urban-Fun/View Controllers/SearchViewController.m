@@ -233,7 +233,6 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Users" forIndexPath:indexPath];
         
         cell.textLabel.text = self.usersArray[indexPath.row].username;
-        
         return cell;
     }
     return nil;

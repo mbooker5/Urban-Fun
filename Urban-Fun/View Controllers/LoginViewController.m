@@ -9,6 +9,7 @@
 
 @interface LoginViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
+@property (strong, nonatomic) IBOutlet UIImageView *loginLogo;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @end
 
@@ -17,7 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.shimmeringView.contentView = self.loginLogo;
+    self.shimmeringView.shimmering = YES;
     // dismisses keyboard when tap outside a text field
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
     [tapGestureRecognizer setCancelsTouchesInView:NO];

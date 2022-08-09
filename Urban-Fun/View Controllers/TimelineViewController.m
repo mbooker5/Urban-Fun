@@ -15,6 +15,7 @@
 #import "ProfileViewController.h"
 #import "OtherProfileViewController.h"
 #import "GoogleMapsViewController.h"
+#import "HostViewController.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) CLLocation *currentUserLocation;
 @property (nonatomic, strong) User *profileToView;
 @property (nonatomic, strong) Activity *tappedActivity;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation TimelineViewController
@@ -35,9 +37,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor darkGrayColor];
     [self getActivities];
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
     [self.tableView reloadData];
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self;
@@ -50,7 +52,8 @@
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self getActivities];
-    [refreshControl endRefreshing];
+    
+    
     [self.tableView reloadData];
     
 }
@@ -60,7 +63,7 @@
     [activityQuery orderByDescending:@"createdAt"];
     [activityQuery includeKey:@"host"];
     activityQuery.limit = 20;
-
+    
   
     [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activities, NSError * _Nullable error) {
         if (activities) {
@@ -70,6 +73,7 @@
             [HelperClass showAlertWithTitle:@"Network Error" withMessage:@"Please connect to the internet and press OK." withActionTitle:@"OK" withHandler:@selector(getActivities) onVC:self];
         }
         [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -91,7 +95,6 @@
     cell.activity = activity;
     cell.currentUserLocation = self.currentUserLocation;
     [cell setTimelineCell];
-    
     return cell;
 }
 

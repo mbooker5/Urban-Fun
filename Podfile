@@ -11,6 +11,7 @@ target 'Urban-Fun' do
     pod 'AFNetworking'
     pod 'DateTools'
     pod 'GoogleMaps'
+    pod "Shimmer"
     
   target 'Urban-FunTests' do
     inherit! :search_paths

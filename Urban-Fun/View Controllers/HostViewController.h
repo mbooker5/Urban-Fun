@@ -7,7 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CategoryCell.h"
+
+
 NS_ASSUME_NONNULL_BEGIN
+@class Activity;
+
 
 @interface HostViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *activityCategories;

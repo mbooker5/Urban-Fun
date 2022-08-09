@@ -8,6 +8,7 @@
 #import "TimelineCell.h"
 #import <MapKit/MapKit.h>
 #import "HelperClass.h"
+#import "UIImageView+AFNetworking.h"
 
 
 
@@ -16,6 +17,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+
+    self.validationView.alpha = 0.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -47,6 +50,13 @@
     else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
         [self.timelineJoinButton setSelected:NO];
     }
+    self.timelineUsernameLabel.layer.cornerRadius = 3.0;
+    self.timelineUsernameLabel.clipsToBounds = YES;
+    self.activityImage.layer.cornerRadius = 5.0;
+    self.activityImage.clipsToBounds = YES;
+    self.validationView.layer.cornerRadius = 5.0;
+    self.validationView.clipsToBounds = YES;
+    [self.activityImage setImageWithURL:[NSURL URLWithString:self.activity.image.url]];
 }
 
 - (IBAction)didTapFavorite:(id)sender {
@@ -67,6 +77,25 @@
         [Activity updateAttendanceListWithUserId:currentUser.objectId withActivity:self.activity withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if ([self.activity.attendanceList containsObject:currentUser.objectId]){
                 [self.timelineJoinButton setSelected:YES];
+                [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    if ([self.activity.maxUsers intValue] > 0){
+                        if (([self.activity.attendanceList indexOfObject:currentUser.objectId] + 1 <= [self.activity.maxUsers intValue])){
+                            self.validationView.backgroundColor = [UIColor colorWithRed:50.0/255.0 green:168.0/255.0 blue:68.0/255.0 alpha:0.9];
+                            self.validationView.alpha = 1.0;
+                            self.validationView.alpha = 0.0;
+                        }
+                        else{
+                            self.validationView.backgroundColor = [UIColor colorWithRed:242.0/255.0 green:250.0/255.0 blue:5.0/255.0 alpha:0.9];
+                            self.validationView.alpha = 1.0;
+                            self.validationView.alpha = 0.0;
+                        }
+                    }
+                    self.validationView.backgroundColor = [UIColor colorWithRed:50.0/255.0 green:168.0/255.0 blue:68.0/255.0 alpha:0.9];
+                    self.validationView.alpha = 1.0;
+                    self.validationView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    self.validationView.backgroundColor = [UIColor colorWithRed:50.0/255.0 green:168.0/255.0 blue:68.0/255.0 alpha:0];
+                }];
             }
             else if (![self.activity.attendanceList containsObject:currentUser.objectId]){
                 [self.timelineJoinButton setSelected:NO];
@@ -74,8 +103,6 @@
         }];
     }
 }
-
-
 
 
 @end

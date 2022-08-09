@@ -13,7 +13,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface HostViewController () <CategoriesViewDelegate, LocationViewDelegate>
+@interface HostViewController () <CategoriesViewDelegate, LocationViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *activityTitle;
 @property (strong, nonatomic) IBOutlet UITextView *activityDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *activityImage;
@@ -25,6 +25,7 @@
 @property (nonatomic) CLLocationCoordinate2D locationLatLong;
 @property (strong, nonatomic) IBOutlet UIButton *selectLocation;
 @property (strong, nonatomic) NSString *locationAddress;
+@property (strong, nonatomic) IBOutlet UIButton *imageSelector;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel2;
 @end
 
@@ -38,7 +39,53 @@
         [self.view addGestureRecognizer:tapGestureRecognizer];
     }
 
+- (IBAction)didTapImage:(id)sender {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
 
+   
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Upload Image"
+                                   message:@""
+                                   preferredStyle:UIAlertControllerStyleActionSheet];
+     
+    UIAlertAction* useCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action){
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
+        else {
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
+    
+    UIAlertAction* usePhotoLibrary = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action){
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action){
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    
+    [alert addAction:useCamera];
+    [alert addAction:usePhotoLibrary];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    self.activityImage.image = editedImage;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
     - (IBAction)uploadActivity:(id)sender {
         // next six lines convert UITextFields text into an NSNumber
@@ -60,7 +107,7 @@
                     self.errorMessage.text = @"Invalid Age Range";
                 }
                 else{
-                   [Activity postUserActivity:_activityImage.image withTitle:_activityTitle.text withDescription:_activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                   [Activity postUserActivity:self.activityImage.image withTitle:self.activityTitle.text withDescription:self.activityDescription.text withCategories:self.activityCategories withMinAge:minimumAge withMaxAge:maximumAge withLocation:self.location withAddress:self.locationAddress withMaxUsers:maxUsers withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                        PFQuery *activityQuery = [Activity query];
                        [activityQuery includeKey:@"host"];
@@ -75,14 +122,14 @@
                            }
                        }];
                     }];
-
                 }
-        }
+            }
     }
         else{
             self.errorMessage.text = @"Invalid Title/Description";
         }
     }
+
 
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
@@ -118,7 +165,6 @@
             selectLocationVC.pinLocation = CLLocationCoordinate2DMake(self.locationLatLong.latitude, self.locationLatLong.longitude);
             selectLocationVC.addressString = self.locationAddress;
         }
-        
     }
 }
 

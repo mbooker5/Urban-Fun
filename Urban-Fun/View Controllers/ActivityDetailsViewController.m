@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *detailsJoinButton;
 @property (strong, nonatomic) IBOutlet UILabel *detailsAttendanceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *detailsDescriptionLabel;
+@property (nonatomic, strong) User *profileToView;
 @property (strong,nonatomic) User *currentUser;
 
 - (void) setUpView;
@@ -104,6 +105,7 @@
     }
 }
 - (IBAction)didTapHost:(id)sender {
+    
     [self performSegueWithIdentifier:@"profileFromDetails" sender:sender];
 }
 
@@ -111,7 +113,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  if ([[segue identifier] isEqualToString:@"profileFromDetails"]){
      ProfileViewController *vc = [segue destinationViewController];
-     vc.profileToView = self.activity.host;
+     if (![self.activity.host.objectId isEqualToString:[User currentUser].objectId]){
+         vc.profileToView = self.activity.host;
+     }
  }
     if ([[segue identifier] isEqualToString:@"activitydetails"]){
         AttendanceViewController *vc = [segue destinationViewController];

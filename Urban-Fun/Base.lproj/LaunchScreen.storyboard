@@ -23,10 +23,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Gb-07-ucB" secondAttribute="trailing" constant="67" id="4PI-Rj-vxA"/>
-                            <constraint firstItem="1Gb-07-ucB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="142" id="PZ5-3T-Tao"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1Gb-07-ucB" secondAttribute="bottom" constant="350" id="S8H-Qd-NtG"/>
-                            <constraint firstItem="1Gb-07-ucB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="ZMW-LT-HAK"/>
+                            <constraint firstItem="1Gb-07-ucB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="2rw-5r-I19"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Gb-07-ucB" secondAttribute="trailing" constant="67" id="6SO-EF-L6u"/>
+                            <constraint firstItem="1Gb-07-ucB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="142" id="ifF-vb-PxY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1Gb-07-ucB" secondAttribute="bottom" constant="350" id="ySM-Tc-oef"/>
                         </constraints>
                     </view>
                 </viewController>

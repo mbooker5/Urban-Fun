@@ -12,6 +12,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailField;
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
+@property (strong, nonatomic) IBOutlet UIImageView *signupLogo;
 @property (strong, nonatomic) IBOutlet UITextField *reEnterPasswordField;
 
 @end
@@ -21,7 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.shimmeringView.contentView = self.signupLogo;
+    self.shimmeringView.shimmering = YES;
     // dismisses keyboard when tap outside a text field
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
     [tapGestureRecognizer setCancelsTouchesInView:NO];

@@ -6,7 +6,8 @@
 //
 
 #import "ProfileViewController.h"
-
+#import "ActivityCollectionCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
@@ -16,18 +17,33 @@
 @property (strong, nonatomic) IBOutlet UILabel *followerCount;
 @property (strong, nonatomic) IBOutlet UILabel *followingCount;
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonnull) NSArray *activitiesByUser;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
     // Do any additional setup after loading the view.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView insertSubview:self.refreshControl atIndex:0];
     self.currentUser = [User currentUser];
     if (self.profileToView == nil){
         self.profileToView = [User currentUser];
     }
     [self setUpView];
+    [self getUserActivities];
+    [self.collectionView reloadData];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getUserActivities];
+    
 }
 
 - (void)setUpView {
@@ -69,6 +85,21 @@
         }];
     }
 }
+- (void) getUserActivities{
+        PFQuery *activityQuery = [Activity query];
+        [activityQuery includeKey:@"host"];
+        [activityQuery whereKey:@"host" equalTo:self.profileToView];
+        [activityQuery orderByDescending:@"createdAt"];
+        [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activityObjectArray, NSError * _Nullable error) {
+            if (activityObjectArray){
+                self.activitiesByUser = activityObjectArray;
+            }
+            [self.collectionView reloadData];
+            [self.refreshControl endRefreshing];
+        }];
+    }
+    
+
 /*
 #pragma mark - Navigation
 
@@ -78,5 +109,19 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ActivityCollectionCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"activityCell" forIndexPath:indexPath];
+    Activity *activity = self.activitiesByUser[indexPath.row];
+    [cell.activityImage setImageWithURL:[NSURL URLWithString:activity.image.url]];
+    
+    return cell;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.profileToView.activitiesHosted.count;
+}
+
+
 
 @end

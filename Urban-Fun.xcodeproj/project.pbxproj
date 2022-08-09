@@ -11,6 +11,7 @@
 		40698F04EC293C0AFA27FE36 /* libPods-Urban-Fun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0847A0BCCF961BF9139F3C16 /* libPods-Urban-Fun.a */; };
 		575BDA45D0012E05A2B6BA9E /* libPods-Urban-FunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 794894D32F92DF6A872C3AFA /* libPods-Urban-FunTests.a */; };
 		692A2F98289C46AC002E3889 /* GoogleMapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 692A2F97289C46AC002E3889 /* GoogleMapsViewController.m */; };
+		692A2FA5289DC06A002E3889 /* ActivityCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 692A2FA4289DC06A002E3889 /* ActivityCollectionCell.m */; };
 		6953E711289C43A400037C55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953E710289C43A400037C55 /* AppDelegate.m */; };
 		6953E712289C43A400037C55 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953E70F289C43A400037C55 /* SceneDelegate.m */; };
 		6957F7E828861C2700B26433 /* ActivityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957F7E728861C2700B26433 /* ActivityDetailsViewController.m */; };
@@ -71,6 +72,8 @@
 		660BDA34CE6DB9E1DE98A38D /* Pods-Urban-Fun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urban-Fun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urban-Fun/Pods-Urban-Fun.debug.xcconfig"; sourceTree = "<group>"; };
 		692A2F96289C46AC002E3889 /* GoogleMapsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleMapsViewController.h; sourceTree = "<group>"; };
 		692A2F97289C46AC002E3889 /* GoogleMapsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleMapsViewController.m; sourceTree = "<group>"; };
+		692A2FA3289DC06A002E3889 /* ActivityCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityCollectionCell.h; sourceTree = "<group>"; };
+		692A2FA4289DC06A002E3889 /* ActivityCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityCollectionCell.m; sourceTree = "<group>"; };
 		6953E70D289C43A400037C55 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		6953E70E289C43A400037C55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6953E70F289C43A400037C55 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
@@ -332,6 +335,8 @@
 				69BB1E492890638F0094F2CA /* CollectionViewGridCell.m */,
 				69BB1E572893AC370094F2CA /* UserCell.h */,
 				69BB1E582893AC370094F2CA /* UserCell.m */,
+				692A2FA3289DC06A002E3889 /* ActivityCollectionCell.h */,
+				692A2FA4289DC06A002E3889 /* ActivityCollectionCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				692A2FA5289DC06A002E3889 /* ActivityCollectionCell.m in Sources */,
 				69BB1E44288FB0A00094F2CA /* User.m in Sources */,
 				6978DFB82874C1AF003E1723 /* LoginViewController.m in Sources */,
 				6953E711289C43A400037C55 /* AppDelegate.m in Sources */,
