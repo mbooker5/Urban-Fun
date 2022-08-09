@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonnull) NSArray *activitiesByUser;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation ProfileViewController
@@ -28,9 +29,9 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     // Do any additional setup after loading the view.
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView insertSubview:self.refreshControl atIndex:0];
     self.currentUser = [User currentUser];
     if (self.profileToView == nil){
         self.profileToView = [User currentUser];
@@ -42,10 +43,9 @@
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self getUserActivities];
-    [refreshControl endRefreshing];
-    [self.collectionView reloadData];
     
 }
+
 - (void)setUpView {
     self.usernameLabel.text = self.profileToView.username;
     if (self.profileToView == self.currentUser){
@@ -95,6 +95,7 @@
                 self.activitiesByUser = activityObjectArray;
             }
             [self.collectionView reloadData];
+            [self.refreshControl endRefreshing];
         }];
     }
     

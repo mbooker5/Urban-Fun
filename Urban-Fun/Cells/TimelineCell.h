@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Activity *activity;
 @property (strong, nonatomic) IBOutlet UIView *validationView;
 @property (strong, nonatomic) IBOutlet UILabel *activityTitleLabel;
-@property (strong, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
 @property (strong, nonatomic) IBOutlet UILabel *activityDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *activityImage;
 @property (nonatomic, strong) CLLocation *currentUserLocation;

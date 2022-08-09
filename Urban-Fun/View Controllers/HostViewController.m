@@ -49,7 +49,7 @@
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Upload Image"
                                    message:@""
-                                   preferredStyle:UIAlertControllerStyleAlert];
+                                   preferredStyle:UIAlertControllerStyleActionSheet];
      
     UIAlertAction* useCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
         handler:^(UIAlertAction * action){
@@ -68,16 +68,22 @@
         [self presentViewController:imagePickerVC animated:YES completion:nil];
     }];
     
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action){
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
     
     [alert addAction:useCamera];
     [alert addAction:usePhotoLibrary];
+    [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
     
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    self.activityImage.image = originalImage;
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    self.activityImage.image = editedImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -113,13 +119,11 @@
                                Activity *recentlyPosted = activity[0];
                                [[User currentUser] addObject:recentlyPosted forKey:@"activitiesHosted"];
                                [[User currentUser] saveInBackground];
-                               [self.hostVCDelegate didPostActivity:recentlyPosted];
                            }
                        }];
                     }];
-
                 }
-        }
+            }
     }
         else{
             self.errorMessage.text = @"Invalid Title/Description";
@@ -161,7 +165,6 @@
             selectLocationVC.pinLocation = CLLocationCoordinate2DMake(self.locationLatLong.latitude, self.locationLatLong.longitude);
             selectLocationVC.addressString = self.locationAddress;
         }
-        
     }
 }
 

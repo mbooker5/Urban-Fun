@@ -17,13 +17,14 @@
 #import "GoogleMapsViewController.h"
 #import "HostViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate, HostVCDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *arrayOfActivities;
 @property (nonatomic, strong) const CLLocationManager *manager;
 @property (nonatomic, strong) CLLocation *currentUserLocation;
 @property (nonatomic, strong) User *profileToView;
 @property (nonatomic, strong) Activity *tappedActivity;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation TimelineViewController
@@ -36,9 +37,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor darkGrayColor];
     [self getActivities];
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
     [self.tableView reloadData];
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self;
@@ -51,7 +52,7 @@
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self getActivities];
-    [refreshControl endRefreshing];
+    
     
     [self.tableView reloadData];
     
@@ -72,6 +73,7 @@
             [HelperClass showAlertWithTitle:@"Network Error" withMessage:@"Please connect to the internet and press OK." withActionTitle:@"OK" withHandler:@selector(getActivities) onVC:self];
         }
         [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -114,14 +116,6 @@
 
     }];
     
-}
-- (void) didPostActivity:(Activity *)activity{
-    NSMutableArray *temporaryActivitiesArray = [[NSMutableArray alloc] initWithArray:self.arrayOfActivities];
-    [temporaryActivitiesArray insertObject:activity atIndex:0];
-    [self.tableView beginUpdates];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
 }
 
 // delegate method to pass tapped user from cell
