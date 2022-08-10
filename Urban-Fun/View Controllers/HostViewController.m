@@ -48,7 +48,7 @@
    
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Upload Image"
-                                   message:@""
+                                   message:@"Please select image source"
                                    preferredStyle:UIAlertControllerStyleActionSheet];
      
     UIAlertAction* useCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault

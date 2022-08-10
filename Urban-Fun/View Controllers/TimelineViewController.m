@@ -17,7 +17,7 @@
 #import "GoogleMapsViewController.h"
 #import "HostViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, ActivityDetailsDelegate, TimelineCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *arrayOfActivities;
 @property (nonatomic, strong) const CLLocationManager *manager;
@@ -25,6 +25,8 @@
 @property (nonatomic, strong) User *profileToView;
 @property (nonatomic, strong) Activity *tappedActivity;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property NSInteger setsLoaded;
+@property BOOL isMoreDataLoading;
 @end
 
 @implementation TimelineViewController
@@ -36,7 +38,6 @@
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor darkGrayColor];
-    [self getActivities];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
@@ -48,30 +49,47 @@
     if (CLLocationManager.locationServicesEnabled){
         [self.manager startUpdatingLocation];
     }
+    self.isMoreDataLoading = NO;
+    self.setsLoaded = 0;
+    [self getActivities];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    self.setsLoaded = 0;
     [self getActivities];
-    
-    
     [self.tableView reloadData];
-    
 }
+
+
 
 -(void)getActivities{
     PFQuery *activityQuery = [Activity query];
     [activityQuery orderByDescending:@"createdAt"];
     [activityQuery includeKey:@"host"];
     activityQuery.limit = 20;
+    activityQuery.skip = self.setsLoaded * 20;
+
     
   
     [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activities, NSError * _Nullable error) {
-        if (activities) {
+        if (activities && self.setsLoaded > 0) {
+            NSMutableArray *temporaryActivitiesArray = [[NSMutableArray alloc] initWithArray:self.arrayOfActivities];
+            for (Activity *activity in activities){
+                if (![self.arrayOfActivities containsObject:activity]){
+                    [temporaryActivitiesArray addObject:activity];
+                }
+                self.setsLoaded += 1;
+            }
+            self.arrayOfActivities = temporaryActivitiesArray;
+        }
+        else if (activities && self.setsLoaded == 0){
             self.arrayOfActivities = activities;
+            self.setsLoaded += 1;
         }
         else if (error != nil){
             [HelperClass showAlertWithTitle:@"Network Error" withMessage:@"Please connect to the internet and press OK." withActionTitle:@"OK" withHandler:@selector(getActivities) onVC:self];
         }
+        self.isMoreDataLoading = NO;
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     }];
@@ -96,6 +114,12 @@
     cell.currentUserLocation = self.currentUserLocation;
     [cell setTimelineCell];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row + 2 == [self.arrayOfActivities count]){
+        [self getActivities];
+    }
 }
 
 - (void)syncButtons{
