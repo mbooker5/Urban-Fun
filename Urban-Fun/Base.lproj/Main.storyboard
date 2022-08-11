@@ -1483,22 +1483,12 @@
                                                         <constraint firstAttribute="height" constant="11" id="PTa-6t-KAk"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igB-1B-msZ">
-                                                    <rect key="frame" x="343" y="159" width="22" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="22" id="CH9-hE-hTc"/>
-                                                        <constraint firstAttribute="height" constant="20" id="CYg-zG-uxR"/>
-                                                    </constraints>
-                                                    <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="heart" catalog="system"/>
-                                                    <state key="selected" image="heart.fill" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="didTapFavorite:" destination="g3f-Xc-YDF" eventType="touchUpInside" id="GeD-Xt-SKk"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apk-n3-EaH">
-                                                    <rect key="frame" x="372" y="158" width="22" height="20"/>
+                                                    <rect key="frame" x="372" y="150" width="28" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="fmG-ZK-4PY"/>
+                                                        <constraint firstAttribute="width" constant="28" id="yIF-bk-D0R"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1539,15 +1529,29 @@
                                                         <action selector="didTapDistance:" destination="g3f-Xc-YDF" eventType="touchUpInside" id="btZ-rC-ro1"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCj-xN-OLK">
-                                                    <rect key="frame" x="30" y="11" width="149" height="141"/>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Du1-fp-Yw9">
                                                     <rect key="frame" x="196" y="11" width="198" height="20"/>
                                                     <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="16"/>
                                                     <color key="textColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCj-xN-OLK">
+                                                    <rect key="frame" x="30" y="11" width="149" height="141"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igB-1B-msZ">
+                                                    <rect key="frame" x="341" y="151" width="28" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="28" id="CH9-hE-hTc"/>
+                                                        <constraint firstAttribute="height" constant="28" id="CYg-zG-uxR"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.26851832869999998" green="0.33272999530000003" blue="0.37827810649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="heart" catalog="system"/>
+                                                    <state key="selected" image="heart.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="didTapFavorite:" destination="g3f-Xc-YDF" eventType="touchUpInside" id="GeD-Xt-SKk"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -1563,8 +1567,8 @@
                                                 <constraint firstItem="zZD-RJ-Xfo" firstAttribute="bottom" secondItem="EL3-Ni-jhe" secondAttribute="bottomMargin" id="8hX-Bs-qia"/>
                                                 <constraint firstItem="055-GF-SKM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tIS-Ie-Tat" secondAttribute="bottom" constant="10" id="9xM-Ob-Twq"/>
                                                 <constraint firstItem="tIS-Ie-Tat" firstAttribute="leading" secondItem="lpn-0y-CFh" secondAttribute="trailing" constant="17" id="DMV-87-btg"/>
-                                                <constraint firstAttribute="trailing" secondItem="apk-n3-EaH" secondAttribute="trailing" constant="20" symbolic="YES" id="EmL-7d-fO4"/>
-                                                <constraint firstItem="apk-n3-EaH" firstAttribute="leading" secondItem="igB-1B-msZ" secondAttribute="trailing" constant="7" id="Ixg-l0-yDl"/>
+                                                <constraint firstAttribute="trailing" secondItem="apk-n3-EaH" secondAttribute="trailing" constant="14" id="EmL-7d-fO4"/>
+                                                <constraint firstItem="apk-n3-EaH" firstAttribute="leading" secondItem="igB-1B-msZ" secondAttribute="trailing" constant="3" id="Ixg-l0-yDl"/>
                                                 <constraint firstItem="tIS-Ie-Tat" firstAttribute="trailing" secondItem="EL3-Ni-jhe" secondAttribute="trailingMargin" id="JFN-Sd-HFO"/>
                                                 <constraint firstItem="oCj-xN-OLK" firstAttribute="top" secondItem="lpn-0y-CFh" secondAttribute="top" id="KVE-u4-ikt"/>
                                                 <constraint firstAttribute="trailing" secondItem="Du1-fp-Yw9" secondAttribute="trailing" constant="20" symbolic="YES" id="KiH-HX-is7"/>
@@ -2063,8 +2067,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="TAG-I6-8aN"/>
-        <segue reference="TM9-A6-ZoH"/>
-        <segue reference="Pgo-bb-P8b"/>
+        <segue reference="QHD-tM-lQw"/>
+        <segue reference="Cw4-rB-tBZ"/>
         <segue reference="kKc-lq-bCf"/>
         <segue reference="Jut-mf-dNH"/>
     </inferredMetricsTieBreakers>

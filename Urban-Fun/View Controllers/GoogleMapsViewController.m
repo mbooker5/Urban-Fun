@@ -12,7 +12,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
       CLLocation *activityLocation = [HelperClass getCLLocationForGeoPoint:self.activity.location];
       GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:activityLocation.coordinate.latitude
                                                               longitude:activityLocation.coordinate.longitude

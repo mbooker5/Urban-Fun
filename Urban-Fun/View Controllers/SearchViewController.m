@@ -130,9 +130,6 @@
                         if ([activity.categories containsObject:category]){
                             [temporaryCategoryArray addObject:activity];
                             break;
-//                            if (![temporaryCategoryArray containsObject:activity]){
-//                                [temporaryCategoryArray addObject:activity];
-//                            }
                         }
                     }
                     self.activitiesArray = temporaryCategoryArray;

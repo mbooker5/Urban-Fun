@@ -28,7 +28,6 @@
     [super viewDidLoad];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    // Do any additional setup after loading the view.
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView insertSubview:self.refreshControl atIndex:0];
