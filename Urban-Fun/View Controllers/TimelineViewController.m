@@ -69,17 +69,13 @@
     activityQuery.limit = 20;
     activityQuery.skip = self.setsLoaded * 20;
 
-    
+
   
     [activityQuery findObjectsInBackgroundWithBlock:^(NSArray<Activity *> * _Nullable activities, NSError * _Nullable error) {
         if (activities && self.setsLoaded > 0) {
             NSMutableArray *temporaryActivitiesArray = [[NSMutableArray alloc] initWithArray:self.arrayOfActivities];
-            for (Activity *activity in activities){
-                if (![self.arrayOfActivities containsObject:activity]){
-                    [temporaryActivitiesArray addObject:activity];
-                }
+            [temporaryActivitiesArray addObjectsFromArray:activities];
                 self.setsLoaded += 1;
-            }
             self.arrayOfActivities = temporaryActivitiesArray;
         }
         else if (activities && self.setsLoaded == 0){
@@ -116,16 +112,23 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row + 2 == [self.arrayOfActivities count]){
-        [self getActivities];
-    }
-}
-
 - (void)syncButtons{
     [self.tableView reloadData];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            [self getActivities];
+        }
+    }
+}
 
 
 
