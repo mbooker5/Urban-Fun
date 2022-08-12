@@ -132,6 +132,10 @@
         AttendanceViewController *vc = [segue destinationViewController];
         vc.activity = self.activity;
     }
+    if ([[segue identifier] isEqualToString:@"attendanceList"]){
+        AttendanceViewController *vc = [segue destinationViewController];
+        vc.activity = self.activity;
+    }
     if ([[segue identifier] isEqualToString:googleMapsVCSegue]){
         GoogleMapsViewController *vc = [segue destinationViewController];
         vc.activity = (Activity *)sender;
