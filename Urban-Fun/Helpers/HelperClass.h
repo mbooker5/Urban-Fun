@@ -36,6 +36,8 @@ static NSString *const profileFromTimelineSegue = @"profileFromTimeline";
 + (NSNumber *) distanceFromUserLocation:(CLLocation *)userLocation forActivity:(Activity *)activity;
 
 + (CLLocation *)getCLLocationForGeoPoint:(PFGeoPoint *)location;
+
++ (NSString *)makeStringBold:(NSString *)inputString;
 @end
 
 NS_ASSUME_NONNULL_END

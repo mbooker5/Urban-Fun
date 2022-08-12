@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *activitiesHosted;
 @property (nonatomic, strong) NSArray *followerList;
 @property (nonatomic, strong) NSArray *followingList;
+@property (nonatomic, strong) PFFileObject *profilePicture;
 
 
 

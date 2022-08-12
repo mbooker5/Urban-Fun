@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "HelperClass.h"
 
 @interface HostViewController () <CategoriesViewDelegate, LocationViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *activityTitle;
@@ -44,11 +45,9 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
-
-   
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Upload Image"
-                                   message:@"Please select image source"
+                                   message:@"Please Select Image Source"
                                    preferredStyle:UIAlertControllerStyleActionSheet];
      
     UIAlertAction* useCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault

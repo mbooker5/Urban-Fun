@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) setTimelineCell;
 @property (strong, nonatomic) IBOutlet UIButton *timelineFavoriteButton;
 @property (strong, nonatomic) IBOutlet UILabel *timelineUsernameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *timelineProfilePicture;
 @property (strong, nonatomic) IBOutlet UIButton *timelineJoinButton;
 @end
 

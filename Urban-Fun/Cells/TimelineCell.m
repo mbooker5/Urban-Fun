@@ -57,6 +57,11 @@
     self.validationView.layer.cornerRadius = 5.0;
     self.validationView.clipsToBounds = YES;
     [self.activityImage setImageWithURL:[NSURL URLWithString:self.activity.image.url]];
+    if (self.activity.host.profilePicture.url){
+        [self.timelineProfilePicture setImageWithURL:[NSURL URLWithString:self.activity.host.profilePicture.url]];
+        self.timelineProfilePicture.layer.cornerRadius = self.timelineProfilePicture.frame.size.height/2.0;
+        self.timelineProfilePicture.clipsToBounds = YES;
+    }
 }
 
 - (IBAction)didTapFavorite:(id)sender {

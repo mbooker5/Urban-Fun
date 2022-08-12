@@ -10,6 +10,7 @@
 #import "User.h"
 #import "Category.h"
 #import "TimelineCell.h"
+#import "UserCell.h"
 #import "ProfileViewController.h"
 #import "ActivityDetailsViewController.h"
 #import "HelperClass.h"
@@ -227,9 +228,10 @@
         return cell;
     }
     if (self.searchControl.selectedSegmentIndex == 1){
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Users" forIndexPath:indexPath];
-        
-        cell.textLabel.text = self.usersArray[indexPath.row].username;
+    UserCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Users" forIndexPath:indexPath];
+        User *user = self.usersArray[indexPath.row];
+        cell.user = user;
+        [cell setUserCell];
         return cell;
     }
     return nil;
@@ -259,6 +261,14 @@
     if ([[segue identifier] isEqualToString:profileFromSearchSegue]){
         ProfileViewController *vc = [segue destinationViewController];
         User *profileToView = sender;
+        if (![profileToView.objectId isEqualToString:[User currentUser].objectId]){
+            vc.profileToView = profileToView;
+        }
+    }
+    if ([[segue identifier] isEqualToString:@"profileFromUserCell"]){
+        ProfileViewController *vc = [segue destinationViewController];
+        NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
+        User *profileToView = self.usersArray[myIndexPath.row];
         if (![profileToView.objectId isEqualToString:[User currentUser].objectId]){
             vc.profileToView = profileToView;
         }

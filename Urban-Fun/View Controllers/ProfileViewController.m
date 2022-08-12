@@ -9,7 +9,7 @@
 #import "ActivityCollectionCell.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) User *currentUser;
@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonnull) NSArray *activitiesByUser;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) IBOutlet UIButton *profilePictureButton;
 @end
 
 @implementation ProfileViewController
@@ -38,6 +39,7 @@
     [self setUpView];
     [self getUserActivities];
     [self.collectionView reloadData];
+    
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -66,6 +68,15 @@
     
     NSArray *followingList = self.profileToView.followingList;
     self.followingCount.text = [NSString stringWithFormat:@"%lu", followingList.count];
+    
+    if (self.profileToView.profilePicture.url){
+        [self.profilePicture setImageWithURL:[NSURL URLWithString:self.profileToView.profilePicture.url]];
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2.0;;
+        self.profilePictureButton.layer.cornerRadius = self.profilePicture.frame.size.height/2.0;
+        self.profilePicture.clipsToBounds = YES;
+        self.profilePictureButton.clipsToBounds = YES;
+    }
+    
 }
 
 - (void) findActivitiesByUser{
@@ -84,6 +95,59 @@
         }];
     }
 }
+
+
+
+- (IBAction)didTapProfilePicture:(id)sender {
+    if (self.profileToView == [User currentUser]){
+        UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+        imagePickerVC.delegate = self;
+        imagePickerVC.allowsEditing = YES;
+        
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Upload Profile Picture"
+                                       message:@"Please Select Image Source"
+                                       preferredStyle:UIAlertControllerStyleActionSheet];
+         
+        UIAlertAction* useCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction * action){
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+                }
+            else {
+                imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        }];
+        
+        UIAlertAction* usePhotoLibrary = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction * action){
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        }];
+        
+        UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction * action){
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        
+        [alert addAction:useCamera];
+        [alert addAction:usePhotoLibrary];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    [User currentUser].profilePicture = [Activity getPFFileFromImage:editedImage];
+    [[User currentUser] saveInBackground];
+    self.profilePicture.image = editedImage;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 - (void) getUserActivities{
         PFQuery *activityQuery = [Activity query];
         [activityQuery includeKey:@"host"];
@@ -97,17 +161,7 @@
             [self.refreshControl endRefreshing];
         }];
     }
-    
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ActivityCollectionCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"activityCell" forIndexPath:indexPath];

@@ -12,6 +12,8 @@
 #import "OtherProfileViewController.h"
 #import "AttendanceViewController.h"
 #import "SceneDelegate.h"
+#import "UIImageView+AFNetworking.h"
+#import "GoogleMapsViewController.h"
 
 @interface ActivityDetailsViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *detailsTitle;
@@ -21,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *detailsJoinButton;
 @property (strong, nonatomic) IBOutlet UILabel *detailsAttendanceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *detailsDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *detailsImage;
 @property (nonatomic, strong) User *profileToView;
 @property (strong,nonatomic) User *currentUser;
 
@@ -52,6 +55,7 @@
     self.detailsAttendanceLabel.text = [NSString stringWithFormat:@"%@%lu", @"Attendance - ", self.activity.attendanceList.count];
     self.detailsDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", @"Description - ", self.activity.activityDescription];
     [self.detailsJoinButton setTitle:@"Join" forState:UIControlStateNormal];
+    [self.detailsImage setImageWithURL:[NSURL URLWithString:self.activity.image.url]];
     User *currentUser = [User currentUser];
     
     if ([self.activity.host.objectId isEqualToString:currentUser.objectId]){
@@ -109,6 +113,13 @@
     [self performSegueWithIdentifier:@"profileFromDetails" sender:sender];
 }
 
+- (IBAction)didTapDistance:(id)sender{
+    if (([self.activity.host.objectId isEqualToString:[User currentUser].objectId]) || (([self.activity.attendanceList containsObject:[User currentUser].objectId]) && ([self.activity.attendanceList indexOfObject:[User currentUser].objectId] <= [self.activity.maxUsers intValue] - 1))){
+        
+        [self performSegueWithIdentifier:@"googleMaps" sender:self.activity];
+    }
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  if ([[segue identifier] isEqualToString:@"profileFromDetails"]){
@@ -120,6 +131,10 @@
     if ([[segue identifier] isEqualToString:@"activitydetails"]){
         AttendanceViewController *vc = [segue destinationViewController];
         vc.activity = self.activity;
+    }
+    if ([[segue identifier] isEqualToString:googleMapsVCSegue]){
+        GoogleMapsViewController *vc = [segue destinationViewController];
+        vc.activity = (Activity *)sender;
     }
 }
 

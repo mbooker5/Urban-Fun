@@ -13,7 +13,7 @@
 @dynamic activitiesHosted;
 @dynamic followerList;
 @dynamic followingList;
-
+@dynamic profilePicture;
 
 
 
