@@ -83,6 +83,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     self.activityImage.image = editedImage;
+    [self.imageSelector setTitle:@"" forState:UIControlStateNormal];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

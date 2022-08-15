@@ -62,6 +62,9 @@
         self.timelineProfilePicture.layer.cornerRadius = self.timelineProfilePicture.frame.size.height/2.0;
         self.timelineProfilePicture.clipsToBounds = YES;
     }
+    else{
+        self.timelineProfilePicture.image = [UIImage imageNamed:@"Urban Fun"];
+    }
 }
 
 - (IBAction)didTapFavorite:(id)sender {

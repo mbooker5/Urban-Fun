@@ -71,11 +71,12 @@
     
     if (self.profileToView.profilePicture.url){
         [self.profilePicture setImageWithURL:[NSURL URLWithString:self.profileToView.profilePicture.url]];
-        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2.0;;
-        self.profilePictureButton.layer.cornerRadius = self.profilePicture.frame.size.height/2.0;
-        self.profilePicture.clipsToBounds = YES;
-        self.profilePictureButton.clipsToBounds = YES;
+        
     }
+    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2.0;;
+    self.profilePictureButton.layer.cornerRadius = self.profilePicture.frame.size.height/2.0;
+    self.profilePicture.clipsToBounds = YES;
+    self.profilePictureButton.clipsToBounds = YES;
     
 }
 
@@ -142,8 +143,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     [User currentUser].profilePicture = [Activity getPFFileFromImage:editedImage];
-    [[User currentUser] saveInBackground];
-    self.profilePicture.image = editedImage;
+    [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [self setUpView];
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

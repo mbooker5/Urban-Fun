@@ -35,13 +35,15 @@
 
 - (void)registerUser {
     PFUser *newUser = [PFUser user];
-    newUser.email = self.emailField.text;
+    if (![self.emailField.text isEqualToString:@""]){
+        newUser.email = self.emailField.text;
+    }
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     
-    if ([self.emailField.text isEqualToString:@""]) {
-        [HelperClass showAlertWithTitle:@"Enter Email to Register" withMessage:@"Enter valid email address." withActionTitle:@"OK" withHandler:nil  onVC:self];
-    }
+//    if ([self.emailField.text isEqualToString:@""]) {
+//        [HelperClass showAlertWithTitle:@"Enter Email to Register" withMessage:@"Enter valid email address." withActionTitle:@"OK" withHandler:nil  onVC:self];
+//    }
     if (![self.passwordField.text isEqualToString:self.reEnterPasswordField.text]) {
         [HelperClass showAlertWithTitle:@"Cannot Register User" withMessage:@"Passwords must be the same." withActionTitle:@"OK" withHandler:nil  onVC:self];
         
